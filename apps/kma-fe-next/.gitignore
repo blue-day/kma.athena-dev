@@ -1,6 +1,6 @@
 # --- Node & Next.js Specific ---
 node_modules/
-.next/
+**/.next/
 out/
 build/
 dist/
