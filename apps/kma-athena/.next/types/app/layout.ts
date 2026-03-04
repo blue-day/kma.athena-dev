@@ -1,4 +1,4 @@
-// File: C:\Users\uracle\Desktop\workspace\kma-ui\apps\kma-athena\src\app\layout.tsx
+// File: /Users/heejun/Desktop/KMA_AiChat_git_pub/apps/kma-athena/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
