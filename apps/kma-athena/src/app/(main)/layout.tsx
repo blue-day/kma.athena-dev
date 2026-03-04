@@ -1,12 +1,5 @@
-import { Header } from '@/widgets/layout/Header';
-import { Footer } from '@/widgets/layout/Footer';
+import { MainLayout } from '@/widgets/layout/MainLayout';
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="athena-shell">
-      <Header />
-      <main className="athena-main">{children}</main>
-      <Footer />
-    </div>
-  );
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <MainLayout>{children}</MainLayout>;
 }

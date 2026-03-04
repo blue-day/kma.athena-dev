@@ -1,5 +1,5 @@
-import { HomePage } from '@/views/HomePage';
+import { KmaMainPage } from '@/views/KmaMainPage';
 
 export default function Page() {
-  return <HomePage />;
+  return <KmaMainPage />;
 }

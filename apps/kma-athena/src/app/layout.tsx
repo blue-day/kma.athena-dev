@@ -3,8 +3,8 @@ import { Providers } from './providers';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'KMA Athena',
-  description: 'Sample Next.js app for UI publishing',
+  title: 'KMA 대한의사협회',
+  description: '사내 AI챗봇',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
