@@ -1,0 +1,41 @@
+/* 기본 테마 변수 및 리셋 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --kma-bg: #ffffff;
+  --kma-card: #ffffff;
+  --kma-text: #111111;
+  --kma-muted: #767676;
+  --kma-line: #e5e5e5;
+  --kma-primary: #0056b3;
+  --kma-focus: #94a3b8;
+}
+
+body {
+  margin: 0;
+  background: var(--kma-bg);
+  color: var(--kma-text);
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kma-hidden {
+  display: none !important;
+}
+.kma-inline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.kma-readonly {
+  padding: 10px 0;
+  font-size: 15px;
+  color: #333;
+}
+.kma-required {
+  color: #d32f2f;
+  margin-left: 2px;
+  font-weight: bold;
+}

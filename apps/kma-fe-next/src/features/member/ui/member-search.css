@@ -1,0 +1,46 @@
+/* MemberSearchBox 전용 스타일 */
+.member-search-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.search-row {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  align-items: flex-end; /* 하단 라인 정렬 */
+}
+
+/* 모든 입력 요소 및 버튼의 높이를 DateRangePicker(40px)와 동일하게 맞춤 */
+.member-search-box .kma-input,
+.member-search-box .kma-date-group,
+.member-search-box .kma-btn,
+.member-search-box select {
+  height: 40px !important;
+  box-sizing: border-box;
+}
+
+/* 검색어 입력칸 레이아웃 */
+.search-keyword-area {
+  flex: 1;
+}
+
+/* 버튼 영역 우측 정렬 */
+.search-button-area {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+/* 라벨 스타일 일치 */
+.member-search-box .kma-label,
+.member-search-box .kma-date-label {
+  margin-bottom: 8px;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}

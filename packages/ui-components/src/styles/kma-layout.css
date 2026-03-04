@@ -1,0 +1,235 @@
+/* packages/ui-components/src/styles/kma-layout.css */
+/* =========================================
+   [SECTION 1] 2-Row Header Layout
+   ========================================= */
+.kma-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  height: auto;
+}
+
+.kma-topbar-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.kma-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.kma-brand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.kma-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.kma-util {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.kma-header-bottom {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.kma-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+}
+
+.kma-nav-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.kma-nav-btn {
+  background: transparent;
+  border: 0;
+  color: #111;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 24px 0 0;
+  cursor: pointer;
+  height: 100%;
+  transition: color 0.2s;
+}
+
+.kma-nav-item + .kma-nav-item .kma-nav-btn {
+  padding: 0 24px;
+}
+
+.kma-nav-item:hover .kma-nav-btn,
+.kma-nav-item.is-open .kma-nav-btn {
+  color: var(--kma-primary);
+}
+
+.kma-nav-item.is-open::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 24px;
+  height: 3px;
+  background-color: var(--kma-primary);
+}
+
+.kma-mega-panel-full {
+  position: absolute;
+  top: 110px;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid var(--kma-line);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  z-index: 900;
+  padding: 40px 0;
+}
+
+.kma-mega-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.kma-mega-link {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.kma-mega-link:hover {
+  color: var(--kma-primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.kma-lang-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kma-lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.kma-lang-btn.active {
+  color: #111;
+  font-weight: 800;
+}
+
+.kma-lang-sep {
+  width: 1px;
+  height: 10px;
+  background-color: #ddd;
+}
+
+.kma-linkbtn {
+  background: transparent;
+  border: 0;
+  color: #555;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.kma-linkbtn:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+.kma-v-divider {
+  width: 1px;
+  height: 12px;
+  background: #e0e0e0;
+}
+
+.kma-user {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kma-user-name {
+  color: #111;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.kma-user-suffix {
+  color: #777;
+  font-size: 13px;
+}
+
+@media (max-width: 1024px) {
+  .kma-header-bottom,
+  .kma-util {
+    display: none;
+  }
+}
+
+/* =========================================
+   [SECTION 2] Common Layout & UI
+   ========================================= */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.kma-page {
+  padding: 40px 20px 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}

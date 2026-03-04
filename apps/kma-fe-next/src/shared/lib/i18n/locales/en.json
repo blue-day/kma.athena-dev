@@ -1,0 +1,31 @@
+{
+  "header": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "admin": "Admin",
+    "link": "Link Menu",
+    "contact": "Contact Menu",
+    "ready": "Coming Soon.",
+    "logout_confirm": "Do you want to logout?",
+    "logout_done": "Logged out.",
+    "alert_title": "Notice",
+    "no_move": "Link disabled"
+  },
+  "menu": {
+    "의협소개": "About KMA",
+    "공지·뉴스": "News & Notice",
+    "병·의원 찾기": "Find Clinics",
+    "회원 통계": "Statistics",
+    "KMA POLICY": "KMA Policy",
+    "국제 협력": "International",
+    "지역환자안전센터": "Safety Center",
+    "불법 대체조제 피해 신고센터": "Report Center",
+    "소개": "Overview",
+    "연혁": "History",
+    "조직도": "Organization",
+    "회원조회": "Member List",
+    "공지사항": "Notice",
+    "보도자료": "Press Release"
+  }
+}

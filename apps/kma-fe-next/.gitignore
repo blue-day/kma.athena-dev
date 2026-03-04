@@ -1,0 +1,45 @@
+# --- Node & Next.js Specific ---
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# --- Turborepo & Cache ---
+.turbo
+.cache
+
+# --- Environment Variables (Security) ---
+# 로컬 보안 정보는 절대 Git에 포함하지 않습니다.
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# --- Package Manager ---
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# --- OS & IDE ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- Logs & Reports ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+TEST*.xml
+
+# ------------------------------------------------------
+# [repo]
+# ------------------------------------------------------
+repomix-output*
+**/repomix-output*

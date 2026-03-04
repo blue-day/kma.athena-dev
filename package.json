@@ -1,0 +1,44 @@
+{
+  "name": "kma-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KMA Hybrid Monorepo (React + NestJS + Solutions)",
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "tool:repomix": "repomix --config tools/config/repomix.config.json"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.0",
+    "@types/node": "^25.0.9",
+    "@types/prismjs": "^1.26.5",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-next": "^14.2.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "prettier": "^3.0.0",
+    "repomix": "^1.11.1",
+    "turbo": "latest",
+    "typescript": "^5.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tools/*"
+  ],
+  "dependencies": {
+    "next": "14.2.0"
+  }
+}

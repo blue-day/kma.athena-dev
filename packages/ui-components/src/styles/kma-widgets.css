@@ -1,0 +1,134 @@
+/* packages/ui-components/src/styles/kma-widgets.css */
+/* =========================================
+   [SECTION 3] Component Specific Styles
+   ========================================= */
+
+/* Search Container & Fields */
+.kma-search-container {
+  display: flex;
+  align-items: flex-end; /* 하단 라인 기준 완벽 통일 */
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.kma-search-date-area {
+  flex: 0 0 auto;
+}
+
+/* 데이트피커 박스와 인풋 높이를 44px로 강제 일치 및 수직 중앙 정렬 */
+.kma-search-date-area .tui-datepicker-input {
+  height: 40px !important; /* 전체 높이 44px 고정 */
+  box-sizing: border-box !important;
+  border: 1px solid #ddd !important;
+  display: inline-flex !important; /* 내부 텍스트 수직 정렬을 위해 flex 사용 */
+  align-items: center !important;
+  border-radius: 0 !important;
+  padding: 0 10px !important;
+  background-color: #fff !important;
+}
+
+.kma-search-date-area .tui-datepicker-input input {
+  height: 100% !important; /* 부모 높이 44px에 가득 차게 설정 */
+  border: none !important;
+  box-sizing: border-box !important;
+  font-size: 15px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.kma-search-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.kma-search-field-group {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+/* 버튼 높이/너비 일치 및 글자 줄바꿈 방지 */
+.kma-search-container .kma-btn,
+.kma-btn-reset {
+  height: 40px !important; /* 버튼 높이도 40px로 강제 고정 */
+  min-width: 90px !important;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap !important;
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+/* Custom Reset Button Style */
+.kma-btn-reset {
+  background-color: #f8f9fa;
+  color: #666;
+  border: 1px solid #ccc;
+}
+
+.kma-btn-reset:hover {
+  background-color: #e9ecef;
+  border-color: #ccc;
+  color: #333;
+}
+
+/* TUI Grid, Editor, Viewer 스타일 (기존 유지) */
+.kma-grid .tui-grid-container {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.kma-grid .tui-grid-header-area {
+  background-color: #fff !important;
+  border-top: 2px solid #111 !important;
+  border-bottom: 1px solid #ccc !important;
+}
+
+.kma-grid .tui-grid-cell-header {
+  background-color: #fff !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
+.kma-grid .tui-grid-cell {
+  border-right: 0 !important;
+  border-left: 0 !important;
+  color: #333 !important;
+}
+
+.kma-grid .tui-grid-row-hover {
+  background-color: #f9f9f9 !important;
+}
+
+.kma-editor-wrap {
+  margin: 30px 0;
+}
+
+.kma-editor-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.kma-toast-viewer {
+  min-height: 300px;
+  border: 1px solid #e5e5e5;
+  border-radius: 0;
+  padding: 30px;
+  background: #fff;
+}

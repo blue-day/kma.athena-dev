@@ -1,0 +1,713 @@
+/* packages/ui-components/src/styles/kma-global.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== KMA Theme Variables ===== */
+:root {
+  --kma-bg: #ffffff;
+  --kma-card: #ffffff;
+  --kma-text: #111111;
+  --kma-muted: #767676;
+  --kma-line: #e5e5e5;
+  --kma-primary: #0056b3;
+  --kma-focus: #94a3b8;
+}
+
+body {
+  margin: 0;
+  background: var(--kma-bg);
+  color: var(--kma-text);
+  font-family:
+    'Pretendard',
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================
+   [SECTION 1] 2-Row Header Layout
+   ========================================= */
+
+.kma-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  height: auto;
+}
+
+.kma-topbar-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.kma-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.kma-brand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.kma-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.kma-util {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.kma-header-bottom {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.kma-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+}
+
+.kma-nav-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.kma-nav-btn {
+  background: transparent;
+  border: 0;
+  color: #111;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 24px 0 0;
+  cursor: pointer;
+  height: 100%;
+  transition: color 0.2s;
+}
+.kma-nav-item + .kma-nav-item .kma-nav-btn {
+  padding: 0 24px;
+}
+
+.kma-nav-item:hover .kma-nav-btn,
+.kma-nav-item.is-open .kma-nav-btn {
+  color: var(--kma-primary);
+}
+
+.kma-nav-item.is-open::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 24px;
+  height: 3px;
+  background-color: var(--kma-primary);
+}
+
+.kma-mega-panel-full {
+  position: absolute;
+  top: 110px;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid var(--kma-line);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  z-index: 900;
+  padding: 40px 0;
+}
+
+.kma-mega-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.kma-mega-link {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.kma-mega-link:hover {
+  color: var(--kma-primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.kma-lang-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.kma-lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+  transition: color 0.2s;
+}
+.kma-lang-btn.active {
+  color: #111;
+  font-weight: 800;
+}
+.kma-lang-sep {
+  width: 1px;
+  height: 10px;
+  background-color: #ddd;
+}
+
+.kma-linkbtn {
+  background: transparent;
+  border: 0;
+  color: #555;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+.kma-linkbtn:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+.kma-v-divider {
+  width: 1px;
+  height: 12px;
+  background: #e0e0e0;
+}
+
+.kma-user {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.kma-user-name {
+  color: #111;
+  font-weight: 700;
+  font-size: 13px;
+}
+.kma-user-suffix {
+  color: #777;
+  font-size: 13px;
+}
+
+@media (max-width: 1024px) {
+  .kma-header-bottom,
+  .kma-util {
+    display: none;
+  }
+}
+
+/* =========================================
+   [SECTION 2] Common Layout & UI
+   ========================================= */
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.kma-page {
+  padding: 40px 20px 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.kma-title,
+.page-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 30px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.kma-divider {
+  display: none;
+}
+
+.card,
+.kma-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.kma-card-pad0 {
+  padding: 0;
+}
+
+/* Buttons */
+.btn,
+.kma-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 0;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #333;
+}
+.btn:hover,
+.kma-btn:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+.btn-primary,
+.kma-btn-primary {
+  border-color: var(--kma-primary);
+  background: var(--kma-primary);
+  color: #fff;
+}
+.btn-primary:hover,
+.kma-btn-primary:hover {
+  background: #004494;
+  border-color: #004494;
+}
+
+.kma-btn-dark {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+.kma-btn-dark:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.btn-danger,
+.kma-btn-danger {
+  border-color: #d32f2f;
+  background: #d32f2f;
+  color: #fff;
+}
+.btn-danger:hover,
+.kma-btn-danger:hover {
+  background: #b71c1c;
+  border-color: #b71c1c;
+}
+
+.kma-btn-xs {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.kma-actions-center {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.kma-actions-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* =========================================
+   [SECTION 3] Component Specific Styles
+   ========================================= */
+
+/* Search Container & Fields */
+.kma-search-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.kma-search-date-area {
+  flex: 0 0 auto;
+}
+
+.kma-search-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.kma-search-field-group {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Custom Reset Button Style */
+.kma-btn-reset {
+  min-width: 80px;
+  background-color: #f8f9fa;
+  color: #666;
+}
+.kma-btn-reset:hover {
+  background-color: #e9ecef;
+  border-color: #ccc;
+}
+
+/* Inputs */
+.kma-label,
+.label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.kma-input,
+.input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  padding: 0 14px;
+  font-size: 15px;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.kma-input:focus,
+.input:focus {
+  border-color: #111;
+}
+
+/* Table */
+.kma-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid #111;
+}
+.kma-table th {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 16px 10px;
+  font-weight: 700;
+  color: #111;
+  font-size: 15px;
+  text-align: center;
+}
+.kma-table td {
+  border-bottom: 1px solid #eee;
+  padding: 16px 10px;
+  color: #555;
+  font-size: 15px;
+}
+.kma-empty {
+  text-align: center;
+  color: #888;
+  padding: 60px;
+  border-bottom: 1px solid #eee;
+}
+
+/* TUI Grid */
+.kma-grid .tui-grid-container {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+.kma-grid .tui-grid-header-area {
+  background-color: #fff !important;
+  border-top: 2px solid #111 !important;
+  border-bottom: 1px solid #ccc !important;
+}
+.kma-grid .tui-grid-cell-header {
+  background-color: #fff !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+.kma-grid .tui-grid-cell {
+  border-right: 0 !important;
+  border-left: 0 !important;
+  color: #333 !important;
+}
+.kma-grid .tui-grid-row-hover {
+  background-color: #f9f9f9 !important;
+}
+
+/* Form Table */
+.kma-form-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid #111;
+  margin-bottom: 40px;
+}
+.kma-form-table th {
+  width: 160px;
+  background: #fcfcfc;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  font-weight: 700;
+  text-align: left;
+  font-size: 15px;
+  color: #111;
+}
+.kma-form-table td {
+  border-bottom: 1px solid #eee;
+  padding: 14px 20px;
+}
+
+/* Paging */
+.kma-paging {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 40px 0 10px;
+}
+.kma-pagebtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 0;
+  border: 1px solid #eee;
+  background: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  color: #777;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.kma-pagebtn:hover:not(:disabled) {
+  background: #f9f9f9;
+  color: #111;
+  border-color: #ccc;
+}
+.kma-pagebtn.is-active {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+.kma-pagebtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Attach */
+.kma-attach {
+  border-top: 1px solid #eee;
+  margin-top: 30px;
+  padding-top: 20px;
+}
+.kma-attach-head {
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #111;
+}
+.kma-attach-drop {
+  border: 1px dashed #ccc;
+  border-radius: 0;
+  padding: 30px;
+  background: #fafafa;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #666;
+  font-size: 14px;
+}
+.kma-attach-drop:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+.kma-attach-list {
+  margin-top: 15px;
+  border-top: 1px solid #eee;
+}
+.kma-attach-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+/* Editor & Viewer */
+.kma-editor-wrap {
+  margin: 30px 0;
+}
+.kma-editor-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+.kma-toast-viewer {
+  min-height: 300px;
+  border: 1px solid #e5e5e5;
+  border-radius: 0;
+  padding: 30px;
+  background: #fff;
+}
+
+/* Login */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.login-card {
+  width: 400px;
+  padding: 40px;
+  border: 1px solid #eee;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal (콤팩트 디자인) */
+.kma-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+.kma-modal {
+  width: min(800px, 90vw);
+  background: #fff;
+  border-radius: 0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* 모달 헤더: 흰색 배경, 검은 글씨, 진한 라인 */
+.kma-modal-head {
+  padding: 16px 24px;
+  background: #fff;
+  color: #111;
+  border-bottom: 2px solid #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.kma-modal-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #111;
+}
+.kma-modal-x {
+  color: #111;
+  font-size: 24px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.kma-modal-x:hover {
+  opacity: 1;
+}
+
+.kma-modal-body {
+  padding: 24px;
+}
+.kma-modal-foot {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background: #fff;
+}
+
+/* 모달 테이블: 로우 높이 축소 (콤팩트) */
+.kma-modal-tablewrap .kma-table th,
+.kma-modal-tablewrap .kma-table td {
+  padding: 8px 10px; /* 패딩 축소 */
+}
+.kma-modal-tablewrap .kma-table th {
+  font-size: 14px;
+  background: #f9f9f9;
+}
+.kma-modal-tablewrap .kma-table td {
+  font-size: 14px;
+}
+
+/* Utils */
+.kma-hidden {
+  display: none;
+}
+.kma-inline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.kma-readonly {
+  padding: 10px 0;
+  font-size: 15px;
+  color: #333;
+}
+.badge {
+  font-size: 12px;
+  color: #888;
+}
+o .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
