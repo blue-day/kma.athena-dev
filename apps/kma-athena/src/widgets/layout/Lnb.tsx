@@ -1,14 +1,33 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import defaultProfileIcon from '@/shared/assets/images/icon-profile.svg';
+
+type LnbProps = {
+  profileName?: string;
+  profileTeam?: string;
+  profileEmail?: string;
+  profileImageUrl?: string;
+};
 
 /**
  * 전역 사이드바 (LNB)
  * - 펼쳐지거나 좁은 형태 유지 (버튼 토글 방식)
  */
-export const Lnb = () => {
+export const Lnb = ({
+  profileName = '홍길동',
+  profileTeam = 'AI개발팀',
+  profileEmail = 'sample@kma.or.kr',
+  profileImageUrl,
+}: LnbProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isHistoryVisible, setIsHistoryVisible] = useState(true);
+  const [profileSrc, setProfileSrc] = useState(profileImageUrl?.trim() || defaultProfileIcon.src);
+  const isNavVisible = isExpanded && isHistoryVisible;
+
+  useEffect(() => {
+    setProfileSrc(profileImageUrl?.trim() || defaultProfileIcon.src);
+  }, [profileImageUrl]);
 
   return (
     <aside
@@ -21,7 +40,6 @@ export const Lnb = () => {
       }}
     >
       <div className={`flex items-center h-[92px] px-6 transition-all duration-300 ${isExpanded ? 'justify-between' : 'justify-center'}`}>
-        {/* 로고 영역: opacity와 visibility를 이용한 Fade 효과 */}
         <Link 
           href="/" 
           className={`flex items-center transition-all duration-300 ${
@@ -48,7 +66,7 @@ export const Lnb = () => {
           <button className={`btn-new-chat ${
             isExpanded ? 'w-full' : 'close'
           }`}>
-            <span className={`text-sm font-medium ${isExpanded ? 'block opacity-100' : ' w-0 hidden opacity-0'}`}>새 채팅</span>
+            <span className={`text-sm font-medium truncate ${isExpanded ? 'block opacity-100' : ' w-0 hidden opacity-0'}`}>새 채팅</span>
           </button>
         </div>
 
@@ -59,18 +77,21 @@ export const Lnb = () => {
             disabled={!isExpanded}
             className="flex items-center transition-all duration-300 text-left"
           >
-            {isExpanded && (
-              <span className={`btn-toggle-text ${isHistoryVisible ? '' : 'close'}`}>대화 기록</span>
-            )}
+            <span className={`btn-toggle-text truncate transition-opacity duration-300 ${isExpanded ? 'visible opacity-100' : 'invisible opacity-0'} ${isHistoryVisible ? '' : 'close'}`}>대화 기록</span>
           </button>
         </div>
 
         {/* (3) 대화 기록 리스트 (스크롤 영역) */}
-        <nav className={`flex-1 overflow-y-auto space-y-[26px] pb-6 custom-scrollbar transition-all duration-300 ${
-          isExpanded && isHistoryVisible ? 'opacity-100 block' : 'opacity-0 hidden pointer-events-none'
+        <nav className={`flex-1 overflow-y-auto space-y-[26px] pb-6 custom-scrollbar transition-opacity duration-300 ${
+          isNavVisible ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}>
           {/* 오늘 */}
-          <div className="space-y-2">
+          <div
+            className={`space-y-2 transition-all duration-300 ${
+              isNavVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ transitionDelay: isNavVisible ? '60ms' : '0ms' }}
+          >
             {isExpanded && <h3 className="px-[10px] py-[6px] text-[13px] text-gray-300">오늘</h3>}
             <div className="space-y-1.5">
               {[1, 2].map((i) => (
@@ -89,7 +110,12 @@ export const Lnb = () => {
           </div>
 
           {/* 어제 */}
-          <div>
+          <div
+            className={`transition-all duration-300 ${
+              isNavVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ transitionDelay: isNavVisible ? '130ms' : '0ms' }}
+          >
             {isExpanded && <h3 className="px-[10px] py-[6px] text-[13px] text-gray-300">어제</h3>}
             <div className="space-y-1.5">
               {[1, 2].map((i) => (
@@ -108,7 +134,12 @@ export const Lnb = () => {
           </div>
 
           {/* 이전 기록 */}
-          <div>
+          <div
+            className={`transition-all duration-300 ${
+              isNavVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ transitionDelay: isNavVisible ? '200ms' : '0ms' }}
+          >
             {isExpanded && <h3 className="px-[10px] py-[6px] text-[13px] text-gray-300">4일 전</h3>}
             <div className="space-y-1.5">
               {[1, 2, 3, 4].map((i) => (
@@ -128,9 +159,29 @@ export const Lnb = () => {
         </nav>
       </div>
 
-      <div className="p-4 border-t border-gray-100">
-        {/* 하단 설정/프로필 아이콘 */}
-        <div className="w-8 h-8 bg-gray-200 rounded-full mx-auto"></div>
+      <div className="h-[142px] self-stretch flex flex-col justify-center items-stretch bg-primary">
+        <div className={`flex items-center gap-3 transition-padding duration-300 ${isExpanded ? 'px-[36px]' : 'p-4'}`}>
+          <div className="w-[50px] h-[50px] min-w-[50px] min-h-[50px] shrink-0 rounded-full overflow-hidden">
+            {/* 외부 URL 포함 동적 이미지 소스를 허용하기 위해 img 태그를 사용 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={profileSrc}
+              alt="프로필 이미지"
+              className="w-full h-full object-cover"
+              onError={() => setProfileSrc(defaultProfileIcon.src)}
+            />
+          </div>
+          {isExpanded && (
+            <div className="min-w-0">
+              <p className="truncate text-base leading-5 font-semibold text-white">
+                {profileName} <span className="text-sm font-normal">({profileTeam})</span>
+              </p>
+              <p className="truncate text-sm leading-5 text-white">
+                {profileEmail}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </aside>
   );

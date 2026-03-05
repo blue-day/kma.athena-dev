@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { MaterialPanel } from '@/features/chat/ui/MaterialPanel';
+import { ChatHeader } from './Header';
 
 interface ChatLayoutProps {
   children: React.ReactNode;
@@ -18,18 +19,12 @@ export const ChatLayout = ({ children, header }: ChatLayoutProps) => {
   return (
     <div className="relative flex flex-col w-full h-full overflow-hidden bg-white">
       {/* 1. 상단 채팅 전용 헤더 (채팅방 제목, 설정 등) */}
-      <header className="flex-shrink-0 h-16 border-b border-gray-100 bg-white">
-        {header || (
-          <div className="flex items-center h-full px-6">
-            <h2 className="text-lg font-bold text-gray-800">대한의사협회 사내 지식 챗봇</h2>
-          </div>
-        )}
-      </header>
+      <ChatHeader header={header} />
 
       {/* 2. 메인 바디 영역 (채팅창 + 우측 슬라이딩 패널) */}
       <div className="flex flex-1 min-h-0 overflow-hidden relative">
         {/* (A) 중앙 채팅 메시지 영역 (아이템들이 수직으로 쌓임) */}
-        <section className="flex-1 min-w-0 overflow-y-auto bg-white relative">
+        <section className="relative flex-1 min-w-0 overflow-y-auto bg-white bg-[linear-gradient(to_top,_#ddf0ff_0%,_transparent_30%)]">
           {/* 자료 패널 토글 버튼 (패널이 닫혀있을 때만 표시) */}
           {!isMaterialOpen && (
             <button
@@ -43,7 +38,7 @@ export const ChatLayout = ({ children, header }: ChatLayoutProps) => {
             </button>
           )}
           
-          <div className="w-full max-w-4xl mx-auto h-full flex flex-col">
+          <div className="w-full h-full flex flex-col overflow-y-auto">
             {children}
           </div>
         </section>

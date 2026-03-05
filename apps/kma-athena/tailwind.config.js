@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: '#22449c',
         gray: {
           50: '#E2E3E7',
           100: '#C6C8CF',
@@ -12,6 +13,7 @@ module.exports = {
           400: '#626777',
           500: '#4E525F',
           600: '#3D4049',
+          border: '#e5e7eb',
         },
       },
     },

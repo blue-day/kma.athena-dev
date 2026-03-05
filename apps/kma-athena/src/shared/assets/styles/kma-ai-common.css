@@ -2,6 +2,7 @@
 
 :root {
   --kma-text: #1a1a1a;
+  --kma-primary: #22449c;
   --kma-bg-hover: #eaf3ff;
 }
 
@@ -32,6 +33,7 @@ a {
   background: url('../images/logo-kma-01.png') no-repeat center / contain;
   display: block;
 }
+
 .btn-lnb-toggle {
   width: 40px;
   height: 40px;
@@ -42,6 +44,7 @@ a {
   transition: background-color 0.2s;
   background: url('../images/icon-side-sidebar-area-default.svg') center / 100% auto no-repeat;
 }
+
 .btn-lnb-toggle:hover {
   background-color: var(--kma-bg-hover);
 }
@@ -54,9 +57,11 @@ a {
   padding-left: 58px;
   background-color: #fff;
 }
+
 .btn-new-chat:hover {
   background-color: var(--kma-bg-hover);
 }
+
 .btn-new-chat::before {
   content: '';
   position: absolute;
@@ -67,10 +72,12 @@ a {
   height: 32px;
   background: url('../images/icon-side-menu-new.svg') center / 100% auto no-repeat;
 }
+
 .btn-new-chat.close {
   width: 52px;
   padding-left: 0;
 }
+
 .btn-new-chat.close::before {
   left: 10px;
 }
@@ -80,6 +87,7 @@ a {
   padding-left: 10px;
   padding-right: 18px;
 }
+
 .btn-toggle-text::after {
   content: '';
   position: absolute;
@@ -90,6 +98,7 @@ a {
   height: 16px;
   background: url('../images/icon-list-arrow-up.svg') center / 100% auto no-repeat;
 }
+
 .btn-toggle-text.close::after {
   transform: translateY(-50%) rotate(180deg);
 }
@@ -106,9 +115,11 @@ a {
   transition: background-color 0.2s;
   overflow: hidden;
 }
+
 .btn-lnb-history:hover {
   background-color: var(--kma-bg-hover);
 }
+
 .btn-lnb-history .title {
   flex: 1;
   text-align: left;
@@ -117,6 +128,7 @@ a {
   display: flex;
   align-items: center;
 }
+
 .btn-lnb-history .delete-btn {
   display: none;
   width: 22px;
@@ -125,7 +137,140 @@ a {
   flex-shrink: 0;
   margin-left: 8px;
 }
+
 .btn-lnb-history:hover .delete-btn,
 .btn-lnb-history .title:focus + .delete-btn {
   display: block;
+}
+
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.txt-fade-up {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUpIn 0.6s ease-out forwards;
+}
+
+.txt-fade-up--title {
+  animation-delay: 0ms;
+}
+
+.txt-fade-up--desc {
+  animation-delay: 140ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .txt-fade-up {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+.btn-chat-attach {
+  background-image: url('../images/icon-plus.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+/* 질문 전송 버튼 상태별 퍼블리싱 */
+.btn-chat-send {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  transition: filter 0.2s;
+}
+
+.btn-chat-send:hover {
+  background-color: #f8fafc;
+}
+
+/* 입력값 없음 */
+.btn-chat-send-disabled {
+  background-image: url('../images/icon-send-disabled.svg');
+}
+
+/* 입력값 있음 */
+.btn-chat-send-active {
+  background-image: url('../images/icon-send-active.svg');
+}
+
+/* 프롬프트 실행 중 */
+.btn-chat-send-stop {
+  background-image: url('../images/icon-send-stop.svg');
+  background-size: 22px auto;
+  background-color: #e4f0ff;
+}
+
+.btn-chat-send-stop:hover {
+  background-color: #e4f0ff;
+}
+
+.common-select {
+  position: relative;
+}
+
+.common-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 10px 36px 10px 16px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  border-radius: 8px;
+  background: url('../images/icon-list-arrow-down.svg') right 16px center / 16px auto no-repeat #fff;
+}
+
+.common-select-trigger:hover{
+  background-color: #f8fafc;
+}
+
+.common-select-trigger.open {
+  background: url('../images/icon-list-arrow-up.svg') right 16px center / 16px auto no-repeat #fff;
+}
+
+.common-select-menu {
+  position: absolute;
+  left: 0;
+  bottom: 46px;
+  z-index: 10;
+  min-width: 140px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+}
+
+.common-select-option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 8px 42px 8px 16px;
+  text-align: left;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.common-select-option:hover {
+  color: var(--kma-primary);
+}
+
+.common-select-option-active {
+  color: var(--kma-primary);
+  background: url('../images/icon-list-check-on.svg') right 16px top 4px/ 20px auto no-repeat;
 }

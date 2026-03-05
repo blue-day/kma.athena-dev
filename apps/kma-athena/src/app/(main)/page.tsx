@@ -1,5 +1,5 @@
-import { KmaMainPage } from '@/views/KmaMainPage';
+import { GeneralChatPage } from '@/views/GeneralChatPage';
 
 export default function Page() {
-  return <KmaMainPage />;
+  return <GeneralChatPage />;
 }
