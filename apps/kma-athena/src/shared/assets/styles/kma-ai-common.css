@@ -1,4 +1,4 @@
-
+/* 공통 반응형 스타일(PC based) */
 
 :root {
   --kma-text: #1a1a1a;
@@ -25,6 +25,10 @@ a {
   text-decoration: none;
 }
 
+.wide{
+  margin-left: -16px;
+  margin-right: -16px;
+}
 
 /* LNB */
 .logo-kma {
@@ -49,8 +53,9 @@ a {
   background-color: var(--kma-bg-hover);
 }
 
-.btn-new-chat {
+.btn-menu-item {
   position: relative;
+  display: block;
   height: 48px;
   border-radius: 8px;
   text-align: left;
@@ -58,11 +63,11 @@ a {
   background-color: #fff;
 }
 
-.btn-new-chat:hover {
+.btn-menu-item:hover {
   background-color: var(--kma-bg-hover);
 }
 
-.btn-new-chat::before {
+.btn-menu-item.chat::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -73,12 +78,23 @@ a {
   background: url('../images/icon-side-menu-new.svg') center / 100% auto no-repeat;
 }
 
-.btn-new-chat.close {
+.btn-menu-item.locker::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+  width: 32px;
+  height: 32px;
+  background: url('../images/icon-side-menu-locker.svg') center / 100% auto no-repeat;
+}
+
+.btn-menu-item.close {
   width: 52px;
   padding-left: 0;
 }
 
-.btn-new-chat.close::before {
+.btn-menu-item.close::before {
   left: 10px;
 }
 
@@ -86,6 +102,7 @@ a {
   position: relative;
   padding-left: 10px;
   padding-right: 18px;
+  font-size: 14px;
 }
 
 .btn-toggle-text::after {
@@ -143,6 +160,29 @@ a {
   display: block;
 }
 
+/* 얇은 세로 스크롤바 */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #E2E3E7 transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #E2E3E7;
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #C6C8CF;
+}
+
 @keyframes fadeUpIn {
   from {
     opacity: 0;
@@ -176,6 +216,36 @@ a {
   }
 }
 
+@keyframes chatInputDockIn {
+  from {
+    opacity: 0.92;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-input-dock-enter {
+  animation: chatInputDockIn 0.5s ease-out;
+}
+
+@keyframes chatMessageRiseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-message-rise {
+  animation: chatMessageRiseIn 0.35s ease-out;
+}
+
 .btn-chat-attach {
   background-image: url('../images/icon-plus.svg');
   background-position: center;
@@ -186,8 +256,8 @@ a {
 /* 질문 전송 버튼 상태별 퍼블리싱 */
 .btn-chat-send {
   display: inline-flex;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background-position: center;
   background-repeat: no-repeat;
@@ -220,6 +290,7 @@ a {
   background-color: #e4f0ff;
 }
 
+/* 공통 셀렉트 - 위로 옵션값 노출 */
 .common-select {
   position: relative;
 }
@@ -235,6 +306,15 @@ a {
   background: url('../images/icon-list-arrow-down.svg') right 16px center / 16px auto no-repeat #fff;
 }
 
+.common-select-trigger > span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient:vertical;
+  word-wrap:break-word;
+}
+
 .common-select-trigger:hover{
   background-color: #f8fafc;
 }
@@ -245,10 +325,10 @@ a {
 
 .common-select-menu {
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: 46px;
   z-index: 10;
-  min-width: 140px;
+  width: 140px;
   padding: 10px 0;
   border-radius: 10px;
   background-color: #fff;
@@ -273,4 +353,18 @@ a {
 .common-select-option-active {
   color: var(--kma-primary);
   background: url('../images/icon-list-check-on.svg') right 16px top 4px/ 20px auto no-repeat;
+}
+
+/* 공통 셀렉트 - 팝업으로 옵션값 노출 */
+.common-select-popopen {
+  padding: 4px 26px 4px 4px;
+  font-size: 14px;
+  background: url('../images/icon-input-arrow-down.svg') right 4px center / 20px auto no-repeat #fff;
+}
+
+.icon-select-check {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url('../images/icon-list-check-on.svg') center / 100% auto no-repeat;
 }

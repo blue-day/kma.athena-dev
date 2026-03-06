@@ -11,12 +11,12 @@ interface ChatWelcomeHeroProps {
 export const ChatWelcomeHero = ({ subtitle, userName = '영숙님' }: ChatWelcomeHeroProps) => {
   return (
     <>
-      <h2 className="txt-fade-up txt-fade-up--title text-5xl font-bold leading-[1.2]">
+      <h2 className="txt-fade-up txt-fade-up--title text-[26px] md:text-5xl font-bold leading-[1.2]">
         안녕하세요. <span className="text-primary">{userName}</span> :)
       </h2>
-      <p className="txt-fade-up txt-fade-up--desc mt-1.5 text-lg text-[#62748e]">{subtitle}</p>
+      <p className="txt-fade-up txt-fade-up--desc mt-1.5 text-sm md:text-lg text-[#62748e]">{subtitle}</p>
 
-      <div className="mt-5 h-[60px] w-[60px]">
+      <div className="mt-4 md:mt-5 h-[50px] md:h-[60px] w-[50px] md:w-[60px]">
         <Lottie animationData={chatbotLottie} loop autoplay className="h-full w-full" />
       </div>
     </>

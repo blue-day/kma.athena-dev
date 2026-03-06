@@ -14,17 +14,26 @@ interface MainLayoutProps {
  */
 export const MainLayout = ({ children }: MainLayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     if (!mobileMenuOpen) {
       return;
     }
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+
     const { overflow } = document.body.style;
     document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.body.style.overflow = overflow;
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [mobileMenuOpen]);
 
@@ -33,14 +42,16 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       mobileMenuOpen,
       openMobileMenu: () => setMobileMenuOpen(true),
       closeMobileMenu: () => setMobileMenuOpen(false),
+      themeMode,
+      setThemeMode,
     }),
-    [mobileMenuOpen],
+    [mobileMenuOpen, themeMode],
   );
 
   return (
     <MainLayoutProvider value={contextValue}>
       <div className="h-screen overflow-y-hidden overflow-x-hidden md:overflow-x-auto">
-        <div className="flex h-screen w-full min-w-0 md:min-w-[1280px]">
+        <div className="flex h-screen w-full min-w-0 md:min-w-[1200px]">
           {/* 1. 최좌측 LNB 사이드바 */}
           <Lnb mobileOpen={mobileMenuOpen} onMobileClose={() => setMobileMenuOpen(false)} />
 

@@ -1,0 +1,43 @@
+/* 모바일 전용 스타일 */
+
+@media (max-width: 767px) {
+
+  /* Header */
+  header .logo-kma {
+    width: 74px;
+    height: 40px;
+    background: url('../images/logo-kma-02.png') no-repeat center / contain;
+    display: block;
+  }
+  
+  /* LNB */
+  .btn-mobile-menu {
+    width: 40px;
+    height: 40px;
+    background: url('../images/mobile/icon-top-hamburger.svg') center / 24px auto no-repeat;
+  }
+
+  .kma-lnb-wrap .switch-theme{ 
+    width: 100%;
+  }
+  
+  .kma-lnb-wrap .btn-lnb-close{
+    margin-left: auto;
+  }
+
+  .kma-lnb-wrap .wide{
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .kma-lnb-wrap .btn-toggle-text{
+    padding-left: 6px;
+  }
+  
+  .btn-lnb-close{
+    width: 40px;
+    height: 40px;
+    background: url('../images/mobile/icon-popup-close.svg') center / 24px auto no-repeat;
+  }
+}
+
