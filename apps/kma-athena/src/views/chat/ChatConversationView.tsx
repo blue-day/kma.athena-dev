@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { AssistantAnswerCard } from '@/features/chat/ui/AssistantAnswerCard';
 import { ChatPromptInput } from '@/features/chat/ui/ChatPromptInput';
 import { ConversationSummaryHeader } from '@/features/chat/ui/ConversationSummaryHeader';
-import { MaterialPanel } from '@/features/chat/ui/MaterialPanel';
+import { MaterialPanel, MaterialPanelContent } from '@/features/chat/ui/MaterialPanel';
+import { CommonBottomSheet } from '@/shared/ui/CommonBottomSheet';
 import { ChatLayout } from '@/widgets/layout/ChatLayout';
 
 const noop = (_value?: string) => {};
@@ -44,6 +45,16 @@ export function ChatConversationView() {
         >
           <MaterialPanel onClose={() => setIsMaterialPanelOpen(false)} />
         </aside>
+
+        <CommonBottomSheet
+          open={isMaterialPanelOpen}
+          onClose={() => setIsMaterialPanelOpen(false)}
+          className="max-h-[80vh]"
+        >
+          <div className="max-h-[calc(80vh-84px)] overflow-y-auto">
+            <MaterialPanelContent />
+          </div>
+        </CommonBottomSheet>
       </div>
     </ChatLayout>
   );

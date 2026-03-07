@@ -13,8 +13,6 @@ const MATERIAL_SUB_TABS = [
 ] as const;
 
 export const MaterialPanel = ({ onClose }: MaterialPanelProps) => {
-  const [activeSubTab, setActiveSubTab] = useState<string>('internal');
-
   return (
     <div className="flex h-full w-full flex-col">
       <div className="p-4 flex justify-end">
@@ -28,6 +26,16 @@ export const MaterialPanel = ({ onClose }: MaterialPanelProps) => {
         </button>
       </div>
 
+      <MaterialPanelContent />
+    </div>
+  );
+};
+
+export const MaterialPanelContent = () => {
+  const [activeSubTab, setActiveSubTab] = useState<string>('internal');
+
+  return (
+    <>
       <CommonSubTabs
         tabs={[...MATERIAL_SUB_TABS]}
         activeTab={activeSubTab}
@@ -62,6 +70,6 @@ export const MaterialPanel = ({ onClose }: MaterialPanelProps) => {
           </section>
         )}
       </div>
-    </div>
+    </>
   );
 };
