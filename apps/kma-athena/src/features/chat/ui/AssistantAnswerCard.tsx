@@ -1,71 +1,53 @@
-export function AssistantAnswerCard() {
+interface AssistantAnswerCardProps {
+  onOpenMaterialPanel?: () => void;
+}
+
+export function AssistantAnswerCard({ onOpenMaterialPanel }: AssistantAnswerCardProps) {
   return (
-    <article className="w-full rounded-2xl border border-[#e5e7eb] bg-white px-6 py-5 shadow-[0_10px_30px_-22px_rgba(15,23,42,0.5)]">
-      <h3 className="text-2xl font-bold text-[#111827]">의협의 공식 입장</h3>
-      <div className="mt-3 text-sm leading-7 text-[#374151]">
-        <p>대한의사협회는 2025년 5월 29일 성분명처방 관련 입장을 제시했습니다.</p>
-        <p className="mt-2">
-          현행 처방체계를 유지하면서도 환자 안전과 진료 연속성을 우선해야 하며, 준비 없는 제도
-          전환은 신중해야 한다는 내용입니다.
-        </p>
-        <p className="mt-2">
-          또한 불가피한 변경이 필요할 경우 의료현장과 환자단체의 충분한 협의가 선행돼야 한다고
-          강조했습니다.
-        </p>
-      </div>
+    <article className="ai-answer-wrap">
+      <p className="answer-loading">...</p> {/* 추후 답변로딩 애니메이션 작업 예정 */}
+      <h3>의협의 공식 입장</h3>
+      <p>
+        대한의사협회는 2025년 5월 29일에 성분명처방 관련 입장을 게시했습니다. 
+        <br />의협은 성분명처방 제도화가 과학적 진료행위에 대한 침해이며, 성분명 처방이 약사의 대체조제 권한을 강화한다는 주장이 본질을 호도하고 있다는 입장입니다.
+        <br />또한 성분명처방 제도화가 환자 중심의보건의료체계를 해칠수 있으며, 약사회의 주장이 더불어민주당의공약과 다르다는 점을 강조하고 있습니다.
+      </p>
 
-      <div className="mt-5 flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          className="inline-flex items-center rounded-md border border-[#dbe1eb] bg-[#f8fafc] px-3 py-1.5 text-xs text-[#334155] transition-colors hover:bg-[#eef2ff]"
-        >
-          보도자료 바로가기
-        </button>
-        <button
-          type="button"
-          className="inline-flex items-center rounded-md border border-[#dbe1eb] bg-[#f8fafc] px-3 py-1.5 text-xs text-[#334155] transition-colors hover:bg-[#eef2ff]"
-        >
-          노무근거자료
-        </button>
-      </div>
+      <button
+        type="button"
+        className="btn-underline"
+        onClick={onOpenMaterialPanel}
+      >
+        내부 근거/참고 자료 <span>7건</span> &gt;
+      </button>
 
-      <div className="mt-5 flex items-center justify-end gap-2">
+      <div className="flex items-center justify-end gap-1">
         <button
           type="button"
-          className="inline-flex h-8 items-center rounded-md border border-[#d1d5db] px-2.5 text-xs text-[#4b5563] transition-colors hover:bg-[#f8fafc]"
+          className="btn-favorite transition-colors hover:bg-[#ebf3fd]"
         >
-          보관함 저장
+          <span className="sr-only">보관함 저장</span>
         </button>
         <button
           type="button"
-          className="inline-flex h-8 items-center rounded-md border border-[#d1d5db] px-2.5 text-xs text-[#4b5563] transition-colors hover:bg-[#f8fafc]"
+          className="btn-copy transition-colors hover:bg-[#ebf3fd]"
         >
-          복사
+          <span className="sr-only">복사</span>
         </button>
       </div>
 
-      <div className="mt-5 border-t border-[#e5e7eb] pt-5">
-        <p className="mb-3 text-sm text-[#4b5563]">
-          관심있는 주제가 있다면, 이렇게 물어볼 수 있어요.
+      <div className="recommend-box">
+        <p>
+          원하는 답변이 아니라면, 이렇게 질문해 보는건 어때요?
         </p>
-        <div className="flex flex-col gap-2">
-          <button
-            type="button"
-            className="inline-flex w-fit max-w-full items-center rounded-md bg-[#eef3ff] px-3 py-2 text-left text-sm text-[#1e3a8a] transition-colors hover:bg-[#dbeafe]"
-          >
-            <span className="truncate">1. 성분명 처방 관련된 현행 의견</span>
+        <div className="recommend-list">
+          <button type="button">
+            1. 성분명 처방 관련된 현행 의견</button>
+          <button type="button">
+            2. 성분명 반대
           </button>
-          <button
-            type="button"
-            className="inline-flex w-fit max-w-full items-center rounded-md bg-[#eef3ff] px-3 py-2 text-left text-sm text-[#1e3a8a] transition-colors hover:bg-[#dbeafe]"
-          >
-            <span className="truncate">2. 성분명 반대</span>
-          </button>
-          <button
-            type="button"
-            className="inline-flex w-fit max-w-full items-center rounded-md bg-[#eef3ff] px-3 py-2 text-left text-sm text-[#1e3a8a] transition-colors hover:bg-[#dbeafe]"
-          >
-            <span className="truncate">3. 외국에서 성분명 처방이 어떻게 하고 있나요?</span>
+          <button type="button">
+            3. 외국에서 성분명 처방이 어떻게 하고 있나요?
           </button>
         </div>
       </div>

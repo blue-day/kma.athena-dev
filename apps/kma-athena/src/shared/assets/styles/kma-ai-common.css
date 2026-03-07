@@ -25,12 +25,19 @@ a {
   text-decoration: none;
 }
 
+/* === 공통 스타일 ===  */
 .wide{
   margin-left: -16px;
   margin-right: -16px;
 }
 
-/* LNB */
+.iht{
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* === LNB 스타일 ===  */
 .logo-kma {
   width: 194px;
   height: 24px;
@@ -160,7 +167,7 @@ a {
   display: block;
 }
 
-/* 얇은 세로 스크롤바 */
+/* === 스크롤바 스타일 ===  */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #E2E3E7 transparent;
@@ -183,69 +190,7 @@ a {
   background-color: #C6C8CF;
 }
 
-@keyframes fadeUpIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.txt-fade-up {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeUpIn 0.6s ease-out forwards;
-}
-
-.txt-fade-up--title {
-  animation-delay: 0ms;
-}
-
-.txt-fade-up--desc {
-  animation-delay: 140ms;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .txt-fade-up {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-}
-
-@keyframes chatInputDockIn {
-  from {
-    opacity: 0.92;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chat-input-dock-enter {
-  animation: chatInputDockIn 0.5s ease-out;
-}
-
-@keyframes chatMessageRiseIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chat-message-rise {
-  animation: chatMessageRiseIn 0.35s ease-out;
-}
-
+/* === 입력 프롬프트 스타일 ===  */
 .btn-chat-attach {
   background-image: url('../images/icon-plus.svg');
   background-position: center;
@@ -290,6 +235,7 @@ a {
   background-color: #e4f0ff;
 }
 
+/* === 공통 셀렉트 스타일 ===  */
 /* 공통 셀렉트 - 위로 옵션값 노출 */
 .common-select {
   position: relative;
@@ -367,4 +313,166 @@ a {
   width: 20px;
   height: 20px;
   background: url('../images/icon-list-check-on.svg') center / 100% auto no-repeat;
+}
+
+/* === 대화상세 스타일 ===  */
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.txt-fade-up {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUpIn 0.6s ease-out forwards;
+}
+
+.txt-fade-up--title {
+  animation-delay: 0ms;
+}
+
+.txt-fade-up--desc {
+  animation-delay: 140ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .txt-fade-up {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+@keyframes chatInputDockIn {
+  from {
+    opacity: 0.92;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-input-dock-enter {
+  animation: chatInputDockIn 0.5s ease-out;
+}
+
+@keyframes chatMessageRiseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-message-rise {
+  animation: chatMessageRiseIn 0.35s ease-out;
+}
+
+.btn-title-edit{
+  display: block;
+  width: 28px;
+  height: 28px;
+  background: url('../images/icon-edit.svg') center / 20px auto no-repeat;
+  border-radius: 50%;
+}
+
+/* 답변 태그 스타일 정의 */
+.ai-answer-wrap{
+  width: 100%;
+  padding-top: 28px;
+  padding-bottom: 20px;
+}
+
+.ai-answer-wrap *{
+  font-size: 14px;
+}
+
+.ai-answer-wrap h3{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.ai-answer-wrap p{
+  line-height: 2;
+}
+
+.ai-answer-wrap h3 + p{
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.ai-answer-wrap .btn-underline{
+  display: inline-block;
+  padding: 4px 0;
+  text-decoration: underline;
+  line-height: 2;
+}
+
+.ai-answer-wrap .btn-underline > span{
+  color: var(--kma-primary);
+}
+
+.ai-answer-wrap .btn-favorite{
+  width: 36px;
+  height: 36px;
+  background: url('../images/icon-favorites.svg') center / 20px auto no-repeat;
+  border-radius: 50%;
+}
+
+.ai-answer-wrap .btn-copy{
+  width: 36px;
+  height: 36px;
+  background: url('../images/icon-copy.svg') center / 20px auto no-repeat;
+  border-radius: 50%;
+}
+
+.ai-answer-wrap .recommend-box{
+  margin-top: 8px;
+  padding-top: 36px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.recommend-box .recommend-list{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.recommend-box .recommend-list button{
+  display: inline-block;
+  padding: 4px 10px;
+  text-align: left;
+  border-radius: 6px;
+  background-color: #ebf3fd;
+  line-height: 2;
+  transition: background-color 0.2s;
+}
+.recommend-box .recommend-list button:hover{
+  background-color: #dbeafe;
+}
+
+.btn-panel-close{
+  width: 30px;
+  height: 30px;
+  background: url('../images/mobile/icon-popup-close.svg') center / 24px auto no-repeat;
+}
+
+.btn-download{
+  width: 36px;
+  height: 36px;
+  background: url('../images/icon-download.svg') center / 20px auto no-repeat;
+  border-radius: 50%;
 }

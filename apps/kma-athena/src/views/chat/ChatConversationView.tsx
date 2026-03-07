@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { AssistantAnswerCard } from '@/features/chat/ui/AssistantAnswerCard';
 import { ChatPromptInput } from '@/features/chat/ui/ChatPromptInput';
 import { ConversationSummaryHeader } from '@/features/chat/ui/ConversationSummaryHeader';
@@ -9,6 +10,7 @@ import { ChatLayout } from '@/widgets/layout/ChatLayout';
 const noop = (_value?: string) => {};
 
 export function ChatConversationView() {
+  const [isMaterialPanelOpen, setIsMaterialPanelOpen] = useState(false);
 
   return (
     <ChatLayout>
@@ -16,12 +18,12 @@ export function ChatConversationView() {
         <section className="relative z-10 mx-auto flex h-full w-full flex-col">
           <ConversationSummaryHeader />
 
-          <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-2.5 pt-6">
-            <div className="mx-auto flex w-full max-w-[860px] flex-col gap-4 pb-6 pt-2">
-              <div className="chat-message-rise ml-auto max-w-[80%] rounded-2xl bg-[#eef3ff] px-4 py-3 text-sm text-[#1f2937]">
+          <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-2.5 pt-[60px]">
+            <div className="mx-auto flex w-full max-w-[852px] flex-col py-6">
+              <div className="chat-message-rise ml-auto max-w-[80%] rounded-[8px_0_8px_8px] bg-[#ebf3fd] px-4 py-2 leading-7">
                 성분명 처방에 대한 협회의 공식 입장은 어때?
               </div>
-              <AssistantAnswerCard />
+              <AssistantAnswerCard onOpenMaterialPanel={() => setIsMaterialPanelOpen(true)} />
             </div>
           </div>
 
@@ -35,10 +37,12 @@ export function ChatConversationView() {
         </section>
 
         <aside
-          className="hidden w-0 flex-shrink-0 overflow-y-auto border-l border-gray-100 bg-gray-50 opacity-0 transition-all duration-300 md:block"
-          aria-hidden
+          className={`hidden flex-shrink-0 overflow-y-auto border-l border-gray-border bg-white transition-all duration-300 md:block ${
+            isMaterialPanelOpen ? 'w-[400px] opacity-100' : 'w-0 opacity-0 pointer-events-none'
+          }`}
+          aria-hidden={!isMaterialPanelOpen}
         >
-          <MaterialPanel onClose={noop} />
+          <MaterialPanel onClose={() => setIsMaterialPanelOpen(false)} />
         </aside>
       </div>
     </ChatLayout>
