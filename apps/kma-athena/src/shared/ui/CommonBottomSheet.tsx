@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 
 type CommonBottomSheetProps = {
   open: boolean;
@@ -17,6 +18,12 @@ export const CommonBottomSheet = ({
   children,
   className = '',
 }: CommonBottomSheetProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   useEffect(() => {
     if (!open) {
       return;
@@ -34,16 +41,20 @@ export const CommonBottomSheet = ({
     };
   }, [open, onClose]);
 
-  return (
+  if (!isMounted) {
+    return null;
+  }
+
+  const bottomSheetContent = (
     <div
-      className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
+      className={`popup-bottom-wrap md:hidden transition-opacity duration-300 ${
         open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
       }`}
     >
       <button
         type="button"
         aria-label="바텀시트 닫기"
-        className="absolute inset-0 bg-black/60"
+        className="btn-popup-bg"
         onClick={onClose}
       />
 
@@ -51,7 +62,7 @@ export const CommonBottomSheet = ({
         role="dialog"
         aria-modal="true"
         aria-label={title ?? '바텀 시트'}
-        className={`absolute bottom-0 left-0 right-0 rounded-t-2xl bg-white px-4 pb-5 transition-transform duration-300 ${
+        className={`popup-bottom-box transition-transform duration-300 ${
           open ? 'translate-y-0' : 'translate-y-full'
         } ${className}`}
       >
@@ -59,13 +70,17 @@ export const CommonBottomSheet = ({
           type="button"
           aria-label="바텀시트 닫기"
           onClick={onClose}
-          className="mx-auto p-4 mb-1 block"
+          className="btn-popup-close"
         >
-          <span className="w-[30px] h-1 flex rounded-[30px] bg-gray-100"></span>
+          <span className="btn-popup-close-bar"></span>
         </button>
-        {title ? <h2 className="mb-2.5 pb-3 font-bold border-b border-gray-border">{title}</h2> : null}
-        {children}
+        {title ? <h2 className="popup-title">{title}</h2> : null}
+        <div className="popup-content">
+          {children}
+        </div>
       </div>
     </div>
   );
+
+  return createPortal(bottomSheetContent, document.body);
 };

@@ -3,18 +3,27 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Lnb } from './Lnb';
 import { MainLayoutProvider } from './MainLayoutContext';
+import { CommonLoading } from '@/shared/ui/CommonLoading';
+import { CommonPopup } from '@/shared/ui/CommonPopup';
 
 interface MainLayoutProps {
   children: React.ReactNode;
+  isLoading?: boolean;
 }
 
 /**
  * 전역 레이아웃 컴포넌트
  * - Lnb (최좌측 바) + Content (우측 전체 영역)
+ * - isLoading: 로딩 중 표시 여부
+ * - isAlertPopupOpen: alert 팝업 여부
+ * - isConfirmPopupOpen: confirm 팝업 여부
  */
-export const MainLayout = ({ children }: MainLayoutProps) => {
+
+export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
+  const [isAlertPopupOpen, setIsAlertPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -61,6 +70,30 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
           </main>
         </div>
       </div>
+      {/* alert 팝업 */}
+      <CommonPopup
+        open={isAlertPopupOpen}
+        variant="alert"
+        content={
+          <p>저장 되었습니다.</p>
+        }
+        onClose={() => setIsAlertPopupOpen(false)}
+        onConfirm={() => setIsAlertPopupOpen(false)}
+      />
+
+      {/* confirm 팝업 */}
+      <CommonPopup
+        open={isConfirmPopupOpen}
+        variant="confirm"
+        content={
+          <p>채팅을 삭제하겠습니까?</p>
+        }
+        onClose={() => setIsConfirmPopupOpen(false)}
+        onConfirm={() => setIsConfirmPopupOpen(false)}
+      />
+
+      {/* 로딩 */}
+      {isLoading && <CommonLoading />}
     </MainLayoutProvider>
   );
 };

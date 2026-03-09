@@ -56,7 +56,7 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
   };
 
   return (
-    <header className="flex-shrink-0 h-[56px] md:h-[70px] md:border-b border-gray-border bg-white fixed md:static top-0 left-0 right-0 z-30">
+    <header className="flex-shrink-0 h-[56px] md:h-[70px] md:border-b border-gray-border bg-white fixed md:static top-0 left-0 right-0 z-10">
       {header || (
         <>
           <div className="hidden md:flex items-center h-full w-full px-[30px]">

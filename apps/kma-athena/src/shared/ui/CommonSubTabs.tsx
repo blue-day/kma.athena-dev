@@ -19,7 +19,7 @@ export function CommonSubTabs({
   ariaLabel = '서브 탭',
 }: CommonSubTabsProps) {
   return (
-    <nav className="px-5 border-b border-gray-border" aria-label={ariaLabel}>
+    <nav className="md:px-5 border-b border-gray-border" aria-label={ariaLabel}>
       <ul className="flex items-center">
         {tabs.map((tab) => {
           const isActive = tab.key === activeTab;

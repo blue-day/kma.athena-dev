@@ -2,7 +2,14 @@
 
 @media (max-width: 767px) {
 
-  /* Header */
+  /* === 공통 버튼 === */
+  .btn-info-help{
+    top: 0;
+    right: 20px;
+    transform: translateX(0);
+  }
+
+  /* === Header === */
   header .logo-kma {
     width: 74px;
     height: 40px;
@@ -10,7 +17,7 @@
     display: block;
   }
   
-  /* LNB */
+  /* === LNB === */
   .btn-mobile-menu {
     width: 40px;
     height: 40px;
@@ -39,5 +46,20 @@
     height: 40px;
     background: url('../images/mobile/icon-popup-close.svg') center / 24px auto no-repeat;
   }
+  
+  /* === 대화상세 === */
+  .recommend-box .recommend-list button{
+    font-size: 13px;
+  }
+
+  .btn-scroll-bottom{
+    bottom: 156px;
+  }
+
+
+
+
+
 }
+
 

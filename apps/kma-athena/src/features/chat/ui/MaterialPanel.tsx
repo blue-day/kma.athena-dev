@@ -43,12 +43,20 @@ export const MaterialPanelContent = () => {
         ariaLabel="자료 서브 탭"
       />
 
-      <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto py-5 px-5">
+      <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto py-5 md:px-5">
         {activeSubTab === 'internal' ? (
           <section>
-            <p className="py-1.5 text-sm font-bold">
-              <span className="iht text-primary">1</span>건
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="py-1.5 flex-1 text-sm font-bold">
+                <span className="iht text-primary">1</span>건
+              </p>
+              <button
+                type="button"
+                className="btn-download mr-[-8px] transition-colors hover:bg-[#ebf3fd]"
+              >
+                <span className="sr-only">전체 다운로드</span>
+              </button>
+            </div>
             <ol>
               <li className="flex items-center justify-between gap-2 pl-1">
                 <p className="min-w-0 flex-1 truncate text-sm font-medium">
@@ -57,7 +65,7 @@ export const MaterialPanelContent = () => {
                 </p>
                 <button
                   type="button"
-                  className="btn-download transition-colors hover:bg-[#ebf3fd]"
+                  className="btn-download mr-[-8px] transition-colors hover:bg-[#ebf3fd]"
                 >
                   <span className="sr-only">다운로드</span>
                 </button>
@@ -65,8 +73,18 @@ export const MaterialPanelContent = () => {
             </ol>
           </section>
         ) : (
-          <section className="rounded-lg border border-dashed border-[#d1d5db] px-4 py-5">
-            <p className="text-sm text-[#6b7280]">외부 링크 내용은 추후 제공 예정입니다.</p>
+          <section>
+            <p className="py-1.5 text-sm font-bold">
+              <span className="iht text-primary">1</span>건
+            </p>
+            <ol>
+              <li className="flex items-center justify-between gap-2 pl-1">
+                <a href="#" className="min-w-0 flex-1 truncate text-sm font-medium">
+                  <span className="mr-1">1.</span>
+                  대한의사협회 협약서 20250101
+                </a>
+              </li>
+            </ol>
           </section>
         )}
       </div>

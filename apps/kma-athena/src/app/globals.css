@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-gray-200 opacity-100;
+  }
+}
+
 @import '../shared/assets/font/font.css';
 @import '../shared/assets/styles/kma-ai-common.css';
 @import '../shared/assets/styles/kma-ai-mobile.css';
+
