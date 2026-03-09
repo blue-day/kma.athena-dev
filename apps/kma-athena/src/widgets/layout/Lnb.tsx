@@ -1,13 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import defaultProfileIcon from '@/shared/assets/images/icon-profile.svg';
+import defaultProfileIconMale from '@/shared/assets/images/icon-profile-male.svg';//남성인 경우 
+import defaultProfileIconFemale from '@/shared/assets/images/icon-profile-female.svg';//여성인 경우
 import { ThemeModeSwitch } from '@/widgets/layout/ThemeModeSwitch';
 import { useMainLayout } from './MainLayoutContext';
 
 const LNB_BACKGROUND_STYLE = {
   backgroundImage:
-    'linear-gradient(to bottom, rgba(191, 221, 255, 0) 80%, #bfddff), linear-gradient(to bottom, #f8f9fc, #f8f9fc)',
+    'linear-gradient(to bottom, rgba(191, 221, 255, 0) 70%, #bfddff), linear-gradient(to bottom, #f8f9fc, #f8f9fc)',
 } as const;
 
 const HISTORY_SECTIONS = [
@@ -37,8 +38,6 @@ type LnbProps = {
   mobileOpen?: boolean;
   onMobileClose?: () => void;
   profileName?: string;
-  profileTeam?: string;
-  profileEmail?: string;
   profileImageUrl?: string;
 };
 
@@ -50,18 +49,16 @@ export const Lnb = ({
   mobileOpen = false,
   onMobileClose,
   profileName = '홍길동',
-  profileTeam = 'AI개발팀',
-  profileEmail = 'sample@kma.or.kr',
   profileImageUrl,
 }: LnbProps) => {
   const { themeMode, setThemeMode } = useMainLayout();
   // 데스크톱 LNB 전용 접기/펼치기 상태
   const [isExpanded, setIsExpanded] = useState(true);
   const [isHistoryVisible, setIsHistoryVisible] = useState(true);
-  const [profileSrc, setProfileSrc] = useState(profileImageUrl?.trim() || defaultProfileIcon.src);
+  const [profileSrc, setProfileSrc] = useState(profileImageUrl?.trim() || defaultProfileIconMale.src);
 
   useEffect(() => {
-    setProfileSrc(profileImageUrl?.trim() || defaultProfileIcon.src);
+    setProfileSrc(profileImageUrl?.trim() || defaultProfileIconMale.src);
   }, [profileImageUrl]);
 
   const renderHistoryItem = (title: string, key: string) => (
@@ -89,13 +86,16 @@ export const Lnb = ({
           </button>
         </div>
 
-        <div className="py-1.5">
+        <div className="py-1.5 flex items-center justify-between">
           <button
             onClick={() => expanded && setIsHistoryVisible((prev) => !prev)}
             disabled={!expanded}
             className="flex items-center transition-all duration-300 text-left"
           >
             <span className={`btn-toggle-text truncate transition-opacity duration-300 ${expanded ? 'visible opacity-100' : 'invisible opacity-0'} ${isHistoryVisible ? '' : 'close'}`}>대화기록</span>
+          </button>
+          <button className="btn-list-del mr-1.5 md:mr-2.5">
+            전체삭제
           </button>
         </div>
 
@@ -149,10 +149,7 @@ export const Lnb = ({
         {expanded && (
           <div className="min-w-0">
             <p className="truncate text-base leading-5 font-semibold text-white">
-              {profileName} <span className="text-sm font-normal">({profileTeam})</span>
-            </p>
-            <p className="truncate text-sm leading-5 text-white">
-              {profileEmail}
+              {profileName}
             </p>
           </div>
         )}

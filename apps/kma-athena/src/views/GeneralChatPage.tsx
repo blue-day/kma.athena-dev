@@ -27,7 +27,7 @@ export function GeneralChatPage() {
 
   return (
     <ChatLayout>
-      <section className="relative z-10 mx-auto flex h-full w-full flex-col">
+      <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco">
         <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-2.5">
           <button
             type="button"

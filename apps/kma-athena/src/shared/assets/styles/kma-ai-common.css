@@ -37,6 +37,18 @@ a {
   color: inherit;
 }
 
+section.bg-kma-deco{
+/* 예시: section.bg-kma에 3개의 png 백그라운드 이미지를 적용하는 방법 */
+  background-image: 
+    url('../images/bg-deco-t-left.png'),
+    url('../images/bg-deco-t-right.png'),
+    url('../images/bg-deco-b-left.png'),
+    url('../images/bg-deco-b-right.png');
+  background-position: left top, right top 15%, left bottom, right bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat; 
+  background-size: 281px 314px, 174px 170px, 419px 360px, 646px 431px;
+}
+
 /* === 공통 버튼 === */
 .btn-wrap{
   display: flex;
@@ -76,6 +88,12 @@ a {
   color: #626777;
   padding-right: 36px;
   background: url('../images/icon-info-help.svg') right center / 28px auto no-repeat;
+}
+
+.btn-list-del{
+  font-size: 14px;
+  padding-right: 26px;
+  background: url('../images/icon-trash.svg') right center / 20px auto no-repeat;
 }
 
 /* === 공통 팝업 === */
@@ -401,7 +419,7 @@ a {
 }
 
 .ipt-wrap:focus-within {
-  border-color: #A8ABB6;
+  border-color: #8a3ee7;
 }
 
 .ipt-wrap > input {
