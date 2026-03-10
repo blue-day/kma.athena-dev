@@ -20,11 +20,9 @@ export const ChatLayout = ({ children, header, showHelp = false }: ChatLayoutPro
       <ChatHeader header={header} />
       {showHelp && <HelpGuide />}
 
-      <div className="relative flex flex-1 min-h-0 overflow-hidden pt-[56px] md:pt-0">
-        <section className="relative flex-1 min-w-0 overflow-y-auto custom-scrollbar  bg-white bg-[linear-gradient(to_top,_#ddf0ff_0%,_transparent_30%)]">
-          {children}
-        </section>
-      </div>
+      <section className="relative flex flex-1 min-h-0 min-w-0 overflow-y-auto custom-scrollbar bg-white bg-[linear-gradient(to_top,_#ddf0ff_0%,_transparent_30%)] pt-[56px] md:pt-0">
+        {children}
+      </section>
     </div>
   );
 };
