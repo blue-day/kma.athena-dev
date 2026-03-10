@@ -54,38 +54,29 @@ const KNOWLEDGE_ACTION_CARDS: KnowledgeActionCard[] = [
 interface ActionCardProps {
   title: string;
   description: string;
-  isEnabled: boolean;
+  isDisabled?: boolean;
   isSelected?: boolean;
   onClick?: () => void;
 }
 
-const ActionCard = ({ title, description, isEnabled, isSelected = false, onClick }: ActionCardProps) => {
+const ActionCard = ({ title, description, isDisabled = false, isSelected = false, onClick }: ActionCardProps) => {
   const baseClassName =
     'rounded-[28px] border border-[#dbe6f8] bg-white/80 px-6 py-7 text-center shadow-[0_16px_40px_-30px_rgba(43,127,255,0.7)]';
   const selectedClassName = isSelected
     ? 'min-h-[300px] md:min-h-[340px]'
     : 'min-h-[220px] hover:-translate-y-0.5 hover:border-[#c9dcff]';
-  const disabledClassName = isEnabled ? '' : 'cursor-not-allowed opacity-45';
+  const disabledClassName = isDisabled ? 'cursor-not-allowed opacity-45' : '';
   const cardClassName = `${baseClassName} ${selectedClassName} ${disabledClassName} transition-all duration-300`;
 
   const iconPlaceholder = (
     <div className="mx-auto h-[84px] w-[84px] rounded-[26px] border border-[#d6e2f8] bg-gradient-to-br from-[#eef4ff] to-[#f7f9fd]" />
   );
 
-  if (!isEnabled) {
-    return (
-      <div className={cardClassName}>
-        {iconPlaceholder}
-        <h3 className="mt-5 text-[28px] font-bold leading-tight">{title}</h3>
-        <p className="mt-2 text-sm text-gray-300">{description}</p>
-      </div>
-    );
-  }
-
+  // 활성/비활성 모두 button으로 통일하고, 비활성은 disabled로 처리합니다.
   return (
-    <button type="button" className={cardClassName} onClick={onClick}>
+    <button type="button" className={cardClassName} onClick={onClick} disabled={isDisabled}>
       {iconPlaceholder}
-      <h3 className="mt-5 text-[28px] font-bold leading-tight">{title}</h3>
+      <h3 className="mt-5 text-xl font-bold leading-tight">{title}</h3>
       <p className="mt-2 text-sm text-gray-300">{description}</p>
     </button>
   );
@@ -107,13 +98,14 @@ const ExpandedActionPanel = ({
   onSubmit,
 }: ExpandedActionPanelProps) => {
   return (
+    //확장된 카드 영역
     <div
       className={`rounded-[30px] border border-[#dbe6f8] bg-white/90 px-6 py-7 text-center shadow-[0_20px_55px_-35px_rgba(43,127,255,0.75)] transition-all duration-[280ms] ${
         isExpandedStage ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[220px]'
       }`}
     >
       <div className="mx-auto h-[84px] w-[84px] rounded-[26px] border border-[#d6e2f8] bg-gradient-to-br from-[#eef4ff] to-[#f7f9fd]" />
-      <h3 className="mt-5 text-[28px] font-bold leading-tight">{title}</h3>
+      <h3 className="mt-5 text-xl font-bold leading-tight">{title}</h3>
       <p className="mt-2 text-sm text-gray-300">{description}</p>
 
       {showPrompt && (
@@ -133,6 +125,7 @@ export function KnowledgeChatPage() {
   const [transitionPhase, setTransitionPhase] = useState<TransitionPhase>('idle');
 
   useEffect(() => {
+    // 선택 카드가 없거나 fading 단계가 아니면 아무 전이도 시작하지 않습니다.
     if (!selectedActionKey || transitionPhase !== 'fading') {
       return;
     }
@@ -148,6 +141,7 @@ export function KnowledgeChatPage() {
   }, [selectedActionKey, transitionPhase]);
 
   useEffect(() => {
+    // expanding 단계에서만 확장 완료 타이머를 동작시킵니다.
     if (transitionPhase !== 'expanding') {
       return;
     }
@@ -172,6 +166,7 @@ export function KnowledgeChatPage() {
     : '어떤 업무를 처리하고 싶으신가요?';
 
   const handleActionCardClick = (actionKey: KnowledgeActionKey) => {
+    // 이미 선택됐거나 idle이 아니면 중복 클릭을 무시합니다.
     if (selectedActionKey || transitionPhase !== 'idle') {
       return;
     }
@@ -205,6 +200,7 @@ export function KnowledgeChatPage() {
     const widthClassName =
       hasSelection && isSelected && (isExpanding || isExpanded) ? 'w-full md:w-[980px]' : 'w-full md:w-[220px]';
 
+    // 선택 전이거나 선택 카드인 경우: 본래/확장 폭만 적용합니다.
     if (!hasSelection || isSelected) {
       return widthClassName;
     }
@@ -218,6 +214,7 @@ export function KnowledgeChatPage() {
     return `${widthClassName} pointer-events-none hidden`;
   };
 
+  // 비활성 카드 그룹도 동일하게 fading에서는 보이며 사라지고, 이후에는 hidden 처리합니다.
   const disabledGroupClassName = shouldHideOtherCards
     ? isFading
       ? 'pointer-events-none w-full opacity-0 scale-[0.95] md:w-[460px]'
@@ -229,6 +226,7 @@ export function KnowledgeChatPage() {
     const shouldHide =
       isExpanded && selectedActionKey !== card.key;
 
+    // 확장 완료 후 비선택 활성 카드는 DOM에서 제거합니다.
     if (shouldHide) {
       return null;
     }
@@ -254,7 +252,7 @@ export function KnowledgeChatPage() {
           <ActionCard
             title={card.title}
             description={card.description}
-            isEnabled
+            isDisabled={false}
             isSelected={isSelected}
             onClick={() => handleActionCardClick(card.key)}
           />
@@ -265,32 +263,35 @@ export function KnowledgeChatPage() {
 
   return (
     <ChatLayout showHelp>
-      <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco px-4 md:px-2.5">
-        <div className="flex flex-col items-center pt-[100px] md:pt-[220px]">
-          <ChatWelcomeHero subtitle={subtitle} />
+      <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco">
+        <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-4 md:px-2.5">
+          <div className="flex flex-col items-center pt-[100px] md:pt-[220px]">
+            <ChatWelcomeHero subtitle={subtitle} />
 
-          <div className="mt-8 flex w-full flex-wrap items-start justify-center gap-4 md:mt-10 md:gap-5">
-            {renderEnabledCard(firstEnabledCard)}
-            {renderEnabledCard(secondEnabledCard)}
+            <div className="mt-8 flex w-full flex-wrap items-start justify-center gap-4 md:mt-10 md:gap-4">
+              {renderEnabledCard(firstEnabledCard)}
+              {renderEnabledCard(secondEnabledCard)}
 
-            {!isExpanded && (
-              <div
-                className={`transition-all ease-out ${
-                  isFading ? 'duration-[180ms]' : 'duration-[280ms]'
-                } ${disabledGroupClassName}`}
-              >
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
-                  {disabledCards.map((card) => (
-                    <ActionCard
-                      key={card.key}
-                      title={card.title}
-                      description={card.description}
-                      isEnabled={false}
-                    />
-                  ))}
+              {!isExpanded && (
+                <div
+                  className={`transition-all ease-out ${
+                    isFading ? 'duration-[180ms]' : 'duration-[280ms]'
+                  } ${disabledGroupClassName}`}
+                >
+                  {/* 비활성 카드 2개는 하나의 그룹 div로 묶어 함께 전이합니다. */}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2">
+                    {disabledCards.map((card) => (
+                      <ActionCard
+                        key={card.key}
+                        title={card.title}
+                        description={card.description}
+                        isDisabled
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </section>
