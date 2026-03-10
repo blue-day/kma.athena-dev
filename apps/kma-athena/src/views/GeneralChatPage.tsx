@@ -24,17 +24,15 @@ export function GeneralChatPage() {
 
   return (
     <ChatLayout showHelp>
-      <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco">
-        <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-4 md:px-2.5">
-          <div className="flex mx-auto h-full w-full flex-col items-center pt-[100px] md:pt-[220px] md:flex">
-            <ChatWelcomeHero subtitle="무엇을 도와드릴까요?" />
-            <ChatPromptInput onSubmit={handleSubmit} />
-          </div>
-
-          {/* <div className="mx-auto flex h-full w-full flex-col items-center pt-[30px] md:hidden">
-            <ChatWelcomeHero subtitle="무엇을 도와드릴까요?" />
-          </div> */}
+      <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco px-4 md:px-2.5">
+        <div className="flex mx-auto h-full w-full flex-col items-center pt-[100px] md:pt-[220px] md:flex">
+          <ChatWelcomeHero subtitle="무엇을 도와드릴까요?" />
+          <ChatPromptInput onSubmit={handleSubmit} />
         </div>
+
+        {/* <div className="mx-auto flex h-full w-full flex-col items-center pt-[30px] md:hidden">
+          <ChatWelcomeHero subtitle="무엇을 도와드릴까요?" />
+        </div> */}
 
         {/* <div className="px-4 pb-2.5 pt-4 md:hidden">
           <ChatPromptInput onSubmit={handleSubmit} docked />
