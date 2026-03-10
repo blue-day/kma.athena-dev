@@ -66,15 +66,15 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
   }, [message]);
 
   return (
-    <div className={`${docked ? '' : 'mt-20'} w-full max-w-[860px] mx-auto`}>
+    <div className={`${docked ? '' : 'mt-[30px] md:mt-20'} w-full max-w-[860px] mx-auto`}>
       <div
-        className="self-stretch flex min-h-[114px] md:min-h-[136px] flex-col items-stretch justify-start rounded-[22px] border-4 border-solid border-transparent py-2 md:py-4 shadow-[0_25px_50px_-12px_#dbeafe]"
+        className="self-stretch flex min-h-[108px] md:min-h-[136px] flex-col items-stretch justify-start rounded-[22px] border-4 border-solid border-transparent py-2 md:py-4 shadow-[0_25px_50px_-12px_#dbeafe]"
         style={{
           background:
             'linear-gradient(#fff 0 0) padding-box, linear-gradient(to right, #00d3f3, #2b7fff 50%, #f6339a) border-box',
         }}
       >
-        <div className="flex pt-3 md:pt-4 flex-col justify-between px-4">
+        <div className="flex pt-3 md:pt-4 flex-col justify-between px-3">
           <textarea
             ref={textareaRef}
             placeholder="자유롭게 질문해 보세요."
@@ -92,7 +92,7 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
                 handleSend();
               }
             }}
-            className="block w-full min-h-6 resize-none overflow-y-hidden bg-transparent text-sm md:text-base font-mono leading-6 placeholder:text-[#9ca3af] outline-none"
+            className="block w-full min-h-6 px-1 resize-none overflow-y-hidden bg-transparent text-base leading-6 outline-none"
           />
           <div className="mt-2 md:mt-3 flex items-center">
             <button
@@ -102,7 +102,7 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
             >
               <span className="sr-only">첨부파일</span>
             </button>
-            <div className="ml-auto flex items-center gap-1 md:gap-2.5">
+            <div className="ml-auto flex flex-1 items-center justify-end gap-[1px] md:gap-2.5">
               <CommonSelect
                 options={MODEL_OPTIONS}
                 value={selectedModel}

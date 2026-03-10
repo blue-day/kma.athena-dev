@@ -372,8 +372,8 @@ section.bg-kma-deco{
 /* 질문 전송 버튼 상태별 퍼블리싱 */
 .btn-chat-send {
   display: inline-flex;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background-position: center;
   background-repeat: no-repeat;
@@ -398,7 +398,7 @@ section.bg-kma-deco{
 /* 프롬프트 실행 중 */
 .btn-chat-send-stop {
   background-image: url('../images/icon-send-stop.svg');
-  background-size: 22px auto;
+  background-size: 20px auto;
   background-color: #e4f0ff;
 }
 
@@ -443,6 +443,10 @@ section.bg-kma-deco{
 
 /* === 공통 셀렉트 === */
 /* 공통 셀렉트 - 위로 옵션값 노출 */
+.flex > .common-select{
+  flex: 1 1 0;
+  text-align: right;
+}
 .common-select {
   position: relative;
 }
@@ -465,6 +469,7 @@ section.bg-kma-deco{
   -webkit-line-clamp:1;
   -webkit-box-orient:vertical;
   word-wrap:break-word;
+  overflow-wrap: anywhere;
 }
 
 .common-select-trigger:hover{

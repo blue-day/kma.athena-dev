@@ -18,7 +18,7 @@ export function AssistantAnswerCard({ onOpenMaterialPanel }: AssistantAnswerCard
         className="btn-underline"
         onClick={onOpenMaterialPanel}
       >
-        내부 근거/참고 자료 <span>7건</span> &gt;
+        내부 자료 <span className="text-primary font-semibold">25건</span> &gt; /  외부 링크 <span className="text-primary font-semibold">7건</span> &gt;
       </button>
 
       <div className="flex items-center justify-end gap-1">

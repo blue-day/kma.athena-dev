@@ -28,27 +28,28 @@ export function GeneralChatPage() {
   return (
     <ChatLayout>
       <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco">
-        <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-2.5">
+        <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-4 md:px-2.5">
           <button
             type="button"
             className="btn-info-help"
             onClick={() => setIsHelpPopupOpen(true)}
           >
-            일반 챗봇 소개
+            페이지 소개
           </button>
-          <div className="mx-auto hidden h-full w-full flex-col items-center pt-[220px] md:flex">
+
+          <div className="flex mx-auto h-full w-full flex-col items-center pt-[100px] md:pt-[220px] md:flex">
             <ChatWelcomeHero subtitle="무엇을 도와드릴까요?" />
             <ChatPromptInput onSubmit={handleSubmit} />
           </div>
 
-          <div className="mx-auto flex h-full w-full flex-col items-center pt-[30px] md:hidden">
+          {/* <div className="mx-auto flex h-full w-full flex-col items-center pt-[30px] md:hidden">
             <ChatWelcomeHero subtitle="무엇을 도와드릴까요?" />
-          </div>
+          </div> */}
         </div>
 
-        <div className="px-2.5 pb-2 pt-4 md:hidden">
+        {/* <div className="px-4 pb-2.5 pt-4 md:hidden">
           <ChatPromptInput onSubmit={handleSubmit} docked />
-        </div>
+        </div> */}
       </section>
 
       <CommonPopup

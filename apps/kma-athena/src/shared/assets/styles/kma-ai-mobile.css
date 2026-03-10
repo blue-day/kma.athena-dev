@@ -2,10 +2,25 @@
 
 @media (max-width: 767px) {
 
+  /* === 공통 스타일 === */
+  section.bg-kma-deco{
+  /* 예시: section.bg-kma에 3개의 png 백그라운드 이미지를 적용하는 방법 */
+    background-image: 
+      url('../images/mobile/bg-deco-t-left.png'),
+      url('../images/mobile/bg-deco-t-right.png'),
+      url('../images/mobile/bg-deco-b-left.png'),
+      url('../images/mobile/bg-deco-b-right.png');
+    background-position: left top, right top 15%, left bottom, right bottom 20%;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat; 
+    background-size: 133px 100px, 27px 75px, 173px 166px, 234px 210px;
+  }
+
   /* === 공통 버튼 === */
   .btn-info-help{
-    top: 0;
-    right: 20px;
+    position: fixed;
+    top: auto;
+    bottom: 40px;
+    right: 16px;
     transform: translateX(0);
   }
 
@@ -47,13 +62,16 @@
     background: url('../images/mobile/icon-popup-close.svg') center / 24px auto no-repeat;
   }
   
-  /* === 대화상세 === */
-  .recommend-box .recommend-list button{
-    font-size: 13px;
+  /* === 입력 프롬프트 === */
+  .btn-chat-send{
+    width: 40px;
+    height: 40px;
   }
 
+  
+  /* === 대화상세 === */
   .btn-scroll-bottom{
-    bottom: 156px;
+    bottom: 158px;
   }
 
 

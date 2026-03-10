@@ -6,7 +6,7 @@
 @layer base {
   input::placeholder,
   textarea::placeholder {
-    @apply text-gray-200 opacity-100;
+    color: #9ca3af;
   }
 }
 

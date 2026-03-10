@@ -74,7 +74,7 @@ export function ChatConversationView() {
             aria-label="최신 메시지로 이동"
           />
 
-          <div className="px-2.5 pb-2 pt-4 md:hidden">
+          <div className="px-4 pb-2.5 pt-4 md:hidden">
             <ChatPromptInput onSubmit={noop} docked />
           </div>
 
