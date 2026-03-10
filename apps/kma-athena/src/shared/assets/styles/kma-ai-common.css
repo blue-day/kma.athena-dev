@@ -683,7 +683,9 @@ section.bg-kma-deco {
 .ai-answer-wrap .recommend-box {
   margin-top: 8px;
   padding-top: 36px;
+  padding-bottom: 16px;
   border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .recommend-box .recommend-list {
