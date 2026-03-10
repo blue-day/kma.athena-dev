@@ -175,9 +175,12 @@ section.bg-kma-deco {
   border-radius: 16px 16px 0 0;
   background-color: #fff;
   padding: 0 16px 20px;
-  max-height: 90vh;
   display: flex;
   flex-direction: column;
+}
+
+.popup-bottom-wrap .popup-bottom-box.h-fix{
+  height: 85vh;
 }
 
 .popup-bottom-wrap .btn-popup-close {
@@ -205,10 +208,15 @@ section.bg-kma-deco {
 .popup-bottom-wrap .popup-content {
   display: flex;
   flex-direction: column;
-  flex: 1 1 0;
-  height: 100%;
+  max-height: 80dvh;
+  
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.popup-bottom-wrap .h-fix .popup-content{
+  flex: 1 1 0;
+  height: 100%;
 }
 
 .popup-bottom-wrap .popup-footer {

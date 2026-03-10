@@ -99,7 +99,7 @@ export function ChatConversationView() {
         <CommonBottomSheet
           open={isMaterialPanelOpen}
           onClose={() => setIsMaterialPanelOpen(false)}
-          className="h-[85dvh]"
+          className="h-fix"
           footer={<MaterialPanelDownloadButton />}
         >
           <MaterialPanelContent />

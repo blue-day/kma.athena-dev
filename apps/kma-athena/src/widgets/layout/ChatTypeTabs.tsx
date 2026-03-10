@@ -24,7 +24,7 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
             key={tab.key}
             type="button"
             onClick={() => onChange(tab.key)}
-            className={`relative min-h-12 w-[140px] pb-[11px] text-base text-[14px] transition-font ${
+            className={`relative min-h-12 min-w-[140px] pb-[11px] text-base text-[14px] transition-font px-3 ${
               isActive ? 'font-semibold' : 'hover:font-semibold'
             }`}
           >
