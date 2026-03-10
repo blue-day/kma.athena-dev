@@ -13,7 +13,7 @@ export function HelpGuide() {
         className="btn-info-help"
         onClick={() => setIsHelpPopupOpen(true)}
       >
-        페이지 소개
+        <span className="sr-only">페이지 소개</span>
       </button>
 
       <CommonPopup

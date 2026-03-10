@@ -37,8 +37,8 @@ export const MaterialPanel = ({ onClose }: MaterialPanelProps) => {
 export const MaterialPanelDownloadButton = () => {
   return (
     <div className="btn-wrap">
-      <button type="button" className="btn-txt primary w-full">
-        전체다운
+      <button type="button" className="btn-txt primary w-full ic-download">
+        <span>전체 다운</span>
       </button>
     </div>
   );
