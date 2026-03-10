@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import { AssistantAnswerCard } from '@/features/chat/ui/AssistantAnswerCard';
 import { ChatPromptInput } from '@/features/chat/ui/ChatPromptInput';
 import { ConversationSummaryHeader } from '@/features/chat/ui/ConversationSummaryHeader';
-import { MaterialPanel, MaterialPanelContent } from '@/features/chat/ui/MaterialPanel';
+import {
+  MaterialPanel,
+  MaterialPanelContent,
+  MaterialPanelDownloadButton,
+} from '@/features/chat/ui/MaterialPanel';
 import { CommonBottomSheet } from '@/shared/ui/CommonBottomSheet';
 import { ChatLayout } from '@/widgets/layout/ChatLayout';
 
@@ -95,11 +99,10 @@ export function ChatConversationView() {
         <CommonBottomSheet
           open={isMaterialPanelOpen}
           onClose={() => setIsMaterialPanelOpen(false)}
-          className="max-h-[80vh]"
+          className="h-[85dvh]"
+          footer={<MaterialPanelDownloadButton />}
         >
-          <div className="max-h-[calc(80vh-84px)] overflow-y-auto">
-            <MaterialPanelContent />
-          </div>
+          <MaterialPanelContent />
         </CommonBottomSheet>
       </div>
     </ChatLayout>

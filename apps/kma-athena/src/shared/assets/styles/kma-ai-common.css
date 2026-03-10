@@ -14,7 +14,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #fff;  
+  background: #fff;
   color: var(--kma-text);
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
   overflow: hidden; /* 레이아웃에서 내부 스크롤 사용을 위해 전체 스크롤 방지 */
@@ -26,38 +26,44 @@ a {
 }
 
 /* === 공통 스타일 === */
-.wide{
+.wide {
   margin-left: -16px;
   margin-right: -16px;
 }
 
-.iht{
+.iht {
   font-weight: inherit;
   font-size: inherit;
   color: inherit;
 }
 
-section.bg-kma-deco{
-/* 예시: section.bg-kma에 3개의 png 백그라운드 이미지를 적용하는 방법 */
-  background-image: 
-    url('../images/bg-deco-t-left.png'),
-    url('../images/bg-deco-t-right.png'),
-    url('../images/bg-deco-b-left.png'),
-    url('../images/bg-deco-b-right.png');
-  background-position: left top, right top 15%, left bottom, right bottom;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat; 
-  background-size: 281px 314px, 174px 170px, 419px 360px, 646px 431px;
+section.bg-kma-deco {
+  /* 예시: section.bg-kma에 3개의 png 백그라운드 이미지를 적용하는 방법 */
+  background-image:
+    url('../images/bg-deco-t-left.png'), url('../images/bg-deco-t-right.png'),
+    url('../images/bg-deco-b-left.png'), url('../images/bg-deco-b-right.png');
+  background-position:
+    left top,
+    right top 15%,
+    left bottom,
+    right bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size:
+    281px 314px,
+    174px 170px,
+    419px 360px,
+    646px 431px;
 }
 
 /* === 공통 버튼 === */
-.btn-wrap{
+.btn-wrap {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 8px;
 }
 
-.btn-txt{
+.btn-txt {
   display: inline-block;
   min-width: 80px;
   line-height: 34px;
@@ -67,37 +73,37 @@ section.bg-kma-deco{
   font-weight: 500;
 }
 
-.btn-txt.secondary{
+.btn-txt.secondary {
   background-color: #fff;
   border: 1px solid #d5dbe2;
   color: #1a1a1a;
 }
 
-.btn-txt.primary{
+.btn-txt.primary {
   background-color: var(--kma-primary);
   color: #fff;
 }
 
-.btn-info-help{
-  position: absolute;
-  top: 20px;
-  right: 50%;
-  transform: translateX(430px);
+.btn-info-help {
+  position: fixed;
+  top: 90px;
+  right: 20px;
   font-size: 12px;
   line-height: 28px;
   color: #626777;
   padding-right: 36px;
   background: url('../images/icon-info-help.svg') right center / 28px auto no-repeat;
+  z-index: 11;
 }
 
-.btn-list-del{
+.btn-list-del {
   font-size: 14px;
   padding-right: 26px;
   background: url('../images/icon-trash.svg') right center / 20px auto no-repeat;
 }
 
 /* === 공통 팝업 === */
-.popup-wrap{
+.popup-wrap {
   position: fixed;
   top: 0;
   left: 0;
@@ -111,7 +117,7 @@ section.bg-kma-deco{
   padding: 20px;
 }
 
-.popup-wrap .popup-box{
+.popup-wrap .popup-box {
   position: relative;
   width: 100%;
   max-width: 320px;
@@ -120,7 +126,7 @@ section.bg-kma-deco{
   box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
 }
 
-.popup-wrap .btn-popup-close{
+.popup-wrap .btn-popup-close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -130,38 +136,38 @@ section.bg-kma-deco{
   border-radius: 50%;
 }
 
-.popup-wrap .popup-title{
+.popup-wrap .popup-title {
   padding: 20px 20px 10px;
   padding-right: 40px;
   min-height: 50px;
 }
 
-.popup-wrap .popup-footer{
+.popup-wrap .popup-footer {
   padding: 10px 20px 26px;
 }
 
-.popup-wrap .popup-content{
+.popup-wrap .popup-content {
   padding: 26px 20px 16px;
 }
 
 .popup-wrap.type-alert .popup-content,
-.popup-wrap.type-confirm .popup-content{
- padding: 26px 20px 30px;
+.popup-wrap.type-confirm .popup-content {
+  padding: 26px 20px 30px;
 }
 
-.popup-bottom-wrap{
+.popup-bottom-wrap {
   position: fixed;
   inset: 0;
   z-index: 1000;
 }
 
-.popup-bottom-wrap .btn-popup-bg{
+.popup-bottom-wrap .btn-popup-bg {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.popup-bottom-wrap .popup-bottom-box{
+.popup-bottom-wrap .popup-bottom-box {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -169,26 +175,19 @@ section.bg-kma-deco{
   border-radius: 16px 16px 0 0;
   background-color: #fff;
   padding: 0 16px 20px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.popup-bottom-wrap .popup-bottom-box{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 16px 16px 0 0;
-  background-color: #fff;
-  padding: 0 16px 20px;
-}
-
-.popup-bottom-wrap .btn-popup-close{
+.popup-bottom-wrap .btn-popup-close {
   display: block;
   padding: 16px;
-  margin: 0 auto; 
+  margin: 0 auto;
   margin-bottom: 4px;
 }
 
-.btn-popup-close .btn-popup-close-bar{
+.btn-popup-close .btn-popup-close-bar {
   display: block;
   width: 30px;
   height: 4px;
@@ -196,16 +195,36 @@ section.bg-kma-deco{
   background-color: #c6c8cf;
 }
 
-.popup-bottom-wrap .popup-title{
+.popup-bottom-wrap .popup-title {
   margin-bottom: 10px;
   padding-bottom: 12px;
   font-weight: bold;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.popup-bottom-wrap .popup-content{
-  max-height: 78vh;
+.popup-bottom-wrap .popup-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.popup-bottom-wrap .popup-footer {
+  padding-top: 12px;
+}
+
+.popup-bottom-wrap .popup-footer .btn-wrap {
+  justify-content: stretch;
+}
+
+.popup-bottom-wrap .popup-footer .btn-txt {
+  /* 디자인 적용 필요 */
+  height: 42px;
+  font-size: 14px;
+  font-weight: 600;
+
 }
 
 /* === LNB === */
@@ -341,7 +360,7 @@ section.bg-kma-deco{
 /* === 스크롤바 === */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #E2E3E7 transparent;
+  scrollbar-color: #e2e3e7 transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -353,12 +372,12 @@ section.bg-kma-deco{
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #E2E3E7;
+  background-color: #e2e3e7;
   border-radius: 999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #C6C8CF;
+  background-color: #c6c8cf;
 }
 
 /* === 입력 프롬프트 === */
@@ -443,7 +462,7 @@ section.bg-kma-deco{
 
 /* === 공통 셀렉트 === */
 /* 공통 셀렉트 - 위로 옵션값 노출 */
-.flex > .common-select{
+.flex > .common-select {
   flex: 1 1 0;
   text-align: right;
 }
@@ -462,17 +481,17 @@ section.bg-kma-deco{
   background: url('../images/icon-list-arrow-down.svg') right 16px center / 16px auto no-repeat #fff;
 }
 
-.common-select-trigger > span{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  display:-webkit-box;
-  -webkit-line-clamp:1;
-  -webkit-box-orient:vertical;
-  word-wrap:break-word;
+.common-select-trigger > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
   overflow-wrap: anywhere;
 }
 
-.common-select-trigger:hover{
+.common-select-trigger:hover {
   background-color: #f8fafc;
 }
 
@@ -498,7 +517,9 @@ section.bg-kma-deco{
   align-items: center;
   padding: 8px 42px 8px 16px;
   text-align: left;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
   font-size: 14px;
   line-height: 1.2;
 }
@@ -590,7 +611,7 @@ section.bg-kma-deco{
   animation: chatMessageRiseIn 0.35s ease-out;
 }
 
-.btn-title-edit{
+.btn-title-edit {
   display: block;
   width: 28px;
   height: 28px;
@@ -599,62 +620,62 @@ section.bg-kma-deco{
 }
 
 /* 답변 태그 스타일 정의 */
-.ai-answer-wrap{
+.ai-answer-wrap {
   width: 100%;
   padding-top: 28px;
   padding-bottom: 100px;
 }
 
-.ai-answer-wrap *{
+.ai-answer-wrap * {
   font-size: 14px;
 }
 
-.ai-answer-wrap h3{
+.ai-answer-wrap h3 {
   font-size: 20px;
   font-weight: bold;
 }
 
-.ai-answer-wrap p{
+.ai-answer-wrap p {
   line-height: 2;
 }
 
-.ai-answer-wrap h3 + p{
+.ai-answer-wrap h3 + p {
   margin-top: 8px;
   margin-bottom: 20px;
 }
 
-.ai-answer-wrap .btn-underline{
+.ai-answer-wrap .btn-underline {
   display: inline-block;
   padding: 4px 0;
   text-decoration: underline;
   line-height: 2;
 }
 
-.ai-answer-wrap .btn-underline > span{
+.ai-answer-wrap .btn-underline > span {
   color: var(--kma-primary);
 }
 
-.ai-answer-wrap .btn-favorite{
+.ai-answer-wrap .btn-favorite {
   width: 36px;
   height: 36px;
   background: url('../images/icon-favorites.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
-.ai-answer-wrap .btn-copy{
+.ai-answer-wrap .btn-copy {
   width: 36px;
   height: 36px;
   background: url('../images/icon-copy.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
-.ai-answer-wrap .recommend-box{
+.ai-answer-wrap .recommend-box {
   margin-top: 8px;
   padding-top: 36px;
   border-top: 1px solid #e5e7eb;
 }
 
-.recommend-box .recommend-list{
+.recommend-box .recommend-list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -662,7 +683,7 @@ section.bg-kma-deco{
   margin-top: 8px;
 }
 
-.recommend-box .recommend-list button{
+.recommend-box .recommend-list button {
   display: inline-block;
   padding: 4px 10px;
   text-align: left;
@@ -671,24 +692,35 @@ section.bg-kma-deco{
   line-height: 2;
   transition: background-color 0.2s;
 }
-.recommend-box .recommend-list button:hover{
+.recommend-box .recommend-list button:hover {
   background-color: #dbeafe;
 }
 
-.btn-panel-close{
+.btn-panel-close {
   width: 30px;
   height: 30px;
   background: url('../images/mobile/icon-popup-close.svg') center / 24px auto no-repeat;
 }
 
-.btn-download{
+.material-panel-footer {
+  padding: 12px 20px 20px;
+}
+
+.material-panel-footer .btn-txt{
+  /* 디자인 적용 필요 */
+  height: 42px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-download {
   width: 36px;
   height: 36px;
   background: url('../images/icon-download.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
-.btn-scroll-bottom{
+.btn-scroll-bottom {
   position: absolute;
   right: 50%;
   margin-right: -18px;
@@ -699,4 +731,24 @@ section.bg-kma-deco{
   transition: opacity 0.2s;
   border-radius: 50%;
   z-index: 20;
+}
+
+/* === 공통 토스트 팝업 === */
+.kma-toast-container {
+  top: 80px !important;
+}
+
+.kma-toast {
+  min-width: unset;
+  max-width: 520px;
+  border-radius: 16px !important;
+  background-color: #fff !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
+  line-height: 1;
+  padding: 16px 20px !important;
+}
+
+.kma-toast > div {
+  margin: 0 !important;
 }

@@ -8,6 +8,7 @@ type CommonBottomSheetProps = {
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
+  footer?: React.ReactNode;
   className?: string;
 };
 
@@ -16,6 +17,7 @@ export const CommonBottomSheet = ({
   onClose,
   title,
   children,
+  footer,
   className = '',
 }: CommonBottomSheetProps) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -78,6 +80,7 @@ export const CommonBottomSheet = ({
         <div className="popup-content">
           {children}
         </div>
+        {footer ? <div className="popup-footer">{footer}</div> : null}
       </div>
     </div>
   );

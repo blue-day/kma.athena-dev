@@ -18,7 +18,7 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
   const { openMobileMenu, themeMode, setThemeMode } = useMainLayout();
   const tabs = [
     { key: '/', label: '일반 챗봇' },
-    { key: '/knowledge-chat', label: '사내 지식 챗봇' },
+    { key: '/knowledge-chat', label: 'KMA 내부 지식 챗봇 ' },
     { key: '/my-assistant', label: '나만의 비서' },
   ];
   const activeTabFromPath = tabs.find((tab) => tab.key === pathname)?.key ?? '/';

@@ -5,6 +5,8 @@ import { Lnb } from './Lnb';
 import { MainLayoutProvider } from './MainLayoutContext';
 import { CommonLoading } from '@/shared/ui/CommonLoading';
 import { CommonPopup } from '@/shared/ui/CommonPopup';
+import { CommonToast } from '@/shared/ui/CommonToast';
+import { showToast } from '@/shared/ui/toast';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -24,6 +26,7 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
   const [isAlertPopupOpen, setIsAlertPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [isToastPopupOpen] = useState(false);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -45,6 +48,14 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!isToastPopupOpen) {
+      return;
+    }
+
+    showToast('토스트 팝업 테스트입니다.', { type: 'success' });
+  }, [isToastPopupOpen]);
 
   const contextValue = useMemo(
     () => ({
@@ -70,6 +81,7 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
           </main>
         </div>
       </div>
+      
       {/* alert 팝업 */}
       <CommonPopup
         open={isAlertPopupOpen}
@@ -94,6 +106,9 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
 
       {/* 로딩 */}
       {isLoading && <CommonLoading />}
+
+      {/* 토스트 팝업 */}
+      <CommonToast />
     </MainLayoutProvider>
   );
 };

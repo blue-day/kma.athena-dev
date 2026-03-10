@@ -27,6 +27,19 @@ export const MaterialPanel = ({ onClose }: MaterialPanelProps) => {
       </div>
 
       <MaterialPanelContent />
+      <div className="material-panel-footer">
+        <MaterialPanelDownloadButton />
+      </div>
+    </div>
+  );
+};
+
+export const MaterialPanelDownloadButton = () => {
+  return (
+    <div className="btn-wrap">
+      <button type="button" className="btn-txt primary w-full">
+        전체다운
+      </button>
     </div>
   );
 };
@@ -50,12 +63,6 @@ export const MaterialPanelContent = () => {
               <p className="py-1.5 flex-1 text-sm font-bold">
                 <span className="iht text-primary">1</span>건
               </p>
-              <button
-                type="button"
-                className="btn-download mr-[-8px] transition-colors hover:bg-[#ebf3fd]"
-              >
-                <span className="sr-only">전체 다운로드</span>
-              </button>
             </div>
             <ol>
               <li className="flex items-center justify-between gap-2 pl-1">
@@ -65,7 +72,7 @@ export const MaterialPanelContent = () => {
                 </p>
                 <button
                   type="button"
-                  className="btn-download mr-[-8px] transition-colors hover:bg-[#ebf3fd]"
+                  className="btn-download transition-colors hover:bg-[#ebf3fd]"
                 >
                   <span className="sr-only">다운로드</span>
                 </button>
@@ -78,7 +85,7 @@ export const MaterialPanelContent = () => {
               <span className="iht text-primary">1</span>건
             </p>
             <ol>
-              <li className="flex items-center justify-between gap-2 pl-1">
+              <li className="flex items-center justify-between gap-2 pl-1 py-2">
                 <a href="#" className="min-w-0 flex-1 truncate text-sm font-medium">
                   <span className="mr-1">1.</span>
                   대한의사협회 협약서 20250101

@@ -4,7 +4,7 @@ import { ChatLayout } from '@/widgets/layout/ChatLayout';
 
 export function MyAssistantPage() {
   return (
-    <ChatLayout>
+    <ChatLayout showHelp>
       <div className="flex h-full flex-col p-6">
         <section className="rounded-2xl border border-violet-100 bg-violet-50 p-6">
           <h2 className="text-xl font-bold text-violet-900">나만의 비서 페이지</h2>

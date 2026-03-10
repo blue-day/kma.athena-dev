@@ -17,11 +17,9 @@
 
   /* === 공통 버튼 === */
   .btn-info-help{
-    position: fixed;
     top: auto;
     bottom: 40px;
     right: 16px;
-    transform: translateX(0);
   }
 
   /* === Header === */
