@@ -215,7 +215,7 @@ export function KnowledgeChatPage() {
 
     // 선택 전 상태: 기본 너비와 높이값 보존
     if (!hasSelection) {
-      return `${widthClassName} max-h-[500px] opacity-100`;
+      return `${widthClassName} max-h-[500px]`;
     }
 
     // 선택된 카드: 확장 단계에 맞춰 너비 조절
@@ -223,21 +223,22 @@ export function KnowledgeChatPage() {
       return widthClassName;
     }
 
-    // 비선택 카드: PC와 모바일 모두에서 부드럽게 투명해지며 공간이 사라지도록 설정
-    return `${widthClassName} pointer-events-none opacity-0 max-h-0 md:max-w-0 !m-0 !p-0 overflow-hidden`;
+    // 비선택 카드: 클릭 직후(isFading)부터 즉시 높이와 마진을 줄여 부드러운 슬라이드 유도
+    return `${widthClassName} pointer-events-none opacity-0 max-h-0 !m-0 !p-0 overflow-hidden md:hidden`;
   };
 
-  // 비활성 카드 그룹: 전환 도중에도 w-full을 유지하며 PC에서도 부드럽게 사라지도록 수정
+  // 비활성 카드 그룹: 전환 도중에도 w-full을 유지하며 모바일에서 부드럽게 사라지도록 설정
   const disabledGroupClassName = shouldHideOtherCards
-    ? 'w-full pointer-events-none opacity-0 max-h-0 md:max-w-0 !m-0 !p-0 overflow-hidden'
+    ? 'w-full pointer-events-none opacity-0 max-h-0 !m-0 overflow-hidden md:hidden'
     : 'w-full md:w-[600px] bg-[#f7faff] rounded-2xl md:rounded-[28px] max-h-[500px] opacity-100';
 
   const renderEnabledCard = (card: KnowledgeActionCard) => {
     const isSelected = selectedActionKey === card.key;
+    const shouldHideForPC = isExpanded && !isSelected;
 
     return (
       <div
-        className={`transition-all ease-in-out duration-[580ms] ${getCardBlockClassName(card.key)}`}
+        className={`transition-all ease-in-out duration-[580ms] ${getCardBlockClassName(card.key)} ${shouldHideForPC ? 'md:hidden' : ''}`}
       >
         {isSelected && transitionPhase !== 'idle' ? (
           <ExpandedActionPanel
@@ -277,7 +278,7 @@ export function KnowledgeChatPage() {
                 className={`transition-all ease-in-out duration-[580ms] ${disabledGroupClassName}`}
               >
                 {/* 비활성 카드 2개는 하나의 그룹 div로 묶어 함께 전이합니다. */}
-                <div className="relative grid grid-cols-1 md:grid-cols-2 md:gap-2 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-white/40 after:content-['']">
+                <div className="relative grid grid-cols-1 md:grid-cols-2 md:gap-2 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-white/40 after:content-[''] bg-[#f7faff] rounded-2xl md:rounded-[28px]">
                   {disabledCards.map((card) => (
                     <ActionCard
                       key={card.key}
