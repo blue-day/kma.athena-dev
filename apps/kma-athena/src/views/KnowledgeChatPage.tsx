@@ -74,7 +74,7 @@ const ActionCard = ({
   onClick,
 }: ActionCardProps) => {
   const commonClassName =
-    'w-[calc(100%-12px)] md:max-w-[296px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border ring-[6px] md:ring-8 ring-[#f7faff] m-1.5 md:m-2 p-4 pl-[86px] md:p-[30px] md:pt-[126px] text-left md:text-center bg-white';
+    'w-[calc(100%-12px)] md:w-full md:max-w-[296px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border ring-[6px] md:ring-8 ring-[#f7faff] m-1.5 md:m-2 p-4 pl-[86px] md:p-[30px] md:pt-[126px] text-left md:text-center bg-white';
   const enabledClassName = 'transition-all duration-300 hover:-translate-y-0.5';
   const disabledClassName = 'cursor-not-allowed';
   const stateClassName = isDisabled ? disabledClassName : enabledClassName;
@@ -213,46 +213,32 @@ export function KnowledgeChatPage() {
     const widthClassName =
       hasSelection && isSelected && (isExpanding || isExpanded) ? 'w-full md:w-[980px]' : 'w-full md:w-[296px]';
 
-    // 선택 전이거나 선택 카드인 경우: 본래/확장 폭만 적용합니다.
-    if (!hasSelection || isSelected) {
+    // 선택 전 상태: 기본 너비와 높이값 보존
+    if (!hasSelection) {
+      return `${widthClassName} max-h-[500px] opacity-100`;
+    }
+
+    // 선택된 카드: 확장 단계에 맞춰 너비 조절
+    if (isSelected) {
       return widthClassName;
     }
 
-    if (isFading) {
-      // 1단계: 비선택 카드는 투명/축소 처리로 사라지는 느낌을 만듭니다.
-      return `${widthClassName} pointer-events-none opacity-0 scale-[0.95]`;
-    }
-
-    // 2단계 이후: 레이아웃 간섭을 막기 위해 DOM은 유지하되 hidden 처리합니다.
-    return `${widthClassName} pointer-events-none hidden`;
+    // 비선택 카드: PC와 모바일 모두에서 부드럽게 투명해지며 공간이 사라지도록 설정
+    return `${widthClassName} pointer-events-none opacity-0 max-h-0 md:max-w-0 !m-0 !p-0 overflow-hidden`;
   };
 
-  // 비활성 카드 그룹도 동일하게 fading에서는 보이며 사라지고, 이후에는 hidden 처리합니다.
+  // 비활성 카드 그룹: 전환 도중에도 w-full을 유지하며 PC에서도 부드럽게 사라지도록 수정
   const disabledGroupClassName = shouldHideOtherCards
-    ? isFading
-      ? 'pointer-events-none w-full opacity-0 scale-[0.95] md:w-[600px]'
-      : 'pointer-events-none hidden'
-    : 'w-full md:w-[600px] bg-[#f7faff] rounded-2xl md:rounded-[28px]';
+    ? 'w-full pointer-events-none opacity-0 max-h-0 md:max-w-0 !m-0 !p-0 overflow-hidden'
+    : 'w-full md:w-[600px] bg-[#f7faff] rounded-2xl md:rounded-[28px] max-h-[500px] opacity-100';
 
   const renderEnabledCard = (card: KnowledgeActionCard) => {
     const isSelected = selectedActionKey === card.key;
-    const shouldHide =
-      isExpanded && selectedActionKey !== card.key;
-
-    // 확장 완료 후 비선택 활성 카드는 DOM에서 제거합니다.
-    if (shouldHide) {
-      return null;
-    }
 
     return (
       <div
-        className={`transition-all ease-out ${
-          isExpanding ? 'duration-[180ms]' : 'duration-[280ms]'
-        } ${
-          getCardBlockClassName(card.key)
-        }`}
+        className={`transition-all ease-in-out duration-[580ms] ${getCardBlockClassName(card.key)}`}
       >
-        {/* 선택 직후부터는 버튼 대신 확장 전용 패널로 전환해 "영역 확장" 인상을 강화합니다. */}
         {isSelected && transitionPhase !== 'idle' ? (
           <ExpandedActionPanel
             title={card.title}
@@ -287,26 +273,22 @@ export function KnowledgeChatPage() {
               {renderEnabledCard(firstEnabledCard)}
               {renderEnabledCard(secondEnabledCard)}
 
-              {!isExpanded && (
-                <div
-                  className={`transition-all ease-out ${
-                    isFading ? 'duration-[180ms]' : 'duration-[280ms]'
-                  } ${disabledGroupClassName}`}
-                >
-                  {/* 비활성 카드 2개는 하나의 그룹 div로 묶어 함께 전이합니다. */}
-                  <div className="relative grid grid-cols-1 md:grid-cols-2 md:gap-2 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-white/40 after:content-['']">
-                    {disabledCards.map((card) => (
-                      <ActionCard
-                        key={card.key}
-                        title={card.title}
-                        description={card.description}
-                        className={card.className}
-                        isDisabled
-                      />
-                    ))}
-                  </div>
+              <div
+                className={`transition-all ease-in-out duration-[580ms] ${disabledGroupClassName}`}
+              >
+                {/* 비활성 카드 2개는 하나의 그룹 div로 묶어 함께 전이합니다. */}
+                <div className="relative grid grid-cols-1 md:grid-cols-2 md:gap-2 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-white/40 after:content-['']">
+                  {disabledCards.map((card) => (
+                    <ActionCard
+                      key={card.key}
+                      title={card.title}
+                      description={card.description}
+                      className={card.className}
+                      isDisabled
+                    />
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
