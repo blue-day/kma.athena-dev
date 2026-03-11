@@ -71,9 +71,36 @@
     bottom: 158px;
   }
 
+  /* === KMA 내부지식 챗봇 === */
+  .category-card-wrap button.ic-association{
+    background: url('../images/mobile/icon-menu-search-s.svg') center left 18px / 58px auto no-repeat #fff;
+  }
+  .category-card-wrap button.ic-board{
+    background: url('../images/mobile/icon-menu-guide-s.svg') center left 18px / 58px auto no-repeat #fff;
+  }
+  .category-card-wrap button.ic-license{
+    background: url('../images/mobile/icon-menu-license-s.svg') center left 18px / 58px auto no-repeat #fff;
+  }
+  .category-card-wrap button.ic-credit{
+    background: url('../images/mobile/icon-menu-complaints-s.svg') center left 18px / 58px auto no-repeat #fff;
+  }
 
+  button.ic-license:disabled + button.ic-credit:disabled{
+    margin-top: 0;
+  }
 
-
+  .category-card-wrap div.ic-association{
+    background: url('../images/mobile/icon-menu-search-s.svg') top 40px center / 58px auto no-repeat #fff;
+  }
+  .category-card-wrap div.ic-board{
+    background: url('../images/mobile/icon-menu-guide-s.svg') top 40px center / 58px auto no-repeat #fff;
+  }
+  .category-card-wrap div.ic-license{
+    background: url('../images/mobile/icon-menu-license-s.svg') top 40px center / 58px auto no-repeat #fff;
+  }
+  .category-card-wrap div.ic-credit{
+    background: url('../images/mobile/icon-menu-complaints-s.svg') top 40px center / 58px auto no-repeat #fff;
+  }
 
 }
 

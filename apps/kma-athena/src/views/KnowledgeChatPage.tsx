@@ -9,7 +9,7 @@ import { ChatWelcomeHero } from '@/features/chat/ui/ChatWelcomeHero';
 const CONVERSATION_ROUTE = '/chat/conversation?source=knowledge-chat';
 // 1단계: 비선택 카드 fade-out, 2단계: 선택 카드 확장
 const FADE_DURATION_MS = 180;
-const EXPAND_DURATION_MS = 280;
+const EXPAND_DURATION_MS = 580;
 
 type KnowledgeActionKey =
   | 'association-material'
@@ -22,62 +22,69 @@ interface KnowledgeActionCard {
   title: string;
   description: string;
   isEnabled: boolean;
+  className: string;
 }
 
 const KNOWLEDGE_ACTION_CARDS: KnowledgeActionCard[] = [
   {
     key: 'association-material',
     title: '협회 자료 검색',
-    description: '지식 저장소 자료를 기반으로 검색할 수 있습니다.',
+    description: '지식 저장소 자료를 기반으로\n검색할 수 있습니다.',
     isEnabled: true,
+    className: 'ic-association',
   },
   {
     key: 'board-material',
     title: '상임 이사회 자료 검색',
-    description: '상임이사회 관련 내용을 검색할 수 있습니다.',
+    description: '명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
     isEnabled: true,
+    className: 'ic-board',
   },
   {
     key: 'license-report',
     title: '면허 신고',
-    description: '준비중인 기능입니다.',
+    description: '설명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
     isEnabled: false,
+    className: 'ic-license',
   },
   {
     key: 'credit-point',
     title: '연수 평점',
-    description: '준비중인 기능입니다.',
+    description: '명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
     isEnabled: false,
+    className: 'ic-credit',
   },
 ];
 
 interface ActionCardProps {
   title: string;
   description: string;
+  className?: string;
   isDisabled?: boolean;
   isSelected?: boolean;
   onClick?: () => void;
 }
 
-const ActionCard = ({ title, description, isDisabled = false, isSelected = false, onClick }: ActionCardProps) => {
-  const baseClassName =
-    'rounded-[28px] border border-[#dbe6f8] bg-white/80 px-6 py-7 text-center shadow-[0_16px_40px_-30px_rgba(43,127,255,0.7)]';
-  const selectedClassName = isSelected
-    ? 'min-h-[300px] md:min-h-[340px]'
-    : 'min-h-[220px] hover:-translate-y-0.5 hover:border-[#c9dcff]';
-  const disabledClassName = isDisabled ? 'cursor-not-allowed opacity-45' : '';
-  const cardClassName = `${baseClassName} ${selectedClassName} ${disabledClassName} transition-all duration-300`;
-
-  const iconPlaceholder = (
-    <div className="mx-auto h-[84px] w-[84px] rounded-[26px] border border-[#d6e2f8] bg-gradient-to-br from-[#eef4ff] to-[#f7f9fd]" />
-  );
+const ActionCard = ({
+  title,
+  description,
+  className = '',
+  isDisabled = false,
+  isSelected = false,
+  onClick,
+}: ActionCardProps) => {
+  const commonClassName =
+    'w-[calc(100%-12px)] md:max-w-[296px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border ring-[6px] md:ring-8 ring-[#f7faff] m-1.5 md:m-2 p-4 pl-[86px] md:p-[30px] md:pt-[126px] text-left md:text-center bg-white';
+  const enabledClassName = 'transition-all duration-300 hover:-translate-y-0.5';
+  const disabledClassName = 'cursor-not-allowed';
+  const stateClassName = isDisabled ? disabledClassName : enabledClassName;
+  const cardClassName = `${commonClassName} ${stateClassName} ${className}`;
 
   // 활성/비활성 모두 button으로 통일하고, 비활성은 disabled로 처리합니다.
   return (
     <button type="button" className={cardClassName} onClick={onClick} disabled={isDisabled}>
-      {iconPlaceholder}
-      <h3 className="mt-5 text-xl font-bold leading-tight">{title}</h3>
-      <p className="mt-2 text-sm text-gray-300">{description}</p>
+      <h3 className="md:text-xl font-bold leading-tight">{title}</h3>
+      <p className="mt-1.5 md:mt-4 text-[13px] leading-[1.25] md:text-sm text-gray-300 whitespace-pre-line">{description}</p>
     </button>
   );
 };
@@ -85,6 +92,7 @@ const ActionCard = ({ title, description, isDisabled = false, isSelected = false
 interface ExpandedActionPanelProps {
   title: string;
   description: string;
+  className?: string;
   isExpandedStage: boolean;
   showPrompt: boolean;
   onSubmit: (message: string) => void;
@@ -93,6 +101,7 @@ interface ExpandedActionPanelProps {
 const ExpandedActionPanel = ({
   title,
   description,
+  className = '',
   isExpandedStage,
   showPrompt,
   onSubmit,
@@ -100,17 +109,21 @@ const ExpandedActionPanel = ({
   return (
     //확장된 카드 영역
     <div
-      className={`rounded-[30px] border border-[#dbe6f8] bg-white/90 px-6 py-7 text-center shadow-[0_20px_55px_-35px_rgba(43,127,255,0.75)] transition-all duration-[280ms] ${
-        isExpandedStage ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[220px]'
+      className={`pt-[108px] px-2.5 pb-[34px] rounded-[24px] border border-gray-border bg-white md:p-[30px] md:pt-[126px] text-center transition-all duration-[680ms] ${className} ${
+        isExpandedStage ? 'min-h-[350px] md:min-h-[414px] md:rounded-[50px]' : 'min-h-[100px] ring-[6px] md:ring-8 ring-[#f7faff]'
       }`}
     >
-      <div className="mx-auto h-[84px] w-[84px] rounded-[26px] border border-[#d6e2f8] bg-gradient-to-br from-[#eef4ff] to-[#f7f9fd]" />
-      <h3 className="mt-5 text-xl font-bold leading-tight">{title}</h3>
-      <p className="mt-2 text-sm text-gray-300">{description}</p>
+      <h3 className="text-base md:text-xl font-bold leading-tight">{title}</h3>
+      <p className="mt-1.5 md:mt-4 text-xs md:text-[13px] leading-[1.25] md:text-sm text-gray-300">{description}</p>
 
       {showPrompt && (
-        <div className="mt-8 md:mt-10">
-          <ChatPromptInput onSubmit={onSubmit} />
+        <div className="mt-10 md:mt-9">
+          <ChatPromptInput
+            onSubmit={onSubmit}
+            docked
+            animateOnMount
+            placeholder="질문 예시: 의대증원 수급추계위에서 제시하고 있는 방법론을 요약줘"
+          />
         </div>
       )}
     </div>
@@ -198,7 +211,7 @@ export function KnowledgeChatPage() {
   const getCardBlockClassName = (cardKey: KnowledgeActionKey) => {
     const isSelected = selectedActionKey === cardKey;
     const widthClassName =
-      hasSelection && isSelected && (isExpanding || isExpanded) ? 'w-full md:w-[980px]' : 'w-full md:w-[220px]';
+      hasSelection && isSelected && (isExpanding || isExpanded) ? 'w-full md:w-[980px]' : 'w-full md:w-[296px]';
 
     // 선택 전이거나 선택 카드인 경우: 본래/확장 폭만 적용합니다.
     if (!hasSelection || isSelected) {
@@ -217,9 +230,9 @@ export function KnowledgeChatPage() {
   // 비활성 카드 그룹도 동일하게 fading에서는 보이며 사라지고, 이후에는 hidden 처리합니다.
   const disabledGroupClassName = shouldHideOtherCards
     ? isFading
-      ? 'pointer-events-none w-full opacity-0 scale-[0.95] md:w-[460px]'
+      ? 'pointer-events-none w-full opacity-0 scale-[0.95] md:w-[600px]'
       : 'pointer-events-none hidden'
-    : 'w-full md:w-[460px]';
+    : 'w-full md:w-[600px] bg-[#f7faff] rounded-2xl md:rounded-[28px]';
 
   const renderEnabledCard = (card: KnowledgeActionCard) => {
     const isSelected = selectedActionKey === card.key;
@@ -234,7 +247,7 @@ export function KnowledgeChatPage() {
     return (
       <div
         className={`transition-all ease-out ${
-          isExpanding ? 'duration-[280ms]' : 'duration-[180ms]'
+          isExpanding ? 'duration-[180ms]' : 'duration-[280ms]'
         } ${
           getCardBlockClassName(card.key)
         }`}
@@ -244,6 +257,7 @@ export function KnowledgeChatPage() {
           <ExpandedActionPanel
             title={card.title}
             description={card.description}
+            className={card.className}
             isExpandedStage={isExpanding || isExpanded}
             showPrompt={isExpanded}
             onSubmit={handleSubmit}
@@ -252,6 +266,7 @@ export function KnowledgeChatPage() {
           <ActionCard
             title={card.title}
             description={card.description}
+            className={card.className}
             isDisabled={false}
             isSelected={isSelected}
             onClick={() => handleActionCardClick(card.key)}
@@ -265,10 +280,10 @@ export function KnowledgeChatPage() {
     <ChatLayout showHelp>
       <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco">
         <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-4 md:px-2.5">
-          <div className="flex flex-col items-center pt-[100px] md:pt-[220px]">
+          <div className="flex flex-col items-center pt-[30px] md:pt-[220px] pb-10">
             <ChatWelcomeHero subtitle={subtitle} />
 
-            <div className="mt-8 flex w-full flex-wrap items-start justify-center gap-4 md:mt-10 md:gap-4">
+            <div className="category-card-wrap mt-5 md:mt-[34px] flex flex-wrap w-full items-start justify-center gap-1.5 md:gap-9">
               {renderEnabledCard(firstEnabledCard)}
               {renderEnabledCard(secondEnabledCard)}
 
@@ -279,12 +294,13 @@ export function KnowledgeChatPage() {
                   } ${disabledGroupClassName}`}
                 >
                   {/* 비활성 카드 2개는 하나의 그룹 div로 묶어 함께 전이합니다. */}
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2">
+                  <div className="relative grid grid-cols-1 md:grid-cols-2 md:gap-2 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-white/40 after:content-['']">
                     {disabledCards.map((card) => (
                       <ActionCard
                         key={card.key}
                         title={card.title}
                         description={card.description}
+                        className={card.className}
                         isDisabled
                       />
                     ))}

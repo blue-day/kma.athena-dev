@@ -492,6 +492,10 @@ section.bg-kma-deco {
   background: url('../images/icon-list-arrow-down.svg') right 16px center / 16px auto no-repeat #fff;
 }
 
+.common-select-trigger:disabled{
+  opacity: 0.4;
+}
+
 .common-select-trigger > span {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -763,4 +767,22 @@ section.bg-kma-deco {
 
 .kma-toast > div {
   margin: 0 !important;
+}
+
+/* === KMA 내부지식 챗봇 === */
+.category-card-wrap button.ic-association,
+.category-card-wrap div.ic-association{
+  background: url('../images/icon-menu-search.svg') top 30px center / 84px auto no-repeat #fff;
+}
+.category-card-wrap button.ic-board,
+.category-card-wrap div.ic-board{
+  background: url('../images/icon-menu-guide.svg') top 30px center / 84px auto no-repeat #fff;
+}
+.category-card-wrap button.ic-license,
+.category-card-wrap div.ic-license{
+  background: url('../images/icon-menu-license.svg') top 30px center / 84px auto no-repeat #fff;
+}
+.category-card-wrap button.ic-credit,
+.category-card-wrap div.ic-credit{
+  background: url('../images/icon-menu-complaints.svg') top 30px center / 84px auto no-repeat #fff;
 }
