@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { CommonSelect } from '@/shared/ui/CommonSelect';
 
 const MODEL_OPTIONS = ['Gemini', 'Gemini 2.5 Flash', 'Gemini 2.5 Pro (2025.12)'];
@@ -10,11 +10,21 @@ interface ChatPromptInputProps {
   onSubmit?: (message: string) => void;
   // true면 하단 도킹 상태(대화 모드)로 간주해 상단 여백을 제거합니다.
   docked?: boolean;
+  // 입력창 placeholder를 부모에서 주입할 수 있습니다.
+  placeholder?: string;
+  // true면 컴포넌트가 마운트될 때 슬라이드업 효과를 적용합니다.
+  animateOnMount?: boolean;
 }
 
-export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputProps) => {
+export const ChatPromptInput = ({
+  onSubmit,
+  docked = false,
+  placeholder = '자유롭게 질문해 보세요.',
+  animateOnMount = false,
+}: ChatPromptInputProps) => {
   const [message, setMessage] = useState('');
   const [selectedModel, setSelectedModel] = useState(MODEL_OPTIONS[0]);
+  const [isMountAnimationReady, setIsMountAnimationReady] = useState(!animateOnMount);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isSubmittingRef = useRef(false);
   // TODO: 실제 프롬프트 실행 상태에 따라서 값을 변경시켜주세요.
@@ -65,8 +75,26 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
     textarea.style.overflowY = textarea.scrollHeight > maxHeight ? 'auto' : 'hidden';
   }, [message]);
 
+  useEffect(() => {
+    if (!animateOnMount) {
+      return;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsMountAnimationReady(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [animateOnMount]);
+
   return (
-    <div className={`${docked ? '' : 'mt-[30px] md:mt-20'} w-full max-w-[860px] mx-auto`}>
+    <div
+      className={`${docked ? '' : 'mt-[30px] md:mt-20'} w-full max-w-[860px] mx-auto transition-all duration-500 ease-out ${
+        isMountAnimationReady ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+      }`}
+    >
       <div
         className="self-stretch flex min-h-[108px] md:min-h-[136px] flex-col items-stretch justify-start rounded-[22px] border-4 border-solid border-transparent py-2 md:py-4 shadow-[0_25px_50px_-12px_#dbeafe]"
         style={{
@@ -77,7 +105,7 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
         <div className="flex pt-3 md:pt-4 flex-col justify-between px-3">
           <textarea
             ref={textareaRef}
-            placeholder="자유롭게 질문해 보세요."
+            placeholder={placeholder}
             rows={1}
             value={message}
             onChange={(event) => setMessage(event.target.value)}
@@ -94,7 +122,7 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
             }}
             className="block w-full min-h-6 px-1 resize-none overflow-y-hidden bg-transparent text-base leading-6 outline-none"
           />
-          <div className="mt-2 md:mt-3 flex items-center">
+          <div className="mt-2 md:mt-2.5 flex items-center">
             <button
               type="button"
               className="btn-chat-attach mr-auto inline-flex h-10 w-10 rounded-full transition-colors hover:bg-[#f8fafc]"
@@ -103,12 +131,13 @@ export const ChatPromptInput = ({ onSubmit, docked = false }: ChatPromptInputPro
               <span className="sr-only">첨부파일</span>
             </button>
             <div className="ml-auto flex flex-1 items-center justify-end gap-[1px] md:gap-2.5">
-              <CommonSelect
+              {/* <CommonSelect
                 options={MODEL_OPTIONS}
                 value={selectedModel}
                 onChange={setSelectedModel}
                 ariaLabel="모델 선택"
-              />
+              /> */}
+              <span className="inline-block h-10 py-2.5 px-4 text-sm leading-[1.43]">Gemini</span>
               <button
                 type="button"
                 className={`btn-chat-send ${sendButtonStateClass}`}
