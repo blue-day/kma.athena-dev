@@ -94,7 +94,10 @@ export const Lnb = ({
           >
             <span className={`btn-toggle-text truncate transition-opacity duration-300 ${expanded ? 'visible opacity-100' : 'invisible opacity-0'} ${isHistoryVisible ? '' : 'close'}`}>대화기록</span>
           </button>
-          <button className="btn-list-del mr-1.5 md:mr-2.5">
+          <button 
+            disabled={!expanded}
+            className={`btn-list-del mr-1.5 md:mr-2.5 transition-opacity flex-shrink-0 duration-300 ${expanded ? 'opacity-100' : 'opacity-0'}`}
+            >
             전체삭제
           </button>
         </div>
