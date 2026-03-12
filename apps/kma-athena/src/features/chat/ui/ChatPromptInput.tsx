@@ -14,6 +14,8 @@ interface ChatPromptInputProps {
   placeholder?: string;
   // true면 컴포넌트가 마운트될 때 슬라이드업 효과를 적용합니다.
   animateOnMount?: boolean;
+  // 모델 선택 UI 노출 방식을 지정합니다.
+  modelSelectorVariant?: 'select' | 'text';
 }
 
 export const ChatPromptInput = ({
@@ -21,6 +23,7 @@ export const ChatPromptInput = ({
   docked = false,
   placeholder = '자유롭게 질문해 보세요.',
   animateOnMount = false,
+  modelSelectorVariant = 'select',
 }: ChatPromptInputProps) => {
   const [message, setMessage] = useState('');
   const [selectedModel, setSelectedModel] = useState(MODEL_OPTIONS[0]);
@@ -131,13 +134,20 @@ export const ChatPromptInput = ({
               <span className="sr-only">첨부파일</span>
             </button>
             <div className="ml-auto flex flex-1 items-center justify-end gap-[1px] md:gap-2.5">
-              {/* <CommonSelect
-                options={MODEL_OPTIONS}
-                value={selectedModel}
-                onChange={setSelectedModel}
-                ariaLabel="모델 선택"
-              /> */}
-              <span className="inline-block h-10 py-2.5 px-4 text-sm leading-[1.43]">Gemini</span>
+              {modelSelectorVariant === 'select' ? (
+                // 모델 선택 가능 화면(일반/지식챗 진입 화면)
+                <CommonSelect
+                  options={MODEL_OPTIONS}
+                  value={selectedModel}
+                  onChange={setSelectedModel}
+                  ariaLabel="모델 선택"
+                />
+              ) : (
+                // 모델 선택 불가 화면(대화 상세 화면)
+                <span className="inline-block h-10 py-2.5 px-4 text-sm leading-[1.43]">
+                  {selectedModel}
+                </span>
+              )}
               <button
                 type="button"
                 className={`btn-chat-send ${sendButtonStateClass}`}
