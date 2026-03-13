@@ -786,3 +786,14 @@ section.bg-kma-deco {
 .category-card-wrap div.ic-credit{
   background: url('../images/icon-menu-complaints.svg') top 30px center / 84px auto no-repeat #fff;
 }
+
+/* === 나만의 비서 === */
+.assistant-init-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 87px;
+  padding-top: 120px;
+  background: url('../images/icon-secretary.svg') top center / 100px auto no-repeat;
+}

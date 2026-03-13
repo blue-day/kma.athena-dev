@@ -75,6 +75,9 @@ importers:
       react-hot-toast:
         specifier: ^2.6.0
         version: 2.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      swiper:
+        specifier: ^12.1.2
+        version: 12.1.2
     devDependencies:
       '@types/node':
         specifier: ^20.14.10
@@ -3939,6 +3942,10 @@ packages:
 
   sweetalert2@11.26.21:
     resolution: {integrity: sha512-apfAIHg5DOOnPqUIJc+aAsDplpfHliAnVl7zqLfhQiWaYDew46pg4ZZMLJhbVbjdOdMV+PKG5ulkKzNqvcSViQ==}
+
+  swiper@12.1.2:
+    resolution: {integrity: sha512-4gILrI3vXZqoZh71I1PALqukCFgk+gpOwe1tOvz5uE9kHtl2gTDzmYflYCwWvR4LOvCrJi6UEEU+gnuW5BtkgQ==}
+    engines: {node: '>= 4.7.0'}
 
   symbol-observable@4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
@@ -8661,6 +8668,8 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   sweetalert2@11.26.21: {}
+
+  swiper@12.1.2: {}
 
   symbol-observable@4.0.0: {}
 
