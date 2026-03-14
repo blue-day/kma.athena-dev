@@ -102,6 +102,11 @@
     background: url('../images/mobile/icon-menu-complaints-s.svg') top 40px center / 58px auto no-repeat #fff;
   }
 
-}
+  /* === 나만의 비서 === */
+  .assistant-init-wrap {
+    margin-top: 29px;
+    background: url('../images/icon-secretary.svg') top center / 100px auto no-repeat;
+  }
 
+}
 

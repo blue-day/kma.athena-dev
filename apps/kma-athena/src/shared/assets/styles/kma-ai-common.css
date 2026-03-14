@@ -797,3 +797,40 @@ section.bg-kma-deco {
   padding-top: 120px;
   background: url('../images/icon-secretary.svg') top center / 100px auto no-repeat;
 }
+
+.my-assistant-swiper-wrapper--pc .swiper-slide{
+  padding: 8px;
+  background-color: #f7faff;
+  border-radius: 28px;
+  width: min(304px, calc((100% - 8px) / 4)) !important;
+}
+
+.my-assistant-swiper-wrapper--pc .swiper-slide + .swiper-slide{
+  padding-left: 0;
+}
+
+.my-assistant-swiper-wrapper--pc .swiper-slide::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 50%;
+  height: 100%;
+  background-color: #f7faff;
+  z-index: -1;
+}
+
+.my-assistant-swiper-wrapper--pc .swiper-slide:last-child::after{
+  display: none;
+}
+
+.my-assistant-swiper-wrapper--pc .my-assistant-swiper--five-plus{
+  padding: 8px;
+  border-radius: 28px;
+  background-color: #f7faff;
+}
+
+.my-assistant-swiper-wrapper--pc .my-assistant-swiper--five-plus .swiper-slide{
+  padding: 0;
+  width: min(296px, calc((100% - 24px) / 4)) !important;
+}
