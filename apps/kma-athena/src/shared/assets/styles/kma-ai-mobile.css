@@ -21,6 +21,11 @@
     right: 16px;
   }
 
+  /* === 공통 인풋 === */
+  .textarea-box textarea{
+    height: 160px;
+  }
+
   /* === Header === */
   header .logo-kma {
     width: 74px;
@@ -106,6 +111,32 @@
   .assistant-init-wrap {
     margin-top: 29px;
     background: url('../images/icon-secretary.svg') top center / 100px auto no-repeat;
+  }
+
+  .btn-assistant-create > strong{
+    display: inline-block;
+    line-height: 30px;
+    padding-top: 0;
+    padding-left: 38px;
+    background: url('../images/icon-add-ms.svg') top left / 30px auto no-repeat;
+  }
+
+  .btn-assistant {
+    background-size: 56px auto;
+    background-position: top 28px left 16px;
+  }
+
+  .assistant-type-list{
+    flex-wrap: wrap;
+  }
+
+  .assistant-type-list > li{
+    flex: none;
+    width: calc(50% - 4px);
+  }
+
+  .assistant-type-list label{
+    padding: 14px 16px;
   }
 
 }

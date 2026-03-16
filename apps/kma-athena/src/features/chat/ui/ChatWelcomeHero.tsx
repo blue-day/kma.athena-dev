@@ -12,7 +12,7 @@ interface ChatWelcomeHeroProps {
 export const ChatWelcomeHero = ({ subtitle, userName = '영숙님' }: ChatWelcomeHeroProps) => {
   return (
     <>
-      <h2 className="txt-fade-up txt-fade-up--title text-[26px] md:text-5xl font-bold !leading-[48px]">
+      <h2 className="txt-fade-up txt-fade-up--title text-[26px] md:text-5xl font-bold !leading-[32px] md:!leading-[48px]">
         안녕하세요. <span className="text-primary">{userName} :)</span>
       </h2>
       <p className="txt-fade-up txt-fade-up--desc mt-1.5 text-sm md:text-lg text-gray-300 text-center">{subtitle}</p>

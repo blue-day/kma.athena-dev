@@ -6,7 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperInstance } from 'swiper';
 import { Pagination } from 'swiper/modules';
 import { ChatLayout } from '@/widgets/layout/ChatLayout';
+import { CreateAssistantContent } from '../features/chat/ui/CreateAssistantContent';
 import { ChatWelcomeHero } from '@/features/chat/ui/ChatWelcomeHero';
+import { CommonBottomSheet } from '@/shared/ui/CommonBottomSheet';
+import { CommonPopup } from '@/shared/ui/CommonPopup';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -29,11 +32,11 @@ type SlideCard = SlideCardCreate | SlideCardAssistant;
 const CONVERSATION_ROUTE = '/chat/conversation?source=my-assistant';
 const MOBILE_CARDS_PER_SLIDE = 4;
 const MOCK_ASSISTANTS: AssistantCard[] = [
-  { id: 'assistant-1', title: '진료기록 요약 비서' },
-  { id: 'assistant-2', title: '의학논문 검색 비서' },
-  { id: 'assistant-3', title: '환자응대 스크립트 비서' },
+  { id: 'assistant-1', title: '지식 아카이브 매니저' },
+  { id: 'assistant-2', title: '베테랑 의협 사무국장' },
+  { id: 'assistant-3', title: '스마트한 세무 컨설턴트' },
   { id: 'assistant-4', title: '청구코드 점검 비서' },
-  // { id: 'assistant-5', title: '학회자료 정리 비서' },
+  { id: 'assistant-5', title: '학회자료 정리 비서' },
 ];
 
 const chunkCards = (cards: SlideCard[], size: number): SlideCard[][] => {
@@ -51,6 +54,8 @@ export function MyAssistantPage() {
   const desktopSwiperRef = useRef<SwiperInstance | null>(null);
   const [isDesktopSwiperReady, setIsDesktopSwiperReady] = useState(false);
   const [isSwiperAreaVisible, setIsSwiperAreaVisible] = useState(false);
+  const [isCreatePopupOpen, setIsCreatePopupOpen] = useState(false);
+  const [isCreateBottomSheetOpen, setIsCreateBottomSheetOpen] = useState(false);
   const assistants = MOCK_ASSISTANTS;
   const hasAssistants = assistants.length > 0;
 
@@ -88,11 +93,28 @@ export function MyAssistantPage() {
   }, [hasAssistants]);
 
   const handleCreateClick = () => {
-    // 생성 플로우 연결은 후속 단계에서 처리합니다.
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      setIsCreatePopupOpen(true);
+      return;
+    }
+
+    setIsCreateBottomSheetOpen(true);
   };
 
   const handleAssistantClick = (assistantId: string) => {
     router.push(`${CONVERSATION_ROUTE}&conversationId=${assistantId}`);
+  };
+
+  const handleCloseCreatePopup = () => {
+    setIsCreatePopupOpen(false);
+  };
+
+  const handleCloseCreateBottomSheet = () => {
+    setIsCreateBottomSheetOpen(false);
   };
 
   const renderCard = (card: SlideCard) => {
@@ -101,28 +123,28 @@ export function MyAssistantPage() {
         <button
           type="button"
           onClick={handleCreateClick}
-          className="w-full min-h-[112px] md:min-h-[176px] rounded-2xl md:rounded-[24px] border border-gray-border bg-white p-4 text-left"
+          className="btn-assistant-create w-full min-h-[102px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border bg-white p-4"
         >
-          <strong className="text-sm md:text-base font-semibold text-gray-800">만들기</strong>
+          <strong className="text-sm md:text-base font-semibold">만들기</strong>
         </button>
       );
     }
 
     return (
-      <article className="w-full min-h-[112px] md:min-h-[176px] rounded-2xl md:rounded-[24px] border border-gray-border bg-white p-4">
-        <button type="button" className="w-full text-left" onClick={() => handleAssistantClick(card.assistant.id)}>
-          <h3 className="text-sm md:text-base font-semibold leading-5 text-gray-800">{card.assistant.title}</h3>
+      <article className="relative flex flex-col w-full min-h-[102px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border bg-white md:px-2 pb-4 md:pb-[26px]">
+        <button type="button" className="btn-assistant flex md:justify-center w-full flex-1 px-4 pl-[82px] pt-6 pb-10 md:pt-[122px] md:pb-0 md:px-4" onClick={() => handleAssistantClick(card.assistant.id)}>
+          <strong className="block text-[15px] md:text-base font-semibold break-keep">{card.assistant.title}</strong>
         </button>
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex justify-center gap-1.5 absolute bottom-4 right-4 md:static z-10">
           <button
             type="button"
-            className="h-8 rounded-md border border-[#dbe5f6] bg-[#eef3ff] px-3 text-xs font-medium text-[#35507a]"
+            className="min-w-[70px] md:min-w-20 h-[30px] md:h-8 rounded-full border border-[#d5dbe2] bg-white px-4 text-sm font-medium"
           >
             편집
           </button>
           <button
             type="button"
-            className="h-8 rounded-md border border-[#f3d6d6] bg-[#fff1f1] px-3 text-xs font-medium text-[#7a3535]"
+            className="min-w-[70px] md:min-w-20 h-[30px] md:h-8 rounded-full border border-[#d5dbe2] bg-white px-4 text-sm font-medium"
           >
             삭제
           </button>
@@ -136,7 +158,7 @@ export function MyAssistantPage() {
       {/* 페이지 배경/스크롤 영역 */}
       <section className="relative z-10 mx-auto flex h-full w-full flex-col bg-kma-deco">
         <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-4 md:px-2.5">
-          <div className="flex flex-col items-center pt-[30px] md:pt-[220px] pb-10 md:px-10">
+          <div className={`flex flex-col items-center ${hasAssistants ? 'pt-[30px]' : 'pt-[100px]'} md:pt-[220px] pb-10 md:px-12`}>
             {/* 상단 인사/설명 영역 */}
             <ChatWelcomeHero
               subtitle={
@@ -163,22 +185,22 @@ export function MyAssistantPage() {
                       <button
                         type="button"
                         onClick={() => desktopSwiperRef.current?.slidePrev()}
-                        className={`absolute -left-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-border bg-white text-sm transition-opacity md:flex ${
+                        className={`btn-assistant-prev absolute -left-[50px] top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 transition-opacity md:flex ${
                           isDesktopSwiperReady ? 'opacity-100' : 'pointer-events-none opacity-0'
                         }`}
                         aria-label="이전 슬라이드"
                       >
-                        {'<'}
+                        <span className="sr-only">이전 슬라이드</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => desktopSwiperRef.current?.slideNext()}
-                        className={`absolute -right-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-border bg-white text-sm transition-opacity md:flex ${
+                        className={`btn-assistant-next absolute -right-[50px] top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 transition-opacity md:flex ${
                           isDesktopSwiperReady ? 'opacity-100' : 'pointer-events-none opacity-0'
                         }`}
                         aria-label="다음 슬라이드"
                       >
-                        {'>'}
+                        <span className="sr-only">다음 슬라이드</span>
                       </button>
                     </>
                   )}
@@ -229,7 +251,7 @@ export function MyAssistantPage() {
                       >
                         {mobileSlidePages.map((pageCards: SlideCard[], pageIndex: number) => (
                           <SwiperSlide key={`my-assistant-mobile-page-${pageIndex}`} className="h-auto">
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-1.5 bg-[#f7faff] p-1.5 rounded-[20px]">
                               {pageCards.map((card: SlideCard, cardIndex: number) => (
                                 <div key={`my-assistant-mobile-card-${pageIndex}-${cardIndex}`}>{renderCard(card)}</div>
                               ))}
@@ -242,8 +264,8 @@ export function MyAssistantPage() {
                 </div>
 
                 {/* 페이지네이션 (PC/Mobile 분리) */}
-                <div className="my-assistant-swiper-pagination-mobile mt-4 flex justify-center md:hidden" />
-                <div className="my-assistant-swiper-pagination-desktop mt-4 hidden justify-center md:flex" />
+                <div className="my-assistant-swiper-pagination-mobile mt-5 flex justify-center md:hidden" />
+                <div className="my-assistant-swiper-pagination-desktop mt-5 hidden justify-center md:flex" />
               </section>
             ) : (
               /* Empty State: 생성 버튼만 노출 */
@@ -262,6 +284,44 @@ export function MyAssistantPage() {
           </div>
         </div>
       </section>
+
+      <CommonPopup
+        open={isCreatePopupOpen}
+        variant="custom"
+        title="나만의 비서 만들기"
+        popupWidth={830}
+        content={<CreateAssistantContent />}
+        onClose={handleCloseCreatePopup}
+        onConfirm={handleCloseCreatePopup}
+        confirmText="저장"
+        confirmDisabled
+      />
+
+      <CommonBottomSheet
+        open={isCreateBottomSheetOpen}
+        onClose={handleCloseCreateBottomSheet}
+        title="나만의 비서 만들기"
+        footer={(
+          <div className="btn-wrap">
+            <button
+              type="button"
+              className="btn-txt secondary w-full"
+              onClick={handleCloseCreateBottomSheet}
+            >
+              취소
+            </button>
+            <button
+              type="button"
+              className="btn-txt primary w-full"
+              disabled
+            >
+              저장
+            </button>
+          </div>
+        )}
+      >
+        <CreateAssistantContent />
+      </CommonBottomSheet>
     </ChatLayout>
   );
 }

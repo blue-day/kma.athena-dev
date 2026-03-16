@@ -17,6 +17,7 @@ type CommonPopupProps = {
   onClose: () => void;
   onConfirm?: () => void;
   onCancel?: () => void;
+  confirmDisabled?: boolean;
 };
 
 export function CommonPopup({
@@ -31,6 +32,7 @@ export function CommonPopup({
   onClose,
   onConfirm,
   onCancel,
+  confirmDisabled = false,
 }: CommonPopupProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -65,6 +67,8 @@ export function CommonPopup({
   const secondaryLabel = cancelText ?? '취소';
   const displayContent = content ?? message;
 
+
+
   const handlePrimaryAction = () => {
     //확인 버튼 동작 
     // onConfirm?.();
@@ -98,14 +102,16 @@ export function CommonPopup({
         aria-modal="true"
         aria-label={title ?? '레이어 팝업'}
       >
-        {/* <button
+        {/* {hasCloseButton ? (
+        <button
           type="button"
           className="btn-popup-close"
           onClick={onClose}
           aria-label="닫기"
         >
           <span className="sr-only">닫기</span>
-        </button> */}
+        </button>
+        ) : null} */}
 
         {showTitle ? (
           <div className="popup-title">
@@ -130,6 +136,7 @@ export function CommonPopup({
               type="button"
               className="btn-txt primary"
               onClick={handlePrimaryAction}
+              disabled={confirmDisabled}
             >
               {primaryLabel}
             </button>

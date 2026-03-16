@@ -56,7 +56,7 @@ export const MaterialPanelContent = () => {
         ariaLabel="자료 서브 탭"
       />
 
-      <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto py-5 md:px-5">
+      <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto pt-5 md:py-5  md:px-5">
         {activeSubTab === 'internal' ? (
           <section>
             <div className="flex items-center justify-between">

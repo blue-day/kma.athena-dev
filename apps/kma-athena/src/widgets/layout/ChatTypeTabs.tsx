@@ -24,7 +24,7 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
             key={tab.key}
             type="button"
             onClick={() => onChange(tab.key)}
-            className={`relative min-h-12 min-w-[140px] pb-[11px] text-base text-[14px] transition-font px-3 ${
+            className={`relative min-h-12 min-w-[160px] pb-[11px] text-base text-[14px] transition-font px-3 ${
               isActive ? 'font-semibold' : 'hover:font-semibold'
             }`}
           >
@@ -34,8 +34,8 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
       })}
 
       <span
-        className="pointer-events-none absolute bottom-0 left-0 h-1 w-[140px] bg-primary transition-transform duration-300 ease-out"
-        style={{ transform: `translateX(${activeIndex * 140}px)` }}
+        className="pointer-events-none absolute bottom-0 left-0 h-1 w-[160px] bg-primary transition-transform duration-300 ease-out"
+        style={{ transform: `translateX(${activeIndex * 160}px)` }}
       />
     </nav>
   );
