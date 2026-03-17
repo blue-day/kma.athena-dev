@@ -81,6 +81,7 @@ section.bg-kma-deco {
 
 .btn-txt.primary {
   background-color: var(--kma-primary);
+  border: 1px solid var(--kma-primary);
   color: #fff;
 }
 
@@ -113,6 +114,10 @@ section.bg-kma-deco {
   background: url('../images/icon-download-w.svg') left center / 20px auto no-repeat;
   font-size: inherit;
   font-weight: inherit;
+}
+
+.btn-search{
+  background: url('../images/icon-input-search.svg') center / 20px auto no-repeat;
 }
 
 /* === 공통 팝업 === */
@@ -161,7 +166,7 @@ section.bg-kma-deco {
 
 .popup-wrap .popup-content {
   padding: 26px 26px 16px;
-  max-height: 70dvh;
+  max-height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -169,6 +174,10 @@ section.bg-kma-deco {
 .popup-wrap.type-alert .popup-content,
 .popup-wrap.type-confirm .popup-content {
   padding: 26px 20px 30px;
+}
+
+.popup-wrap .popup-footer .btn-wrap .btn-txt{
+  height: 40px;
 }
 
 .popup-bottom-wrap {
@@ -192,10 +201,11 @@ section.bg-kma-deco {
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  max-height: 90vh;
 }
 
 .popup-bottom-wrap .popup-bottom-box.h-fix{
-  height: 85vh;
+  height: 90vh;
 }
 
 .popup-bottom-wrap .btn-popup-close {
@@ -226,12 +236,15 @@ section.bg-kma-deco {
 .popup-bottom-wrap .popup-content {
   display: flex;
   flex-direction: column;
-  max-height: 70dvh;
   overflow-y: auto;
   overflow-x: hidden;
   flex: 1 1 auto;
   height: 100%;
   padding: 0 16px 20px;
+}
+
+.popup-bottom-wrap .popup-bottom-box.has-inner-scroll .popup-content{
+  padding-bottom: 0;
 }
 
 .popup-bottom-wrap .popup-footer {
@@ -273,7 +286,8 @@ section.bg-kma-deco {
 
 .btn-menu-item {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
   height: 48px;
   border-radius: 8px;
   text-align: left;
@@ -477,7 +491,9 @@ section.bg-kma-deco {
   border-color: #f7f8fa;
 }
 
-.ipt-wrap.disabled input,.ipt-wrap > input:disabled {
+.ipt-wrap.disabled,
+.ipt-wrap.disabled > input,
+.ipt-wrap > input:disabled {
   background-color: #f7f8fa;
 }
 
@@ -634,6 +650,60 @@ section.bg-kma-deco {
   height: 20px;
   background: url('../images/icon-list-check-on.svg') center / 100% auto no-repeat;
 }
+
+/* === 공통 테이블 === */
+.tbl-wrap table{
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.tbl-col *{
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.29;
+}
+
+.tbl-col thead th{
+  padding: 8px 4px;
+  height: 34px;
+  font-weight: 500;
+  color: var(--kma-primary);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  background-color: #f7faff;
+}
+
+.tbl-col thead th:first-child{
+  border-radius: 8px 0 0 8px;
+}
+
+.tbl-col thead th:last-child{
+  border-radius: 0 8px 8px 0;
+}
+
+.tbl-col tbody th, 
+.tbl-col tbody td{
+  padding: 8px 4px;
+  height: 36px;
+}
+
+.tbl-col tbody th{
+  color: #7f8394;
+  font-weight: 400;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.tbl-col tbody tr{
+  border-top: 1px solid #e5e7eb;
+}
+
+.tbl-col tbody tr:first-child{
+  border-top: none;
+}
+
+
 
 /* === 대화상세 === */
 @keyframes fadeUpIn {
@@ -1076,4 +1146,14 @@ section.bg-kma-deco {
   width: 24px;
   height: 24px;
   background: url('../images/icon-input-del.svg') center / 20px auto no-repeat;
+}
+
+/* === 보관함 === */
+.search-box .ipt-wrap{
+  border: none;
+  height: 100%;
+}
+
+.search-box .ipt-wrap > input{
+  padding-left: 16px;
 }

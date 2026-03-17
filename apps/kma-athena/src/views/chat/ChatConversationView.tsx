@@ -1,6 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import {
+  AttachmentPanel,
+  AttachmentPanelContent,
+  AttachmentPanelDownloadButton,
+} from '@/features/chat/ui/AttachmentPanel';
 import { AssistantAnswerCard } from '@/features/chat/ui/AssistantAnswerCard';
 import { ChatPromptInput } from '@/features/chat/ui/ChatPromptInput';
 import { ConversationSummaryHeader } from '@/features/chat/ui/ConversationSummaryHeader';
@@ -16,10 +22,15 @@ const noop = (_value?: string) => {};
 // 하단에서 일정 거리 이상 벗어나면 "맨 아래 이동" 버튼을 노출합니다.
 const BOTTOM_THRESHOLD = 80;
 
+type SidePanelType = 'material' | 'attachment' | null;
+
 export function ChatConversationView() {
-  const [isMaterialPanelOpen, setIsMaterialPanelOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const [activeSidePanel, setActiveSidePanel] = useState<SidePanelType>(null);
   const [showScrollToBottomButton, setShowScrollToBottomButton] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const isSidePanelOpen = activeSidePanel !== null;
+  const isFromMyAssistant = searchParams.get('source') === 'my-assistant';
 
   const updateScrollButtonVisibility = () => {
     const container = scrollContainerRef.current;
@@ -67,7 +78,7 @@ export function ChatConversationView() {
               <div className="chat-message-rise ml-auto max-w-[80%] rounded-[8px_0_8px_8px] bg-[#ebf3fd] px-3 py-2 text-sm leading-5 md:px-4 md:text-base md:leading-7">
                 성분명 처방에 대한 협회의 공식 입장은 어때?
               </div>
-              <AssistantAnswerCard onOpenMaterialPanel={() => setIsMaterialPanelOpen(true)} />
+              <AssistantAnswerCard onOpenMaterialPanel={() => setActiveSidePanel('material')} />
             </div>
           </div>
 
@@ -79,26 +90,46 @@ export function ChatConversationView() {
           />
 
           <div className="px-4 pb-2.5 pt-4 md:px-2.5 md:pb-5">
-            <ChatPromptInput onSubmit={noop} docked modelSelectorVariant="text" />
+            <ChatPromptInput
+              onSubmit={noop}
+              docked
+              modelSelectorVariant="text"
+              isFromMyAssistant={isFromMyAssistant}
+              onOpenAttachmentPanel={() => setActiveSidePanel('attachment')}
+            />
           </div>
         </section>
 
         <aside
           className={`side-panel-wrap hidden flex-shrink-0 overflow-y-auto border-l border-gray-border bg-white transition-all duration-300 md:block ${
-            isMaterialPanelOpen ? 'w-[400px] opacity-100' : 'w-0 opacity-0 pointer-events-none'
+            isSidePanelOpen ? 'w-[400px] opacity-100' : 'w-0 opacity-0 pointer-events-none'
           }`}
-          aria-hidden={!isMaterialPanelOpen}
+          aria-hidden={!isSidePanelOpen}
         >
-          <MaterialPanel onClose={() => setIsMaterialPanelOpen(false)} />
+          {activeSidePanel === 'material' ? (
+            <MaterialPanel onClose={() => setActiveSidePanel(null)} />
+          ) : activeSidePanel === 'attachment' ? (
+            <AttachmentPanel onClose={() => setActiveSidePanel(null)} />
+          ) : null}
         </aside>
 
         <CommonBottomSheet
-          open={isMaterialPanelOpen}
-          onClose={() => setIsMaterialPanelOpen(false)}
-          className="h-fix"
-          footer={<MaterialPanelDownloadButton />}
+          open={isSidePanelOpen}
+          onClose={() => setActiveSidePanel(null)}
+          className="h-fix has-inner-scroll"
+          footer={
+            activeSidePanel === 'material' ? (
+              <MaterialPanelDownloadButton />
+            ) : activeSidePanel === 'attachment' ? (
+              <AttachmentPanelDownloadButton />
+            ) : undefined
+          }
         >
-          <MaterialPanelContent />
+          {activeSidePanel === 'material' ? (
+            <MaterialPanelContent />
+          ) : activeSidePanel === 'attachment' ? (
+            <AttachmentPanelContent />
+          ) : null}
         </CommonBottomSheet>
       </div>
     </ChatLayout>

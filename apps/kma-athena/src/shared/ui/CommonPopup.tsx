@@ -18,6 +18,7 @@ type CommonPopupProps = {
   onConfirm?: () => void;
   onCancel?: () => void;
   confirmDisabled?: boolean;
+  showCancelButton?: boolean;
 };
 
 export function CommonPopup({
@@ -33,6 +34,7 @@ export function CommonPopup({
   onConfirm,
   onCancel,
   confirmDisabled = false,
+  showCancelButton,
 }: CommonPopupProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -66,15 +68,15 @@ export function CommonPopup({
   const primaryLabel = confirmText ?? '확인';
   const secondaryLabel = cancelText ?? '취소';
   const displayContent = content ?? message;
+  const shouldShowCancelButton = showCancelButton ?? variant !== 'alert';
 
 
 
   const handlePrimaryAction = () => {
-    //확인 버튼 동작 
-    // onConfirm?.();
-    // if (!onConfirm) {
-    //   onClose();
-    // }
+    onConfirm?.();
+    if (!onConfirm) {
+      onClose();
+    }
   };
 
   const handleSecondaryAction = () => {
@@ -123,7 +125,7 @@ export function CommonPopup({
 
         <div className="popup-footer">
           <div className="btn-wrap">
-            {variant !== 'alert' ? (
+            {shouldShowCancelButton ? (
               <button
                 type="button"
                 className="btn-txt secondary"

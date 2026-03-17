@@ -16,6 +16,10 @@ interface ChatPromptInputProps {
   animateOnMount?: boolean;
   // 모델 선택 UI 노출 방식을 지정합니다.
   modelSelectorVariant?: 'select' | 'text';
+  // 첨부파일 목록 패널 열기 이벤트를 부모에서 처리합니다.
+  onOpenAttachmentPanel?: () => void;
+  // 나만의 비서 진입 여부에 따라 첨부파일 버튼 표시를 전환합니다.
+  isFromMyAssistant?: boolean;
 }
 
 export const ChatPromptInput = ({
@@ -24,6 +28,8 @@ export const ChatPromptInput = ({
   placeholder = '자유롭게 질문해 보세요.',
   animateOnMount = false,
   modelSelectorVariant = 'select',
+  onOpenAttachmentPanel,
+  isFromMyAssistant = false,
 }: ChatPromptInputProps) => {
   const [message, setMessage] = useState('');
   const [selectedModel, setSelectedModel] = useState(MODEL_OPTIONS[0]);
@@ -126,13 +132,26 @@ export const ChatPromptInput = ({
             className="block w-full min-h-6 px-1 resize-none overflow-y-hidden bg-transparent text-base leading-6 outline-none"
           />
           <div className="mt-2 md:mt-2.5 flex items-center">
-            <button
-              type="button"
-              className="btn-chat-attach mr-auto inline-flex h-10 w-10 rounded-full transition-colors hover:bg-[#f8fafc]"
-              aria-label="첨부파일"
-            >
-              <span className="sr-only">첨부파일</span>
-            </button>
+            {/*  첨부파일 버튼 */}
+            {isFromMyAssistant ? (
+              <button
+                type="button"
+                className="min-w-[101px] h-8 px-2 rounded-[300px] border border-[#d5dbe2] text-sm"
+                aria-label="첨부파일 5건"
+                onClick={onOpenAttachmentPanel}
+              >
+                첨부파일 5건
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn-chat-attach mr-auto inline-flex h-10 w-10 rounded-full transition-colors hover:bg-[#f8fafc]"
+                aria-label="첨부파일"
+              >
+                <span className="sr-only">첨부파일</span>
+              </button>
+            )}
+
             <div className="ml-auto flex flex-1 items-center justify-end gap-[1px] md:gap-2.5">
               {modelSelectorVariant === 'select' ? (
                 // 모델 선택 가능 화면(일반/지식챗 진입 화면)

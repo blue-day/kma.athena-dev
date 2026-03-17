@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react';
 import { CommonSelect } from '@/shared/ui/CommonSelect';
+import { CommonInput } from '@/shared/ui/CommonInput';
 
 const MODEL_OPTIONS = ['Gemini', 'Gemini 2.5 Flash', 'Gemini 2.5 Pro (2025.12)'];
 
@@ -10,6 +11,7 @@ export function CreateAssistantContent() {
   const radioGroupName = `assistant-type-${uniqueId}`;
   const [selectedAssistantType, setSelectedAssistantType] = useState('');
   const [selectedModel, setSelectedModel] = useState(MODEL_OPTIONS[0]);
+  const [assistantName, setAssistantName] = useState('');
 
   const handleAssistantTypeChange = (type: string) => {
     setSelectedAssistantType(type);
@@ -79,9 +81,14 @@ export function CreateAssistantContent() {
       <div className="form-item">
         <span className="form-title required">비서 이름</span>
         <div className="form-content">
-          <div className="ipt-wrap disabled">
-            <input type="text" placeholder="비서의 이름을 입력하세요 (최대 12자)" disabled/>
-          </div>
+          <CommonInput
+            value={assistantName}
+            onChange={setAssistantName}
+            onClear={() => setAssistantName('')}
+            placeholder="비서의 이름을 입력하세요 (최대 12자)"
+            className="disabled" //비활성화 스타일
+            disabled //비활성화 속성
+          />
         </div>
       </div>
 

@@ -21,6 +21,19 @@
     right: 16px;
   }
 
+   /* === 공통 팝업 === */
+   .popup-wrap .popup-title {
+    padding: 20px 20px 10px;
+  }
+  
+  .popup-wrap .popup-footer {
+    padding: 14px 20px 26px;
+  }
+  
+  .popup-wrap .popup-content {
+    padding: 26px 20px 16px;
+  }
+
   /* === 공통 인풋 === */
   .textarea-box textarea{
     height: 160px;

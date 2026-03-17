@@ -1,0 +1,32 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22.747 13.177c-.315-.419-.839-.628-1.467-.628h-6.527a4.19 4.19 0 0 1-1.556-.3l-1.346-.538.137-.41a.524.524 0 0 1 .696-.32l.496.205a4.19 4.19 0 0 0 1.595.315h2.105c.419 0 .733-.21.943-.419.21-.21.314-.524.314-.838 0-.524-.314-.943-.838-1.152L10.456 6.56a4.795 4.795 0 0 0-3.808.208l-1.083.542L3.34 8.882v5.762h2.226l8.022 2.674a4.19 4.19 0 0 0 2.796-.052l6.992-2.622c0-.524-.21-1.047-.628-1.467z" fill="url(#1qpr1wx7ha)"/>
+    <foreignObject x="-.196" y="4.692" width="7.333" height="14.667">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(.79px);clip-path:url(#bt9j60561b);height:100%;width:100%"/>
+    </foreignObject>
+    <g filter="url(#qn9myud03c)" data-figma-bg-blur-radius="1.571">
+        <path d="M1.375 7.049c0-.434.352-.786.786-.786H4.78c.434 0 .785.352.785.786V17a.786.786 0 0 1-.785.786H2.16a.786.786 0 0 1-.785-.786V7.05z" fill="url(#o25qjhyfwd)" fill-opacity=".6"/>
+    </g>
+    <defs>
+        <linearGradient id="1qpr1wx7ha" x1="7.661" y1="6.918" x2="17.089" y2="17.132" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F7D2C4"/>
+            <stop offset="1" stop-color="#F9B69D"/>
+        </linearGradient>
+        <linearGradient id="o25qjhyfwd" x1="1.915" y1="6.132" x2="5.304" y2="17.918" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FBB6C4"/>
+            <stop offset="1" stop-color="#EA7D93"/>
+        </linearGradient>
+        <clipPath id="bt9j60561b" transform="translate(.196 -4.692)">
+            <path d="M1.375 7.049c0-.434.352-.786.786-.786H4.78c.434 0 .785.352.785.786V17a.786.786 0 0 1-.785.786H2.16a.786.786 0 0 1-.785-.786V7.05z"/>
+        </clipPath>
+        <filter id="qn9myud03c" x="-.196" y="4.692" width="7.333" height="14.667" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dx=".393" dy=".393"/>
+            <feGaussianBlur stdDeviation=".196"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.3 0"/>
+            <feBlend in2="shape" result="effect1_innerShadow_1382_16083"/>
+        </filter>
+    </defs>
+</svg>
