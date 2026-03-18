@@ -5,6 +5,7 @@ import defaultProfileIconMale from '@/shared/assets/images/icon-profile-male.svg
 import defaultProfileIconFemale from '@/shared/assets/images/icon-profile-female.svg';//여성인 경우
 import { ThemeModeSwitch } from '@/widgets/layout/ThemeModeSwitch';
 import { useMainLayout } from './MainLayoutContext';
+import { useNotification } from '@/features/pop/model/useNotification';
 
 const LNB_BACKGROUND_STYLE = {
   backgroundImage:
@@ -72,16 +73,36 @@ export const Lnb = ({
     </div>
   );
 
+  const { alert, confirm, toast } = useNotification();  // 팝업 호출부 가져오기
+  const btnNewChat = () => {
+    confirm({
+      message: '새 채팅으로 이동하시겠습니까?',
+      onConfirm: () => {
+        console.log('확인 후 후처리');
+      },
+    });
+  }
+  const btnWait = () => {
+    alert({
+      // title: '알림',
+      message: '준비중인 기능입니다.'
+    });
+  }
+
+  const btnToast = () => {
+    toast('삭제할 수 없습니다.', 'error')
+  }
+
   const renderHistorySection = (expanded: boolean, forceVisible = false, showThemeSwitch = false) => {
     const isNavSectionVisible = forceVisible || (expanded && isHistoryVisible);
 
     return (
       <>
         <div className="space-y-1.5 pb-4 md:pb-5">
-          <button className={`btn-menu-item chat ${expanded ? 'w-full' : 'close'}`}>
+          <button className={`btn-menu-item chat ${expanded ? 'w-full' : 'close'}`} onClick={btnNewChat}>
             <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>새 채팅</span>
           </button>
-          <button className={`btn-menu-item locker ${expanded ? 'w-full' : 'close'}`}>
+          <button className={`btn-menu-item locker ${expanded ? 'w-full' : 'close'}`} onClick={btnWait}>
             <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>보관함</span>
           </button>
         </div>
@@ -94,25 +115,24 @@ export const Lnb = ({
           >
             <span className={`btn-toggle-text truncate transition-opacity duration-300 ${expanded ? 'visible opacity-100' : 'invisible opacity-0'} ${isHistoryVisible ? '' : 'close'}`}>대화기록</span>
           </button>
-          <button 
+          <button
             disabled={!expanded}
             className={`btn-list-del mr-1.5 md:mr-2.5 transition-opacity flex-shrink-0 duration-300 ${expanded ? 'opacity-100' : 'opacity-0'}`}
-            >
+            onClick={btnToast}
+          >
             전체삭제
           </button>
         </div>
 
         <nav
-          className={`wide px-2.5 md:px-4  flex-1 overflow-y-auto space-y-[26px] pb-6 custom-scrollbar transition-opacity duration-300 ${
-            isNavSectionVisible ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-          }`}
+          className={`wide px-2.5 md:px-4  flex-1 overflow-y-auto space-y-[26px] pb-6 custom-scrollbar transition-opacity duration-300 ${isNavSectionVisible ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+            }`}
         >
           {HISTORY_SECTIONS.map((section) => (
             <div
               key={section.key}
-              className={`transition-all duration-300 ${
-                isNavSectionVisible ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`transition-all duration-300 ${isNavSectionVisible ? 'opacity-100' : 'opacity-0'
+                }`}
               style={{ transitionDelay: isNavSectionVisible ? section.transitionDelay : '0ms' }}
             >
               {expanded ? (
@@ -146,7 +166,7 @@ export const Lnb = ({
             src={profileSrc}
             alt="프로필 이미지"
             className="w-full h-full object-cover"
-            onError={() => setProfileSrc(defaultProfileIcon.src)}
+            onError={() => setProfileSrc(defaultProfileIconMale.src)}
           />
         </div>
         {expanded && (
@@ -164,9 +184,8 @@ export const Lnb = ({
     <>
       {/* 데스크톱: 기존 접기/펼치기 가능한 LNB */}
       <aside
-        className={`kma-lnb-wrap relative hidden md:flex md:flex-col h-screen transition-all duration-300 ${
-          isExpanded ? 'w-[320px]' : 'w-[84px]'
-        }`}
+        className={`kma-lnb-wrap relative hidden md:flex md:flex-col h-screen transition-all duration-300 ${isExpanded ? 'w-[320px]' : 'w-[84px]'
+          }`}
         style={{
           ...LNB_BACKGROUND_STYLE,
           backgroundAttachment: 'fixed',
@@ -175,9 +194,8 @@ export const Lnb = ({
         <div className={`flex items-center h-[92px] px-6 transition-all duration-300 ${isExpanded ? 'justify-between' : 'justify-center'}`}>
           <Link
             href="/"
-            className={`flex items-center transition-all duration-300 ${
-              isExpanded ? 'opacity-100 visible w-[194px]' : 'opacity-0 invisible w-0'
-            }`}
+            className={`flex items-center transition-all duration-300 ${isExpanded ? 'opacity-100 visible w-[194px]' : 'opacity-0 invisible w-0'
+              }`}
           >
             <h1 className="logo-kma">
               <span className="sr-only">KMA 대한의사협회</span>
@@ -205,15 +223,13 @@ export const Lnb = ({
           type="button"
           aria-label="메뉴 닫기 오버레이"
           onClick={onMobileClose}
-          className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
-            mobileOpen ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${mobileOpen ? 'opacity-100' : 'opacity-0'
+            }`}
         />
 
         <aside
-          className={`kma-lnb-wrap relative flex h-full w-[86%] max-w-[290px] flex-col bg-[#f8f9fc] shadow-2xl transition-transform duration-300 ${
-            mobileOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`kma-lnb-wrap relative flex h-full w-[86%] max-w-[290px] flex-col bg-[#f8f9fc] shadow-2xl transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
           style={LNB_BACKGROUND_STYLE}
           aria-hidden={!mobileOpen}
         >

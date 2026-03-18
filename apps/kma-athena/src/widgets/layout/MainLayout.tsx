@@ -4,9 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Lnb } from './Lnb';
 import { MainLayoutProvider } from './MainLayoutContext';
 import { CommonLoading } from '@/shared/ui/CommonLoading';
-import { CommonPopup } from '@/shared/ui/CommonPopup';
-import { CommonToast } from '@/shared/ui/CommonToast';
-import { showToast } from '@/shared/ui/toast';
+import { NotificationRenderer } from '@/features/pop/ui/NotificationRenderer';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -24,9 +22,6 @@ interface MainLayoutProps {
 export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
-  const [isAlertPopupOpen, setIsAlertPopupOpen] = useState(false);
-  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
-  const [isToastPopupOpen] = useState(false);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -49,13 +44,6 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
     };
   }, [mobileMenuOpen]);
 
-  useEffect(() => {
-    if (!isToastPopupOpen) {
-      return;
-    }
-
-    showToast('토스트 팝업 테스트입니다.', { type: 'success' });
-  }, [isToastPopupOpen]);
 
   const contextValue = useMemo(
     () => ({
@@ -81,34 +69,12 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
           </main>
         </div>
       </div>
-      
-      {/* alert 팝업 */}
-      <CommonPopup
-        open={isAlertPopupOpen}
-        variant="alert"
-        content={
-          <p>저장 되었습니다.</p>
-        }
-        onClose={() => setIsAlertPopupOpen(false)}
-        onConfirm={() => setIsAlertPopupOpen(false)}
-      />
-
-      {/* confirm 팝업 */}
-      <CommonPopup
-        open={isConfirmPopupOpen}
-        variant="confirm"
-        content={
-          <p>채팅을 삭제하겠습니까?</p>
-        }
-        onClose={() => setIsConfirmPopupOpen(false)}
-        onConfirm={() => setIsConfirmPopupOpen(false)}
-      />
 
       {/* 로딩 */}
       {isLoading && <CommonLoading />}
 
-      {/* 토스트 팝업 */}
-      <CommonToast />
+      {/* 팝업 */}
+      <NotificationRenderer />
     </MainLayoutProvider>
   );
 };
