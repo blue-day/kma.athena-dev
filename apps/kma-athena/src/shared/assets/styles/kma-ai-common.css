@@ -26,6 +26,10 @@ a {
 }
 
 /* === 공통 스타일 === */
+em{
+  font-style: normal;
+}
+
 .wide {
   margin-left: -16px;
   margin-right: -16px;
@@ -106,6 +110,10 @@ section.bg-kma-deco {
   font-size: 14px;
   padding-right: 26px;
   background: url('../images/icon-trash.svg') right center / 20px auto no-repeat;
+}
+
+.btn-archive-del {
+  background: url('../images/icon-popup-close.svg') center / 24px auto no-repeat;
 }
 
 .btn-txt.ic-download > span{
@@ -788,18 +796,8 @@ section.bg-kma-deco {
   font-size: 14px;
 }
 
-.ai-answer-wrap h3 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
 .ai-answer-wrap p {
   line-height: 2;
-}
-
-.ai-answer-wrap h3 + p {
-  margin-top: 8px;
-  margin-bottom: 20px;
 }
 
 .ai-answer-wrap .btn-underline {
@@ -829,7 +827,7 @@ section.bg-kma-deco {
 
 .ai-answer-wrap .recommend-box {
   margin-top: 8px;
-  padding-top: 36px;
+  padding-top: 16px;
   padding-bottom: 16px;
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
@@ -854,6 +852,121 @@ section.bg-kma-deco {
 }
 .recommend-box .recommend-list button:hover {
   background-color: #dbeafe;
+}
+
+.ai-answer-wrap p,
+.ai-answer-wrap ul,
+.ai-answer-wrap ol,
+.ai-answer-wrap blockquote,
+.ai-answer-wrap pre,
+.ai-answer-wrap table {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.ai-answer-wrap h1,
+.ai-answer-wrap h2,
+.ai-answer-wrap h3,
+.ai-answer-wrap h4,
+.ai-answer-wrap h5,
+.ai-answer-wrap h6 {
+  margin-top: 28px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.ai-answer-wrap h1 { font-size: 24px; }
+.ai-answer-wrap h2 { font-size: 22px; }
+.ai-answer-wrap h3 { font-size: 20px; }
+.ai-answer-wrap h4 { font-size: 18px; }
+.ai-answer-wrap h5 { font-size: 16px; }
+.ai-answer-wrap h6 { font-size: 14px; }
+
+.ai-answer-wrap ul,
+.ai-answer-wrap ol {
+  padding-left: 20px;
+}
+
+.ai-answer-wrap ul {
+  list-style: disc;
+}
+
+.ai-answer-wrap ol {
+  list-style: decimal;
+}
+
+.ai-answer-wrap ul li::marker {
+  color: #1a1a1a;
+}
+
+.ai-answer-wrap ol li::marker {
+  color: #1a1a1a;
+}
+
+.ai-answer-wrap li + li {
+  margin-top: 4px;
+}
+
+.ai-answer-wrap a {
+  color: var(--kma-primary);
+  text-decoration: underline;
+}
+
+.ai-answer-wrap img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.ai-answer-wrap hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.ai-answer-wrap blockquote {
+  padding: 8px 12px;
+  border-left: 4px solid #dbeafe;
+  background-color: #f8fbff;
+}
+
+.ai-answer-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.ai-answer-wrap th,
+.ai-answer-wrap td {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ai-answer-wrap thead th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+.ai-answer-wrap pre {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.ai-answer-wrap code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.ai-answer-wrap :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #f3f4f6;
 }
 
 .btn-panel-close {
@@ -1156,4 +1269,46 @@ section.bg-kma-deco {
 
 .search-box .ipt-wrap > input{
   padding-left: 16px;
+}
+
+.filter-scroll-wrap{
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-scroll-wrap::before,
+.filter-scroll-wrap::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.filter-scroll-wrap.is-scrollable::before,
+.filter-scroll-wrap.is-scrollable::after{
+  opacity: 1;
+}
+
+.filter-scroll-wrap::before{
+  left: 0;
+  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.filter-scroll-wrap::after{
+  right: 0;
+  background: linear-gradient(270deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.filter-scroll-box{
+  position: relative;
+  z-index: 0;
+}
+
+.nodata-box > p{
+  background: url('../images/icon-list-nodata.svg') center top / 100px auto no-repeat;
 }

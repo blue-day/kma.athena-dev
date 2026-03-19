@@ -30,7 +30,7 @@ export function CommonSubTabs({
                 onClick={() => onChange(tab.key)}
                 className={`min-w-20 border-b-2 px-1 py-2 h-10 text-sm transition-font ${
                   isActive
-                    ? 'border-primary font-semibold text-primary'
+                    ? 'border-primary font-semibold'
                     : 'border-transparent hover:font-semibold'
                 }`}
                 aria-current={isActive ? 'page' : undefined}

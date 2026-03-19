@@ -152,5 +152,11 @@
     padding: 14px 16px;
   }
 
+  /* === 보관함 === */
+
+  .nodata-box > p{
+    background-size: 80px auto;
+  }
+
 }
 

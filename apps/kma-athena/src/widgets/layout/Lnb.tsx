@@ -102,9 +102,9 @@ export const Lnb = ({
           <button className={`btn-menu-item chat ${expanded ? 'w-full' : 'close'}`} onClick={btnNewChat}>
             <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>새 채팅</span>
           </button>
-          <button className={`btn-menu-item locker ${expanded ? 'w-full' : 'close'}`} onClick={btnWait}>
+          <Link href="/archive" className={`btn-menu-item locker ${expanded ? 'w-full' : 'close'}`}>
             <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>보관함</span>
-          </button>
+          </Link>
         </div>
 
         <div className="py-1.5 flex items-center justify-between">
