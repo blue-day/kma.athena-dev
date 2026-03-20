@@ -1312,3 +1312,7 @@ section.bg-kma-deco {
 .nodata-box > p{
   background: url('../images/icon-list-nodata.svg') center top / 100px auto no-repeat;
 }
+
+.nodata-list-box > p{
+  background: url('../images/icon-internal-nodata.svg') center top / 60px auto no-repeat;
+}

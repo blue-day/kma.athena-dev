@@ -12,6 +12,15 @@ const MATERIAL_SUB_TABS = [
   { key: 'external', label: '외부 링크' },
 ] as const;
 
+const INTERNAL_DOCUMENTS = [
+  { id: 'internal-1', name: '대한의사협회 협약서 20250101' },
+  { id: 'internal-2', name: '업무 운영 가이드 20250215' },
+];
+
+const EXTERNAL_DOCUMENTS = [
+  { id: 'external-1', name: '대한의사협회 협약서 20250101', href: '#' },
+];
+
 export const MaterialPanel = ({ onClose }: MaterialPanelProps) => {
   return (
     <div className="flex h-full w-full flex-col">
@@ -46,6 +55,8 @@ export const MaterialPanelDownloadButton = () => {
 
 export const MaterialPanelContent = () => {
   const [activeSubTab, setActiveSubTab] = useState<string>('internal');
+  const internalCount = INTERNAL_DOCUMENTS.length;
+  const externalCount = EXTERNAL_DOCUMENTS.length;
 
   return (
     <>
@@ -61,37 +72,60 @@ export const MaterialPanelContent = () => {
           <section>
             <div className="flex items-center justify-between">
               <p className="py-1.5 flex-1 text-sm font-bold">
-                <span className="iht text-primary">1</span>건
+                <span className="iht text-primary">{internalCount}</span>건
               </p>
             </div>
-            <ol>
-              <li className="flex items-center justify-between gap-2 pl-1">
-                <p className="min-w-0 flex-1 truncate text-sm font-medium">
-                  <span className="mr-1">1.</span>
-                  대한의사협회 협약서 20250101
+            {internalCount === 0 ? (
+              <div className="nodata-list-box flex flex-col pt-[120px] md:pt-[200px] items-center gap-1 md:gap-2.5">
+                <p className="pt-[80px] text-sm text-gray-300">
+                 내부 자료가 확인되지 않습니다.
                 </p>
-                <button
-                  type="button"
-                  className="btn-download transition-colors hover:bg-[#ebf3fd]"
-                >
-                  <span className="sr-only">다운로드</span>
-                </button>
-              </li>
-            </ol>
+              </div>
+            ) : (
+              <ol>
+                {INTERNAL_DOCUMENTS.map((document, index) => (
+                  <li key={document.id} className="flex items-center justify-between gap-2 pl-1">
+                    <p className="min-w-0 flex-1 truncate text-sm font-medium">
+                      <span className="mr-1">{index + 1}.</span>
+                      {document.name}
+                    </p>
+                    <button
+                      type="button"
+                      className="btn-download transition-colors hover:bg-[#ebf3fd]"
+                    >
+                      <span className="sr-only">다운로드</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            )}
           </section>
         ) : (
           <section>
             <p className="py-1.5 text-sm font-bold">
-              <span className="iht text-primary">1</span>건
+              <span className="iht text-primary">{externalCount}</span>건
             </p>
-            <ol>
-              <li className="flex items-center justify-between gap-2 pl-1 py-2">
-                <a href="#" className="min-w-0 flex-1 truncate text-sm font-medium">
-                  <span className="mr-1">1.</span>
-                  대한의사협회 협약서 20250101
-                </a>
-              </li>
-            </ol>
+            {externalCount === 0 ? (
+              <div className="nodata-list-box flex flex-col pt-[120px] md:pt-[200px] items-center gap-1 md:gap-2.5">
+              <p className="pt-[80px] text-sm text-gray-300">
+               외부 자료가 확인되지 않습니다.
+              </p>
+            </div>
+            ) : (
+              <ol>
+                {EXTERNAL_DOCUMENTS.map((document, index) => (
+                  <li key={document.id} className="flex items-center justify-between gap-2 pl-1 py-2">
+                    <a
+                      href={document.href}
+                      className="min-w-0 flex-1 truncate text-sm font-medium"
+                    >
+                      <span className="mr-1">{index + 1}.</span>
+                      {document.name}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
           </section>
         )}
       </div>
