@@ -149,7 +149,7 @@ export function CreateAssistantContent() {
         </div>
         <p className="form-info">
           첨부된 파일을 참고로 답을 해줍니다.
-          <br />(파일 형식은 PDF만 가능하며, 최대 10개, 개당 10MB 이하로 제한됩니다.)
+          <br />(파일 형식은 PDF만 가능하며, 최대 10개, 10MB 이하로 제한됩니다.)
         </p>
       </div>
     </div>
