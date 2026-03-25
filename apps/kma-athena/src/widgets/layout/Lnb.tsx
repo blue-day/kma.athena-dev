@@ -11,6 +11,10 @@ const LNB_BACKGROUND_STYLE = {
   backgroundImage:
     'linear-gradient(to bottom, rgba(191, 221, 255, 0) 70%, #bfddff), linear-gradient(to bottom, #f8f9fc, #f8f9fc)',
 } as const;
+const LNB_BACKGROUND_STYLE_DARK = {
+  backgroundImage:
+    'linear-gradient(to bottom, rgba(61, 97, 146, 0) 60%, #34517a), linear-gradient(to bottom, #1e2a3b, #1e2a3b)',
+} as const;
 
 const HISTORY_SECTIONS = [
   {
@@ -53,6 +57,7 @@ export const Lnb = ({
   profileImageUrl,
 }: LnbProps) => {
   const { themeMode, setThemeMode } = useMainLayout();
+  const lnbBackgroundStyle = themeMode === 'dark' ? LNB_BACKGROUND_STYLE_DARK : LNB_BACKGROUND_STYLE;
   // 데스크톱 LNB 전용 접기/펼치기 상태
   const [isExpanded, setIsExpanded] = useState(true);
   const [isHistoryVisible, setIsHistoryVisible] = useState(true);
@@ -157,7 +162,7 @@ export const Lnb = ({
   };
 
   const renderProfile = (expanded: boolean) => (
-    <div className="h-[110px] md:h-[142px] self-stretch flex flex-col justify-center items-stretch bg-primary">
+    <div className="h-[110px] md:h-[142px] self-stretch flex flex-col justify-center items-stretch bg-primary dark:bg-[#1e2a3b]">
       <div className={`flex items-center gap-3 transition-padding duration-300 ${expanded ? 'px-[36px]' : 'p-4'}`}>
         <div className="w-[50px] h-[50px] min-w-[50px] min-h-[50px] shrink-0 rounded-full overflow-hidden">
           {/* 외부 URL 포함 동적 이미지 소스를 허용하기 위해 img 태그를 사용 */}
@@ -187,7 +192,7 @@ export const Lnb = ({
         className={`kma-lnb-wrap relative hidden md:flex md:flex-col h-screen transition-all duration-300 ${isExpanded ? 'w-[320px]' : 'w-[84px]'
           }`}
         style={{
-          ...LNB_BACKGROUND_STYLE,
+          ...lnbBackgroundStyle,
           backgroundAttachment: 'fixed',
         }}
       >
@@ -228,9 +233,9 @@ export const Lnb = ({
         />
 
         <aside
-          className={`kma-lnb-wrap relative flex h-full w-[86%] max-w-[290px] flex-col bg-[#f8f9fc] shadow-2xl transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
+          className={`kma-lnb-wrap relative flex h-full w-[86%] max-w-[290px] flex-col shadow-2xl transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
-          style={LNB_BACKGROUND_STYLE}
+          style={lnbBackgroundStyle}
           aria-hidden={!mobileOpen}
         >
           <div className="flex h-[56px] items-center justify-between px-2.5">

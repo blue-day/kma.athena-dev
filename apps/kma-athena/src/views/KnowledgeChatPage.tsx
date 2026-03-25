@@ -74,7 +74,7 @@ const ActionCard = ({
   onClick,
 }: ActionCardProps) => {
   const commonClassName =
-    'w-[calc(100%-12px)] md:w-full md:max-w-[296px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border ring-[6px] md:ring-8 ring-[#f7faff] m-1.5 md:m-2 p-4 pl-[86px] md:p-[30px] md:pt-[126px] text-left md:text-center bg-white';
+    'w-[calc(100%-12px)] md:w-full md:max-w-[296px] md:min-h-[240px] rounded-2xl md:rounded-[24px] border border-gray-border ring-[6px] md:ring-8 ring-[var(--kma-card-border)] m-1.5 md:m-2 p-4 pl-[86px] md:p-[30px] md:pt-[126px] text-left md:text-center';
   const enabledClassName = 'transition-all duration-300 hover:-translate-y-0.5';
   const disabledClassName = 'cursor-not-allowed';
   const stateClassName = isDisabled ? disabledClassName : enabledClassName;
@@ -109,8 +109,8 @@ const ExpandedActionPanel = ({
   return (
     //확장된 카드 영역
     <div
-      className={`pt-[108px] px-2.5 pb-[34px] rounded-[24px] border border-gray-border bg-white md:p-[30px] md:pt-[126px] text-center transition-all duration-[680ms] ${className} ${
-        isExpandedStage ? 'min-h-[350px] md:min-h-[414px] md:rounded-[50px]' : 'min-h-[100px] ring-[6px] md:ring-8 ring-[#f7faff]'
+      className={`pt-[108px] px-2.5 pb-[34px] rounded-[24px] border border-gray-border md:p-[30px] md:pt-[126px] text-center transition-all duration-[680ms] ${className} ${
+        isExpandedStage ? 'min-h-[350px] md:min-h-[414px] md:rounded-[50px]' : 'min-h-[100px] ring-[6px] md:ring-8 ring-[var(--kma-card-border)]'
       }`}
     >
       <h3 className="text-base md:text-xl font-bold leading-tight">{title}</h3>
@@ -211,7 +211,7 @@ export function KnowledgeChatPage() {
   const getCardBlockClassName = (cardKey: KnowledgeActionKey) => {
     const isSelected = selectedActionKey === cardKey;
     const widthClassName =
-      hasSelection && isSelected && (isExpanding || isExpanded) ? 'w-full md:w-[980px]' : 'w-full md:w-[296px]';
+      hasSelection && isSelected && (isExpanding || isExpanded) ? 'w-full md:w-[980px]' : 'w-full md:w-[312px]';
 
     // 선택 전 상태: 기본 너비와 높이값 보존
     if (!hasSelection) {
@@ -230,7 +230,7 @@ export function KnowledgeChatPage() {
   // 비활성 카드 그룹: 전환 도중에도 w-full을 유지하며 모바일에서 부드럽게 사라지도록 설정
   const disabledGroupClassName = shouldHideOtherCards
     ? 'w-full pointer-events-none opacity-0 max-h-0 !m-0 overflow-hidden md:hidden'
-    : 'w-full md:w-[600px] bg-[#f7faff] rounded-2xl md:rounded-[28px] max-h-[500px] opacity-100';
+    : 'w-full md:w-[616px] rounded-2xl md:rounded-[28px] max-h-[500px] opacity-100';
 
   const renderEnabledCard = (card: KnowledgeActionCard) => {
     const isSelected = selectedActionKey === card.key;
@@ -270,7 +270,7 @@ export function KnowledgeChatPage() {
           <div className="flex flex-col items-center pt-[30px] md:pt-[220px] pb-10">
             <ChatWelcomeHero subtitle={subtitle} />
 
-            <div className="category-card-wrap mt-5 md:mt-[34px] flex flex-wrap w-full items-start justify-center gap-1.5 md:gap-9">
+            <div className="category-card-wrap mt-5 md:mt-[34px] flex flex-wrap w-full items-start justify-center gap-1.5 md:gap-5">
               {renderEnabledCard(firstEnabledCard)}
               {renderEnabledCard(secondEnabledCard)}
 
@@ -278,7 +278,7 @@ export function KnowledgeChatPage() {
                 className={`transition-all ease-in-out duration-[580ms] ${disabledGroupClassName}`}
               >
                 {/* 비활성 카드 2개는 하나의 그룹 div로 묶어 함께 전이합니다. */}
-                <div className="relative grid grid-cols-1 md:grid-cols-2 md:gap-2 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-white/40 after:content-[''] bg-[#f7faff] rounded-2xl md:rounded-[28px]">
+                <div className="relative grid grid-cols-1 md:grid-cols-2 after:pointer-events-none after:absolute after:inset-0 after:w-full after:rounded-3xl after:bg-white/40 after:content-[''] bg-[var(--kma-card-border)] rounded-3xl md:rounded-[28px] dark:after:bg-[#1e2a3b]/40">
                   {disabledCards.map((card) => (
                     <ActionCard
                       key={card.key}

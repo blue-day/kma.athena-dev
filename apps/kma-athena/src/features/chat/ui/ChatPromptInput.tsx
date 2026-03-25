@@ -105,10 +105,10 @@ export const ChatPromptInput = ({
       }`}
     >
       <div
-        className="self-stretch flex min-h-[108px] md:min-h-[136px] flex-col items-stretch justify-start rounded-[22px] border-4 border-solid border-transparent py-2 md:py-4 shadow-[0_25px_50px_-12px_#dbeafe]"
+        className="self-stretch flex min-h-[108px] md:min-h-[136px] flex-col items-stretch justify-start rounded-[22px] border-4 border-solid border-transparent py-2 md:py-4 shadow-[0_25px_50px_-12px_#dbeafe] dark:shadow-[0_25px_50px_-12px_#4695ff55]"
         style={{
           background:
-            'linear-gradient(#fff 0 0) padding-box, linear-gradient(to right, #00d3f3, #2b7fff 50%, #f6339a) border-box',
+            'linear-gradient(var(--kma-white-01) 0 0) padding-box, linear-gradient(to right, #00d3f3, #2b7fff 50%, #f6339a) border-box',
         }}
       >
         <div className="flex pt-3 md:pt-4 flex-col justify-between px-3">
@@ -136,7 +136,7 @@ export const ChatPromptInput = ({
             {isFromMyAssistant ? (
               <button
                 type="button"
-                className="min-w-[101px] h-8 px-2 rounded-[300px] border border-[#d5dbe2] text-sm"
+                className="min-w-[101px] h-8 px-2 rounded-[300px] border border-[var(--kma-gray-button-border)] bg-[var(--kma-white-02)] text-sm"
                 aria-label="첨부파일 5건"
                 onClick={onOpenAttachmentPanel}
               >
@@ -145,7 +145,7 @@ export const ChatPromptInput = ({
             ) : (
               <button
                 type="button"
-                className="btn-chat-attach mr-auto inline-flex h-10 w-10 rounded-full transition-colors hover:bg-[#f8fafc]"
+                className="btn-chat-attach mr-auto inline-flex h-10 w-10 rounded-full transition-colors hover:bg-[var(--kma-bg-hover)]"
                 aria-label="첨부파일"
               >
                 <span className="sr-only">첨부파일</span>

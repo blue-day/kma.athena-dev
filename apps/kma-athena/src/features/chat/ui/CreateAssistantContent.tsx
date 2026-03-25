@@ -32,7 +32,7 @@ export function CreateAssistantContent() {
                 onChange={() => handleAssistantTypeChange('1')}
               />
               <label htmlFor={`${uniqueId}-assistant-type-1`}>
-                <span className="text-sm text-[#626777] md:mb-2">추천 비서 A</span>
+                <span className="text-sm text-gray-400 md:mb-2">추천 비서 A</span>
                 <strong className="text-sm md:text-base font-semibold break-keep">지식 아카이브 매니저</strong>
               </label>
             </li>
@@ -45,7 +45,7 @@ export function CreateAssistantContent() {
                 onChange={() => handleAssistantTypeChange('2')}
               />
               <label htmlFor={`${uniqueId}-assistant-type-2`}>
-                <span className="text-sm text-[#626777] md:mb-2">추천 비서 B</span>
+                <span className="text-sm text-gray-400 md:mb-2">추천 비서 B</span>
                 <strong className="text-sm md:text-base font-semibold break-keep">베테랑 의협 사무국장</strong>
               </label>
             </li>  
@@ -58,7 +58,7 @@ export function CreateAssistantContent() {
                 onChange={() => handleAssistantTypeChange('3')}
               />
               <label htmlFor={`${uniqueId}-assistant-type-3`}>
-                <span className="text-sm text-[#626777] md:mb-2">추천 비서 C</span>
+                <span className="text-sm text-gray-400 md:mb-2">추천 비서 C</span>
                 <strong className="text-sm md:text-base font-semibold break-keep">스마트한 법률/세무 컨설턴트</strong>
               </label>
             </li>

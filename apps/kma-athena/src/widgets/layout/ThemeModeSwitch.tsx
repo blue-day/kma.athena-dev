@@ -14,12 +14,12 @@ export const ThemeModeSwitch = ({ value, onChange }: ThemeModeSwitchProps) => {
     <div className="switch-theme-box ml-auto" role="radiogroup" aria-label="테마 선택">
       <div
         className={`switch-theme relative inline-grid h-10 w-[210px] grid-cols-2 items-center rounded-lg p-[3px] ${
-          value === 'dark' ? 'bg-[#0f182a]' : 'bg-[#f8f9fc]'
+          value === 'dark' ? 'bg-[#1a2433]' : 'bg-[#f8f9fc]'
         }`}
       >
         <span
           className={`pointer-events-none block absolute bottom-[3px] left-[3px] top-[3px] w-[calc((100%-6px)/2)] rounded-md shadow-[0_1px_2px_0_rgba(61,64,73,0.15)] transition-all duration-300 ${
-            value === 'light' ? 'translate-x-0 bg-white' : 'translate-x-full bg-[#3d495b]'
+            value === 'light' ? 'translate-x-0 bg-white' : 'translate-x-full bg-[#2c384a]'
           }`}
         />
 

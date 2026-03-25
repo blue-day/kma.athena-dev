@@ -73,7 +73,7 @@ export function ExpandableSearchArea({
       <form
         ref={formRef}
         className={`search-box flex h-10 flex-1 items-center justify-end ${
-          isExpanded ? 'overflow-hidden rounded-full border border-[#ddd]' : ''
+          isExpanded ? 'overflow-hidden rounded-full border border-[var(--kma-input-border)] bg-[var(--kma-white-02)]' : ''
         }`}
         onSubmit={handleSubmit}
       >
@@ -120,7 +120,7 @@ export function ExpandableSearchArea({
           className={`btn-search inline-flex h-10 w-10 shrink-0 items-center justify-center
             ${isExpanded
               ? ''
-              : 'border border-[#ddd] rounded-full'
+              : 'border border-[var(--kma-input-border)] rounded-full'
           }`}
           aria-label={isExpanded ? '검색' : '검색영역 펼치기'}
         >

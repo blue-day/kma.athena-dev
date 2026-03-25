@@ -138,13 +138,13 @@ export function MyAssistantPage() {
         <div className="mt-4 flex justify-center gap-1.5 absolute bottom-4 right-4 md:static z-10">
           <button
             type="button"
-            className="min-w-[70px] md:min-w-20 h-[30px] md:h-8 rounded-full border border-[#d5dbe2] bg-white px-4 text-sm font-medium"
+            className="min-w-[70px] md:min-w-20 h-[30px] md:h-8 rounded-full border border-[var(--kma-gray-button-border)] bg-[var(--kma-white-02)] px-4 text-sm font-medium"
           >
             편집
           </button>
           <button
             type="button"
-            className="min-w-[70px] md:min-w-20 h-[30px] md:h-8 rounded-full border border-[#d5dbe2] bg-white px-4 text-sm font-medium"
+            className="min-w-[70px] md:min-w-20 h-[30px] md:h-8 rounded-full border border-[var(--kma-gray-button-border)] bg-[var(--kma-white-02)] px-4 text-sm font-medium"
           >
             삭제
           </button>
@@ -251,7 +251,7 @@ export function MyAssistantPage() {
                       >
                         {mobileSlidePages.map((pageCards: SlideCard[], pageIndex: number) => (
                           <SwiperSlide key={`my-assistant-mobile-page-${pageIndex}`} className="h-auto">
-                            <div className="flex flex-col gap-1.5 bg-[#f7faff] p-1.5 rounded-[20px]">
+                            <div className="flex flex-col gap-1.5 bg-[var(--kma-card-border)] p-1.5 rounded-[20px]">
                               {pageCards.map((card: SlideCard, cardIndex: number) => (
                                 <div key={`my-assistant-mobile-card-${pageIndex}-${cardIndex}`}>{renderCard(card)}</div>
                               ))}
@@ -274,7 +274,7 @@ export function MyAssistantPage() {
                   <button
                     type="button"
                     onClick={handleCreateClick}
-                    className="w-[170px] h-[46px] rounded-[55px] border border-[#d5dbe2] bg-[#fff]"
+                    className="w-[170px] h-[46px] rounded-[55px] border border-[var(--kma-gray-button-border)] bg-[var(--kma-white-02)]"
                   >
                     <span className="text-sm font-medium">나만의 비서 만들기</span>
                   </button>

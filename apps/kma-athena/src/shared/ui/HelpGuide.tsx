@@ -107,7 +107,7 @@ export function HelpGuide() {
                 {chatbotQuestionGuides.map((guide) => (
                   <li key={guide.title}>
                     <span className="block mb-1 text-sm font-medium text-primary">{guide.title}</span>
-                    <p className="flex items-start justify-center p-2.5 rounded-lg bg-[#ebeffd] text-sm">
+                    <p className="flex items-start justify-center p-2.5 rounded-lg bg-[var(--kma-blue-bg)] text-sm">
                       <span className="flex-shrink-0 iht mr-2.5 text-gray-300">예시)</span>
                       <span className="iht">{guide.content}</span>
                     </p>

@@ -91,7 +91,7 @@ export const MaterialPanelContent = () => {
                     </p>
                     <button
                       type="button"
-                      className="btn-download transition-colors hover:bg-[#ebf3fd]"
+                      className="btn-download transition-colors hover:bg-[var(--kma-bg-hover)]"
                     >
                       <span className="sr-only">다운로드</span>
                     </button>

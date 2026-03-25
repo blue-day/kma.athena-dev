@@ -24,6 +24,23 @@ export const MainLayout = ({ children, isLoading = false }: MainLayoutProps) => 
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
+    const savedTheme = window.localStorage.getItem('kma-theme-mode');
+
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      setThemeMode(savedTheme);
+      return;
+    }
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setThemeMode(prefersDark ? 'dark' : 'light');
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', themeMode);
+    window.localStorage.setItem('kma-theme-mode', themeMode);
+  }, [themeMode]);
+
+  useEffect(() => {
     if (!mobileMenuOpen) {
       return;
     }

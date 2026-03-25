@@ -10,6 +10,12 @@
   }
 }
 
+@layer utilities {
+  [data-theme='dark'] .bg-white {
+    background-color: #1e2a3b;
+  }
+}
+
 @import '../shared/assets/font/font.css';
 @import '../shared/assets/styles/kma-ai-common.css';
 @import '../shared/assets/styles/kma-ai-mobile.css';

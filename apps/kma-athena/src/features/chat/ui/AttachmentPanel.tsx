@@ -50,7 +50,7 @@ export const AttachmentPanelContent = () => {
               <span className="mr-1">1.</span>
               진료 가이드라인_2026.pdf
             </p>
-            <button type="button" className="btn-download transition-colors hover:bg-[#ebf3fd]">
+            <button type="button" className="btn-download transition-colors hover:bg-[var(--kma-bg-hover)]">
               <span className="sr-only">다운로드</span>
             </button>
           </li>

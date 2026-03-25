@@ -79,7 +79,7 @@ export function ChatArchivePage() {
       <section className="relative z-10 mx-auto flex h-full w-full flex-col">
         <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-4 md:px-2.5">
           <div className="max-w-[900px] md:px-6 mx-auto pb-8 md:pb-12">
-            <div className="sticky top-0 z-10 pt-4 md:pt-10 pb-2.5 md:pb-4 flex md:flex-row flex-col items-center justify-between gap-2.5 md:gap-5 bg-white mx-[-16px] md:mx-0">
+            <div className="sticky top-0 z-10 pt-4 md:pt-10 pb-2.5 md:pb-4 flex md:flex-row flex-col items-center justify-between gap-2.5 md:gap-5 mx-[-16px] md:mx-0 bg-[var(--kma-white-content)]">
               <ScrollableFilterTabs
                 options={ARCHIVE_FILTER_OPTIONS}
                 selectedOption={selectedFilter}
@@ -107,7 +107,7 @@ export function ChatArchivePage() {
                       onClick={() => handleArchiveItemClick(item.id)}
                       aria-label={`보관 대화 상세 이동: ${item.title}`}
                     >
-                      <span className="inline-block rounded-md bg-[#deedff] px-2.5 text-sm leading-7">
+                      <span className="inline-block rounded-md bg-[var(--kma-badge-03)] px-2.5 text-sm leading-7">
                         {item.botType}
                       </span>
 
@@ -146,7 +146,7 @@ export function ChatArchivePage() {
               <div className="nodata-box flex flex-col md:min-h-[470px] pt-[120px] md:pt-[200px] items-center gap-1 md:gap-2.5">
                 <p className="pt-[96px] md:pt-[120px] md:text-xl font-medium"
                   >검색 결과가 없습니다.</p>
-                <span className="text-sm text-[#7f8394]">새로운 항목을 추가해 보세요.</span>
+                <span className="text-sm text-gray-300">새로운 항목을 추가해 보세요.</span>
               </div>
             )}
           </div>

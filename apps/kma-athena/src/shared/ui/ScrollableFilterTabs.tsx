@@ -81,7 +81,7 @@ export function ScrollableFilterTabs<T extends string>({
               <li key={option}>
                 <button
                   type="button"
-                  className={`rounded-full border border-[#d5dbe2] px-4 leading-[34px] transition-colors ${
+                  className={`rounded-full border border-[var(--kma-gray-button-border)] bg-[var(--kma-white-02)] px-4 leading-[34px] transition-colors ${
                     isActive ? 'border-primary bg-primary text-white' : ''
                   }`}
                   onClick={(event) => handleOptionClick(option, event)}

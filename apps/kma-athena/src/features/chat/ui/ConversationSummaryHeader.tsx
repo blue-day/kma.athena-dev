@@ -11,9 +11,9 @@ export function ConversationSummaryHeader() {
 
   return (
     <>
-      <div className="sticky top-0 z-10 bg-white/95 px-4 py-1.5 md:py-[9px]">
+      <div className="sticky top-0 z-10 px-4 py-1.5 md:py-[9px]">
         <div className="flex items-center">
-          <span className="mr-2.5 md:mr-4 inline-flex h-[26px] md:h-7 shrink-0 items-center justify-center rounded-md bg-[#eae7ff] px-2 md:px-2.5 text-[13px] md:text-sm">
+          <span className="mr-2.5 md:mr-4 inline-flex h-[26px] md:h-7 shrink-0 items-center justify-center rounded-md bg-[var(--kma-badge-01)] px-2 md:px-2.5 text-[13px] md:text-sm">
             협회 자료 검색
           </span>
           <div className="flex min-w-0 flex-1 items-center">
@@ -25,7 +25,7 @@ export function ConversationSummaryHeader() {
             </p>
             <button
               type="button"
-              className="btn-title-edit shrink-0 transition-colors hover:bg-[#ebf3fd]"
+              className="btn-title-edit shrink-0 transition-colors hover:bg-[var(--kma-bg-hover)]"
               onClick={() => setIsEditPopupOpen(true)}
             >
               <span className="sr-only">수정</span>

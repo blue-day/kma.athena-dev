@@ -91,16 +91,16 @@
 
   /* === KMA 내부지식 챗봇 === */
   .category-card-wrap button.ic-association{
-    background: url('../images/mobile/icon-menu-search-s.svg') center left 18px / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-search-s.png') center left 18px / 58px auto no-repeat var(--kma-white-01);
   }
   .category-card-wrap button.ic-board{
-    background: url('../images/mobile/icon-menu-guide-s.svg') center left 18px / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-guide-s.png') center left 18px / 58px auto no-repeat var(--kma-white-01);
   }
   .category-card-wrap button.ic-license{
-    background: url('../images/mobile/icon-menu-license-s.svg') center left 18px / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-license-s.png') center left 18px / 58px auto no-repeat var(--kma-white-01);
   }
   .category-card-wrap button.ic-credit{
-    background: url('../images/mobile/icon-menu-complaints-s.svg') center left 18px / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-complaints-s.png') center left 18px / 58px auto no-repeat var(--kma-white-01);
   }
 
   button.ic-license:disabled + button.ic-credit:disabled{
@@ -108,16 +108,16 @@
   }
 
   .category-card-wrap div.ic-association{
-    background: url('../images/mobile/icon-menu-search-s.svg') top 40px center / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-search-s.png') top 40px center / 58px auto no-repeat var(--kma-white-01);
   }
   .category-card-wrap div.ic-board{
-    background: url('../images/mobile/icon-menu-guide-s.svg') top 40px center / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-guide-s.png') top 40px center / 58px auto no-repeat var(--kma-white-01);
   }
   .category-card-wrap div.ic-license{
-    background: url('../images/mobile/icon-menu-license-s.svg') top 40px center / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-license-s.png') top 40px center / 58px auto no-repeat var(--kma-white-01);
   }
   .category-card-wrap div.ic-credit{
-    background: url('../images/mobile/icon-menu-complaints-s.svg') top 40px center / 58px auto no-repeat #fff;
+    background: url('../images/mobile/icon-menu-complaints-s.png') top 40px center / 58px auto no-repeat var(--kma-white-01);
   }
 
   /* === 나만의 비서 === */
@@ -158,5 +158,27 @@
     background-size: 80px auto;
   }
 
+  /* === Dark Mode === */
+  [data-theme='dark'] {
+    header .logo-kma {
+      background-image: url('../images/dark-mode/logo-kma-02.png');
+    }
+  
+    .btn-mobile-menu {
+      background-image: url('../images/mobile/dark-mode/icon-top-hamburger.svg');
+    }
+
+    .btn-lnb-close {
+      background-image: url('../images/mobile/dark-mode/icon-popup-close.svg');
+    }
+
+    section.bg-kma-deco{
+      background-image: 
+        url('../images/mobile/dark-mode/bg-deco-t-left.png'),
+        url('../images/mobile/dark-mode/bg-deco-t-right.png'),
+        url('../images/mobile/dark-mode/bg-deco-b-left.png'),
+        url('../images/mobile/dark-mode/bg-deco-b-right.png');
+    }
+  }
 }
 
