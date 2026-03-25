@@ -1194,7 +1194,7 @@ section.bg-kma-deco {
 .btn-panel-close {
   width: 30px;
   height: 30px;
-  background: url('../images/mobile/icon-popup-close.svg') center / 24px auto no-repeat;
+  background: url('../images/icon-popup-close.svg') center / 24px auto no-repeat;
 }
 
 .material-panel-footer {
@@ -1588,7 +1588,9 @@ section.bg-kma-deco {
     background-image: url('../images/dark-mode/icon-trash.svg');
   }
 
-  .btn-archive-del {
+  .popup-wrap .btn-popup-close, 
+  .btn-archive-del, 
+  .btn-panel-close {
     background-image: url('../images/dark-mode/icon-popup-close.svg');
   }
 
