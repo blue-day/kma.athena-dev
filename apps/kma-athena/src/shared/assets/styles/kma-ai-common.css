@@ -172,6 +172,66 @@ section.bg-kma-deco {
   opacity: 0.25;
 }
 
+.common-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.common-checkbox-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.common-checkbox-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.common-checkbox-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: url('../images/checkbox-off.svg') center / 28px auto no-repeat;
+  transition: transform 0.15s ease-out;
+  flex-shrink: 0;
+}
+
+.common-checkbox-label {
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.common-checkbox-input:focus-visible + .common-checkbox-trigger .common-checkbox-icon {
+  outline: 2px solid var(--kma-primary);
+}
+
+.common-checkbox-input:checked + .common-checkbox-trigger .common-checkbox-icon {
+  background-image: url('../images/checkbox-p-on.svg');
+}
+
+.common-checkbox-input:disabled + .common-checkbox-trigger .common-checkbox-icon {
+  background-image: url('../images/checkbox-dimmed.svg');
+}
+
+.common-checkbox-input:checked:disabled + .common-checkbox-trigger .common-checkbox-icon {
+  background-image: url('../images/checkbox-checked-dimmed.svg');
+}
+
+.common-checkbox-input:disabled ~ label {
+  cursor: default;
+}
+
 .btn-info-help {
   position: fixed;
   top: 90px;
@@ -199,6 +259,14 @@ section.bg-kma-deco {
   display: inline-block;
   padding-left: 28px;
   background: url('../images/icon-download-w.svg') left center / 20px auto no-repeat;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.btn-txt.ic-select-download > span{
+  display: inline-block;
+  padding-left: 28px;
+  background: url('../images/icon-select.svg') left center / 20px auto no-repeat;
   font-size: inherit;
   font-weight: inherit;
 }
@@ -874,6 +942,35 @@ section.bg-kma-deco {
   line-height: 2;
 }
 
+.ai-answer-wrap p.answer-loading-text {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.5;
+  font-weight: 500;
+  /* 빛이 지나가는 효과 (Shimmer) */
+  background: linear-gradient(
+    90deg,
+    var(--kma-text) 25%,
+    var(--kma-white-content) 50%,
+    var(--kma-text) 75%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: answerLoadingShimmer 2.5s infinite linear;
+}
+
+@keyframes answerLoadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 .ai-answer-wrap .btn-underline {
   display: inline-block;
   padding: 4px 0;
@@ -1115,6 +1212,10 @@ section.bg-kma-deco {
   height: 36px;
   background: url('../images/icon-download.svg') center / 20px auto no-repeat;
   border-radius: 50%;
+}
+
+.btn-download.completed {
+  background: url('../images/icon-download-complete.svg') center / 20px auto no-repeat !important;
 }
 
 .btn-scroll-bottom {
@@ -1446,6 +1547,22 @@ section.bg-kma-deco {
 
 /* === Dark Mode === */
 [data-theme='dark'] {
+  .common-checkbox-icon {
+    background-image: url('../images/dark-mode/checkbox-off.svg');
+  }
+
+  .common-checkbox-input:checked + .common-checkbox-trigger .common-checkbox-icon {
+    background-image: url('../images/dark-mode/checkbox-p-on.svg');
+  }
+
+  .common-checkbox-input:disabled + .common-checkbox-trigger .common-checkbox-icon {
+    background-image: url('../images/dark-mode/checkbox-dimmed.svg');
+  }
+
+  .common-checkbox-input:checked:disabled + .common-checkbox-trigger .common-checkbox-icon {
+    background-image: url('../images/dark-mode/checkbox-checked-dimmed.svg');
+  }
+
   .logo-kma {
     background-image: url('../images/dark-mode/logo-kma-01.png');
   }

@@ -59,12 +59,15 @@ export function AssistantAnswerCard({ onOpenMaterialPanel }: AssistantAnswerCard
     <article className="ai-answer-wrap">
       {/* 답변 생성중일때만 애니메이션 노출 */}
       <div
-        className="answer-loading h-[28px] w-[28px]"
+        className="answer-loading flex items-center gap-4"
         role="status"
         aria-live="polite"
         aria-label="답변 로딩 중"
       >
-        <Lottie animationData={chatLoadingLottie} loop autoplay className="h-full w-full" />
+        <Lottie animationData={chatLoadingLottie} loop autoplay className="h-[28px] w-[28px]" />
+        <p className="answer-loading-text">
+          내부 자료 검색 중입니다...
+        </p>
       </div>
       
       <h2>의협의 공식 입장</h2>
