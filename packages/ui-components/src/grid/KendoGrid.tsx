@@ -22,7 +22,7 @@ export type KendoGridProps<T extends Record<string, any>> = {
   onRowDoubleClick?: (row: T) => void;
   editField?: string;
   onItemChange?: (event: any) => void;
-  renderCell?: (props: GridCellProps) => React.ReactNode;
+  renderCell?: (props: GridCellProps | any) => React.ReactNode;
 };
 
 const GridContext = createContext<any>(null);
@@ -65,19 +65,23 @@ const EditInput = memo(
 );
 EditInput.displayName = 'EditInput';
 
-const StableCell = (props: GridCellProps) => {
+// v14 변경 사항: props 타입을 any로 두어 GridCustomCellProps 호환성 확보
+const StableCell = (props: any) => {
   const context = useContext(GridContext);
-  const { field, dataItem, className, style } = props;
+  const { field, dataItem } = props;
+
+  // v14부터는 tdProps 안에 기본 스타일과 속성이 담겨 옵니다.
+  const className = props.className || props.tdProps?.className;
+  const style = props.style || props.tdProps?.style;
+
   const { columns, editField, onItemChange, onClickCell, renderCell } = context;
 
   const colField = field || '';
   const col = columns.find((c: any) => c.field === colField);
   const isEditable = editField && dataItem[editField] && col?.editable;
 
-  // Kendo가 주입한 style(너비 정보)은 유지하되, padding은 제거하여
-  // renderCell에 전달 — renderCell 내부에서 padding을 덮어쓸 수 있도록 보장
   const styleForRenderCell: React.CSSProperties = {
-    ...style, // width 등 kendo 너비 정보 유지
+    ...style,
     textAlign: col?.align || 'left',
     cursor: 'pointer',
     height: '36px',
@@ -87,20 +91,16 @@ const StableCell = (props: GridCellProps) => {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    // ✅ padding을 여기서 제거 — renderCell이 자체 td를 렌더링할 때
-    //    kendo 기본 padding(0 8px)이 적용되어 헤더와 오와열 발생하므로 명시하지 않음
   };
 
-  // renderCell이 있는 경우 스타일을 주입하여 호출
   if (renderCell) {
     const customResult = renderCell({ ...props, style: styleForRenderCell });
     if (customResult) return customResult as React.ReactElement;
   }
 
-  // 기본 셀 (renderCell 없거나 null 반환 시)
   const cellBaseStyle: React.CSSProperties = {
     ...styleForRenderCell,
-    padding: '0 15px', // 기본 셀에만 padding 적용
+    padding: '0 15px',
   };
 
   if (isEditable) {
@@ -108,6 +108,7 @@ const StableCell = (props: GridCellProps) => {
     if (col?.editor === 'numeric') inputType = 'number';
     return (
       <td
+        {...props.tdProps} // Kendo의 기본 속성(접근성 등) 유지
         className={className}
         style={{ ...cellBaseStyle, cursor: 'default', padding: '0 10px' }}
       >
@@ -122,12 +123,28 @@ const StableCell = (props: GridCellProps) => {
 
   return (
     <td
+      {...props.tdProps} // Kendo의 기본 속성 유지
       className={className}
       style={cellBaseStyle}
       onClick={() => onClickCell?.(dataItem, colField)}
     >
       {dataItem[colField]}
     </td>
+  );
+};
+
+//   인라인 함수로 있던 Row를 완전히 밖으로 빼내어 컴포넌트 재생성을 막습니다.
+const CustomRow = (props: any) => {
+  const context = useContext(GridContext);
+  const trProps = props.trProps || {};
+  return (
+    <tr
+      {...trProps}
+      style={{ ...(trProps.style || props.style), height: '36px', boxSizing: 'border-box' }}
+      onDoubleClick={() => context.onRowDoubleClick?.(props.dataItem)}
+    >
+      {props.children}
+    </tr>
   );
 };
 
@@ -144,9 +161,11 @@ export function KendoGrid<T extends Record<string, any>>({
   renderCell,
 }: KendoGridProps<T>) {
   const calculatedHeight = height || (maxRows ? `${37 + maxRows * 36 + 2}px` : 300);
+
+  // onRowDoubleClick을 Context에 추가하여 CustomRow에서 접근 가능하도록 처리
   const contextValue = useMemo(
-    () => ({ columns, editField, onItemChange, onClickCell, renderCell }),
-    [columns, editField, onItemChange, onClickCell, renderCell],
+    () => ({ columns, editField, onItemChange, onClickCell, renderCell, onRowDoubleClick }),
+    [columns, editField, onItemChange, onClickCell, renderCell, onRowDoubleClick],
   );
 
   return (
@@ -155,13 +174,8 @@ export function KendoGrid<T extends Record<string, any>>({
         data={data}
         style={{ height: calculatedHeight, border: '1px solid #e5e5e5', backgroundColor: '#fff' }}
         dataItemKey={rowKey}
-        rowRender={(trElement: React.ReactElement, props: GridRowProps) => {
-          return React.cloneElement(trElement, {
-            ...trElement.props,
-            style: { height: '36px', boxSizing: 'border-box' },
-            onDoubleClick: () => onRowDoubleClick?.(props.dataItem),
-          });
-        }}
+        //  안정적인 컴포넌트 참조 전달 (포커스 잃음 완벽 해결)
+        rows={{ data: CustomRow }}
       >
         {columns.map((col) => (
           <Column
@@ -169,7 +183,8 @@ export function KendoGrid<T extends Record<string, any>>({
             field={col.field}
             title={col.title}
             width={col.width}
-            cell={StableCell}
+            // 핵심 변경 사항: cell이 삭제되고 cells={{ data: ... }} 형식으로 변경됨
+            cells={{ data: StableCell }}
             headerClassName="kma-grid-header"
           />
         ))}

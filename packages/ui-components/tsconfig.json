@@ -9,7 +9,6 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    /* composite 프로젝트는 출력을 비활성화(noEmit)할 수 없습니다. */
     "emitDeclarationOnly": true,
     "jsx": "react-jsx",
     "strict": true,
@@ -20,7 +19,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@kma/api-interface": ["../api-interface/src/index.ts"]
     },
     "types": ["node"],
     "composite": true,

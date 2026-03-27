@@ -15,8 +15,9 @@ module.exports = {
     // (A) Vite Apps & Packages (Next.js 제외)
     {
       files: [
+        // 'apps/kma-fe/**/*.{ts,tsx}',
         'apps/kma-fe/**/*.{ts,tsx}',
-        // 'apps/kma-fe-next'는 여기서 관리하지 않음 (자체 설정 사용)
+        'apps/kma-athena/**/*.{ts,tsx}',
         'packages/ui-components/**/*.{ts,tsx}',
       ],
       env: { browser: true, node: true },

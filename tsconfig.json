@@ -1,11 +1,10 @@
 {
   "files": [],
   "references": [
+    { "path": "./apps/kma-fe-next" },
     { "path": "./apps/kma-athena" },
-    { "path": "./apps/kma-fe" },
     { "path": "./packages/ui-components" },
     { "path": "./packages/utils" },
-    { "path": "./packages/auth" },
     { "path": "./packages/api-interface" }
   ]
 }

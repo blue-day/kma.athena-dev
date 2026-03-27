@@ -9,20 +9,16 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-
-    /* composite: true 설정 시 noEmit은 false여야 하며, 대신 emitDeclarationOnly를 true로 설정하여 타입 선언 파일만 생성 */
     "noEmit": false,
     "emitDeclarationOnly": true,
-
     "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
     "composite": true,
     "declaration": true,
-    /* 참조 시 소스 맵 연동을 위해 추가 */
     "declarationMap": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "paths": {
+      "@kma/api-interface": ["../api-interface/src/index.ts"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],

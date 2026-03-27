@@ -4,23 +4,19 @@
  * 팝업 모음
  */
 import { useEffect, useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/providers/hooks';
 import { CommonPopup } from '@/shared/ui/CommonPopup';
 import { CommonToast } from '@/shared/ui/CommonToast';
 import { showToast } from '@/shared/ui/toast';
-import {
-  closeAlert,
-  closeConfirm,
-  dequeueToast,
-} from '../model/notificationSlice';
-import { clearPopupCallbacks, getPopupCallbacks } from '../model/popCallbackRegistry';
+import { useNotificationStore } from '../model/notificationStore';
+import { clearPopupCallbacks, getPopupCallbacks } from '../lib/popCallbackRegistry';
 
 export function NotificationRenderer() {
-  const dispatch = useAppDispatch();
-  const { alert, confirm, toasts } = useAppSelector((state) => state.pops);
+  const alert = useNotificationStore((state) => state.alert);
+  const confirm = useNotificationStore((state) => state.confirm);
+  const toasts = useNotificationStore((state) => state.toasts);
   const consumedToastIdsRef = useRef<Set<string>>(new Set());
-  const [isConfirmSubmitting, setIsConfirmSubmitting] = useState(false);  // 팝업 확인 버튼 중복 클릭 방지
-  const [isAlertSubmitting, setIsAlertSubmitting] = useState(false);      // 위와 동일
+  const [isConfirmSubmitting, setIsConfirmSubmitting] = useState(false);  // ?앹뾽 ?뺤씤 踰꾪듉 以묐났 ?대┃ 諛⑹?
+  const [isAlertSubmitting, setIsAlertSubmitting] = useState(false);      // ?꾩? ?숈씪
 
   useEffect(() => {
     toasts.forEach((toastItem) => {
@@ -32,15 +28,15 @@ export function NotificationRenderer() {
         duration: toastItem.duration,
       });
 
-      dispatch(dequeueToast(toastItem.id));
+      useNotificationStore.getState().dequeueToast(toastItem.id);
 
       queueMicrotask(() => {  // 소비 완료된 id는 바로 제거해서 ref가 계속 커지지 않게 정리
         consumedToastIdsRef.current.delete(toastItem.id);
       });
     });
-  }, [dispatch, toasts]);
+  }, [toasts]);
 
-  const runAlertClose = async () => {
+  const handleAlertClose = async () => {
     if (isAlertSubmitting) return;
     const callbackId = alert.callbackId;
     const callbacks = getPopupCallbacks(callbackId);
@@ -49,12 +45,12 @@ export function NotificationRenderer() {
       await callbacks?.onClose?.();
     } finally {
       clearPopupCallbacks(callbackId);
-      dispatch(closeAlert());
+      useNotificationStore.getState().closeAlert();
       setIsAlertSubmitting(false);
     }
   };
 
-  const runAlertOkey = async () => {
+  const handleAlertConfirm = async () => {
     if (isAlertSubmitting) return;
 
     const callbackId = alert.callbackId;
@@ -65,12 +61,12 @@ export function NotificationRenderer() {
       await callbacks?.onConfirm?.();
     } finally {
       clearPopupCallbacks(callbackId);
-      dispatch(closeAlert());
+      useNotificationStore.getState().closeAlert();
       setIsAlertSubmitting(false);
     }
   };
 
-  const runConfirmClose = async () => {
+  const handleConfirmClose = async () => {
     if (isConfirmSubmitting) return;
 
     const callbackId = confirm.callbackId;
@@ -80,12 +76,12 @@ export function NotificationRenderer() {
       await callbacks?.onClose?.();
     } finally {
       clearPopupCallbacks(callbackId);
-      dispatch(closeConfirm());
+      useNotificationStore.getState().closeConfirm();
       setIsConfirmSubmitting(false);
     }
   };
 
-  const runConfirmCancel = async () => {
+  const handleConfirmCancel = async () => {
     if (isConfirmSubmitting) return;
 
     const callbackId = confirm.callbackId;
@@ -95,12 +91,12 @@ export function NotificationRenderer() {
       await callbacks?.onCancel?.();
     } finally {
       clearPopupCallbacks(callbackId);
-      dispatch(closeConfirm());
+      useNotificationStore.getState().closeConfirm();
       setIsConfirmSubmitting(false);
     }
   };
 
-  const runConfirmOkey = async () => {
+  const handleConfirmConfirm = async () => {
     if (isConfirmSubmitting) return;
 
     const callbackId = confirm.callbackId;
@@ -111,7 +107,7 @@ export function NotificationRenderer() {
       await callbacks?.onConfirm?.();
     } finally {
       clearPopupCallbacks(callbackId);
-      dispatch(closeConfirm());
+      useNotificationStore.getState().closeConfirm();
       setIsConfirmSubmitting(false);
     }
   };
@@ -128,8 +124,8 @@ export function NotificationRenderer() {
         content={alert.content}
         confirmText={alert.confirmText}
         confirmDisabled={alert.confirmDisabled}
-        onClose={runAlertClose}
-        onConfirm={runAlertOkey}
+        onClose={handleAlertClose}
+        onConfirm={handleAlertConfirm}
       />
 
       {/* confirm 팝업 */}
@@ -143,9 +139,9 @@ export function NotificationRenderer() {
         confirmText={confirm.confirmText}
         cancelText={confirm.cancelText}
         confirmDisabled={confirm.confirmDisabled}
-        onClose={runConfirmClose}
-        onCancel={runConfirmCancel}
-        onConfirm={runConfirmOkey}
+        onClose={handleConfirmClose}
+        onCancel={handleConfirmCancel}
+        onConfirm={handleConfirmConfirm}
       />
 
       {/* 토스트 팝업 */}

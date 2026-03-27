@@ -1,15 +1,19 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*tsconfig.json", "tools/config/*.json"],
+  "globalDependencies": ["**/.env.*", "tsconfig.json", "tools/config/*.json"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**", ".next/**"],
+      "outputs": ["dist/**", "build/**", "lib/**", ".next/**", "!.next/cache/**"],
       "env": ["NODE_ENV"]
+    },
+    "codegen": {
+      "cache": false
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["PORT_KMA_MAIN", "PORT_KMA_URA", "PORT_KMA_DAK", "PORT_KMA_LMS", "PORT_API"]
     },
     "test": {
       "outputs": ["coverage/**"],

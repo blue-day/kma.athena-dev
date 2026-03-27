@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { MemberType } from '@kma/api-interface';
-import { Button } from '@kma/ui-components'; // 공통 버튼 임포트
+import { Button } from '@kma/ui-components';
+import { MemberEntity } from '@kma/api-interface';
+// import { MemberEntity } from '@/shared/api/generated/graphql';
 
 export type OrgModalProps = {
   open: boolean;
-  items: MemberType[];
+  items: MemberEntity[];
   onClose: () => void;
-  onApply: (picked: MemberType[]) => void;
+  onApply: (picked: MemberEntity[]) => void;
 };
 
 const PAGE_SIZE = 10;
@@ -54,21 +55,17 @@ export function OrgModal({ open, items, onClose, onApply }: OrgModalProps) {
       aria-modal="true"
     >
       <div className="kma-modal">
-        {/* 헤더 영역 */}
         <div className="kma-modal-head">
           <div className="kma-modal-title">조직도</div>
           <button
             className="kma-modal-x"
             type="button"
             onClick={onClose}
-            aria-label="닫기"
           >
             ✕
           </button>
         </div>
-
         <div className="kma-modal-body">
-          {/* 검색 영역 */}
           <div
             className="kma-modal-search"
             style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}
@@ -87,8 +84,6 @@ export function OrgModal({ open, items, onClose, onApply }: OrgModalProps) {
               style={{ width: '200px' }}
             />
           </div>
-
-          {/* 테이블 영역 */}
           <div
             className="kma-modal-tablewrap"
             style={{ minHeight: '420px' }}
@@ -108,12 +103,7 @@ export function OrgModal({ open, items, onClose, onApply }: OrgModalProps) {
                       <input
                         type="checkbox"
                         checked={!!picked[m.userId]}
-                        onChange={(e) =>
-                          setPicked((p) => ({
-                            ...p,
-                            [m.userId]: e.target.checked,
-                          }))
-                        }
+                        onChange={(e) => setPicked((p) => ({ ...p, [m.userId]: e.target.checked }))}
                         style={{ cursor: 'pointer', width: '16px', height: '16px' }}
                       />
                     </td>
@@ -121,22 +111,9 @@ export function OrgModal({ open, items, onClose, onApply }: OrgModalProps) {
                     <td style={{ textAlign: 'center' }}>{m.userName}</td>
                   </tr>
                 ))}
-                {pageItems.length === 0 && (
-                  <tr>
-                    <td
-                      colSpan={3}
-                      className="kma-empty"
-                      style={{ padding: '150px 0' }}
-                    >
-                      조회 결과 없음
-                    </td>
-                  </tr>
-                )}
               </tbody>
             </table>
           </div>
-
-          {/* 페이징 영역 */}
           <div
             className="kma-paging"
             style={{ marginTop: '20px' }}
@@ -185,8 +162,6 @@ export function OrgModal({ open, items, onClose, onApply }: OrgModalProps) {
             </button>
           </div>
         </div>
-
-        {/* 하단 액션 영역: 공통 Button 적용 */}
         <div className="kma-modal-foot">
           <Button
             variant="primary"

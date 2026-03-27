@@ -1,8 +1,8 @@
 'use client';
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { MemberType } from '@kma/api-interface';
 import { Button } from './Button';
+import type { MemberEntity } from '@kma/api-interface';
 
 const KendoGrid = dynamic(() => import('../grid/KendoGrid').then((mod) => mod.KendoGrid), { ssr: false });
 const KmaPagination = dynamic(() => import('./KmaPagination').then((mod) => mod.KmaPagination), {
@@ -11,9 +11,9 @@ const KmaPagination = dynamic(() => import('./KmaPagination').then((mod) => mod.
 
 export type MemberSearchModalProps = {
   open: boolean;
-  items: MemberType[];
+  items: MemberEntity[];
   onClose: () => void;
-  onApply: (picked: MemberType[]) => void;
+  onApply: (picked: MemberEntity[]) => void;
   title?: string;
   maxRows?: number;
 };
@@ -68,9 +68,6 @@ export function MemberSearchModal({
 
   const renderCell = (props: any) => {
     const { field, dataItem, style } = props;
-
-    // ✅ style에는 이미 KendoGrid가 계산한 width/textAlign/height 등이 들어있음
-    //    padding은 KendoGrid에서 제거하고 넘겨주므로 여기서 추가 padding 없이 사용
     if (field === 'selected') {
       const id = dataItem.userId;
       return (

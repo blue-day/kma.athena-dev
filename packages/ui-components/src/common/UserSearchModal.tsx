@@ -2,8 +2,8 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { MemberType } from '@kma/api-interface';
 import { Button } from './Button';
+import type { MemberEntity } from '@kma/api-interface';
 
 const KendoGrid = dynamic(() => import('../grid/KendoGrid').then((mod) => mod.KendoGrid), { ssr: false });
 const KmaPagination = dynamic(() => import('./KmaPagination').then((mod) => mod.KmaPagination), {
@@ -12,9 +12,9 @@ const KmaPagination = dynamic(() => import('./KmaPagination').then((mod) => mod.
 
 export type UserSearchModalProps = {
   open: boolean;
-  items: MemberType[];
+  items: MemberEntity[];
   onClose: () => void;
-  onApply: (picked: MemberType[]) => void;
+  onApply: (picked: MemberEntity[]) => void;
   title?: string;
   maxRows?: number;
 };
@@ -34,14 +34,12 @@ export function UserSearchModal({
   const [pickedIds, setPickedIds] = useState<Record<string, boolean>>({});
   const [page, setPage] = useState(1);
 
-  // 검색 로직
   const filtered = useMemo(() => {
     const kw = searchKeyword.trim().toLowerCase();
     if (!kw) return items;
     return items.filter((m) => ((m.userId || '') + (m.userName || '')).toLowerCase().includes(kw));
   }, [items, searchKeyword]);
 
-  // 페이지네이션 계산
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const pageItems = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE;
@@ -59,7 +57,6 @@ export function UserSearchModal({
     setPage(1);
   };
 
-  // 그리드 컬럼 정의
   const columns = useMemo(
     () => [
       { field: 'selected', title: ' ', width: 50, align: 'center' as const },
@@ -69,7 +66,6 @@ export function UserSearchModal({
     [],
   );
 
-  // 그리드 셀 렌더링
   const renderCell = useCallback(
     (props: any) => {
       const { field, dataItem, style } = props;
@@ -81,9 +77,7 @@ export function UserSearchModal({
             <input
               type="checkbox"
               checked={!!pickedIds[id]}
-              onChange={(e) => {
-                setPickedIds((prev) => ({ ...prev, [id]: e.target.checked }));
-              }}
+              onChange={(e) => setPickedIds((prev) => ({ ...prev, [id]: e.target.checked }))}
               style={{ cursor: 'pointer' }}
             />
           </td>
@@ -93,9 +87,7 @@ export function UserSearchModal({
       return (
         <td
           style={{ ...style, cursor: 'pointer' }}
-          onClick={() => {
-            setPickedIds((prev) => ({ ...prev, [id]: !prev[id] }));
-          }}
+          onClick={() => setPickedIds((prev) => ({ ...prev, [id]: !prev[id] }))}
         >
           {dataItem[field] ?? ''}
         </td>
@@ -125,7 +117,6 @@ export function UserSearchModal({
             ✕
           </button>
         </div>
-
         <div
           className="kma-modal-body"
           style={{ padding: '20px 24px' }}
@@ -155,7 +146,6 @@ export function UserSearchModal({
               </Button>
             </div>
           </div>
-
           <KendoGrid
             columns={columns}
             data={pageItems}
@@ -163,7 +153,6 @@ export function UserSearchModal({
             maxRows={maxRows}
             renderCell={renderCell}
           />
-
           <div className="mt-5">
             <KmaPagination
               page={page}
@@ -172,14 +161,10 @@ export function UserSearchModal({
             />
           </div>
         </div>
-
         <div className="kma-modal-foot">
           <Button
             variant="primary"
-            onClick={() => {
-              const selectedUsers = items.filter((m) => pickedIds[m.userId]);
-              onApply(selectedUsers);
-            }}
+            onClick={() => onApply(items.filter((m) => pickedIds[m.userId]))}
             style={{ minWidth: '80px' }}
           >
             적용

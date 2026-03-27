@@ -1,6 +1,6 @@
 {
   "name": "@kma/ui-components",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -12,36 +12,37 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "^3.12.0",
     "@kma/api-interface": "workspace:*",
+    "@progress/kendo-data-query": "^1.7.4",
+    "@progress/kendo-drawing": "^1.24.0",
+    "@progress/kendo-file-saver": "^1.1.2",
+    "@progress/kendo-licensing": "^1.10.1",
+    "@progress/kendo-react-grid": "^14.2.0",
+    "@progress/kendo-react-inputs": "^14.2.0",
+    "@progress/kendo-react-intl": "^14.2.0",
+    "@progress/kendo-theme-default": "^13.0.1",
     "@toast-ui/editor": "^3.2.2",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
     "@toast-ui/react-editor": "^3.2.3",
     "@toast-ui/react-grid": "^4.21.22",
-    "froala-editor": "^5.0.0",
+    "froala-editor": "^5.0.1",
     "prismjs": "^1.30.0",
-    "react-aria-components": "^1.14.0",
-    "react-froala-wysiwyg": "^5.0.0",
+    "react-aria-components": "^1.16.0",
+    "react-froala-wysiwyg": "^5.0.1",
     "tui-color-picker": "^2.2.8",
-    "tui-grid": "^4.21.22",
-    "@progress/kendo-licensing": "^1.6.0",
-    "@progress/kendo-data-query": "^1.7.0",
-    "@progress/kendo-drawing": "^1.17.5",
-    "@progress/kendo-react-grid": "^9.0.0",
-    "@progress/kendo-react-intl": "^9.0.0",
-    "@progress/kendo-react-inputs": "^9.0.0",
-    "@progress/kendo-theme-default": "^9.0.0"
+    "tui-grid": "^4.21.22"
   },
   "peerDependencies": {
-    "next": ">=13",
-    "react": ">=18",
-    "react-dom": ">=18"
+    "next": ">=16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
-    "typescript": "^5.5.4"
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.9.3"
   }
 }

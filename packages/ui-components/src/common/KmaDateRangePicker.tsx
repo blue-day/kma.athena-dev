@@ -18,10 +18,8 @@ import {
   CalendarGridBody,
 } from 'react-aria-components';
 
-//  스타일 파일을 공통 styles 폴더에서 가져옵니다.
 import '../styles/date-range-picker.css';
 
-// DateRange 타입 정의
 export interface DateRange {
   start: DateValue;
   end: DateValue;
@@ -42,7 +40,6 @@ export function KmaDateRangePicker({ label, value, onChange }: KmaDateRangePicke
     >
       {label && <Label className="kma-date-label">{label}</Label>}
 
-      {/* 인풋 영역 */}
       <Group className="kma-date-group">
         <DateInput
           slot="start"
@@ -78,7 +75,6 @@ export function KmaDateRangePicker({ label, value, onChange }: KmaDateRangePicke
         <Button className="kma-date-icon-btn">📅</Button>
       </Group>
 
-      {/* 달력 팝업 */}
       <Popover className="kma-date-popover">
         <Dialog className="kma-date-dialog">
           <RangeCalendar className="w-full">
