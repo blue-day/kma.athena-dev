@@ -118,8 +118,8 @@ em{
 section.bg-kma-deco {
   /* 예시: section.bg-kma에 3개의 png 백그라운드 이미지를 적용하는 방법 */
   background-image:
-    url('../images/bg-deco-t-left.png'), url('../images/bg-deco-t-right.png'),
-    url('../images/bg-deco-b-left.png'), url('../images/bg-deco-b-right.png');
+    url('../../../../apps/kma-athena/src/shared/assets/images/bg-deco-t-left.png'), url('../../../../apps/kma-athena/src/shared/assets/images/bg-deco-t-right.png'),
+    url('../../../../apps/kma-athena/src/shared/assets/images/bg-deco-b-left.png'), url('../../../../apps/kma-athena/src/shared/assets/images/bg-deco-b-right.png');
   background-position:
     left top,
     right top 15%,
@@ -206,7 +206,7 @@ section.bg-kma-deco {
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  background: url('../images/checkbox-off.svg') center / 28px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/checkbox-off.svg') center / 28px auto no-repeat;
   transition: transform 0.15s ease-out;
   flex-shrink: 0;
 }
@@ -221,15 +221,15 @@ section.bg-kma-deco {
 }
 
 .common-checkbox-input:checked + .common-checkbox-trigger .common-checkbox-icon {
-  background-image: url('../images/checkbox-p-on.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/checkbox-p-on.svg');
 }
 
 .common-checkbox-input:disabled + .common-checkbox-trigger .common-checkbox-icon {
-  background-image: url('../images/checkbox-dimmed.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/checkbox-dimmed.svg');
 }
 
 .common-checkbox-input:checked:disabled + .common-checkbox-trigger .common-checkbox-icon {
-  background-image: url('../images/checkbox-checked-dimmed.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/checkbox-checked-dimmed.svg');
 }
 
 .common-checkbox-input:disabled ~ label {
@@ -245,24 +245,24 @@ section.bg-kma-deco {
   font-size: 12px;
   line-height: 28px;
   color: var(--kma-gray-400);
-  background: url('../images/icon-info-help.svg') right center / 28px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-info-help.svg') right center / 28px auto no-repeat;
   z-index: 11;
 }
 
 .btn-list-del {
   font-size: 14px;
   padding-right: 26px;
-  background: url('../images/icon-trash.svg') right center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-trash.svg') right center / 20px auto no-repeat;
 }
 
 .btn-archive-del {
-  background: url('../images/icon-popup-close.svg') center / 24px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-popup-close.svg') center / 24px auto no-repeat;
 }
 
 .btn-txt.ic-download > span{
   display: inline-block;
   padding-left: 28px;
-  background: url('../images/icon-download-w.svg') left center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-download-w.svg') left center / 20px auto no-repeat;
   font-size: inherit;
   font-weight: inherit;
 }
@@ -270,13 +270,13 @@ section.bg-kma-deco {
 .btn-txt.ic-select-download > span{
   display: inline-block;
   padding-left: 28px;
-  background: url('../images/icon-select.svg') left center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-select.svg') left center / 20px auto no-repeat;
   font-size: inherit;
   font-weight: inherit;
 }
 
 .btn-search{
-  background: url('../images/icon-input-search.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-search.svg') center / 20px auto no-repeat;
 }
 
 /* === 공통 팝업 === */
@@ -309,7 +309,7 @@ section.bg-kma-deco {
   right: 10px;
   width: 36px;
   height: 36px;
-  background: url('../images/icon-popup-close.svg') center / 24px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-popup-close.svg') center / 24px auto no-repeat;
   border-radius: 50%;
 }
 
@@ -424,7 +424,7 @@ section.bg-kma-deco {
 .logo-kma {
   width: 194px;
   height: 24px;
-  background: url('../images/logo-kma-01.png') no-repeat center / contain;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/logo-kma-01.png') no-repeat center / contain;
   display: block;
 }
 
@@ -436,7 +436,7 @@ section.bg-kma-deco {
   cursor: pointer;
   background-color: transparent;
   transition: background-color 0.2s;
-  background: url('../images/icon-side-sidebar-area-default.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-side-sidebar-area-default.svg') center / 100% auto no-repeat;
 }
 
 .btn-lnb-toggle:hover {
@@ -466,7 +466,7 @@ section.bg-kma-deco {
   left: 16px;
   width: 32px;
   height: 32px;
-  background: url('../images/icon-side-menu-new.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-side-menu-new.svg') center / 100% auto no-repeat;
 }
 
 .btn-menu-item.locker::before {
@@ -477,7 +477,7 @@ section.bg-kma-deco {
   left: 16px;
   width: 32px;
   height: 32px;
-  background: url('../images/icon-side-menu-locker.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-side-menu-locker.svg') center / 100% auto no-repeat;
 }
 
 .btn-menu-item.close {
@@ -504,7 +504,7 @@ section.bg-kma-deco {
   right: 0;
   width: 16px;
   height: 16px;
-  background: url('../images/icon-list-arrow-up.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-list-arrow-up.svg') center / 100% auto no-repeat;
 }
 
 .btn-toggle-text.close::after {
@@ -518,7 +518,7 @@ section.bg-kma-deco {
   width: 100%;
   height: 44px;
   padding: 0 12px 0 44px;
-  background: url('../images/icon-side-list.png') 16px center / 20px auto no-repeat var(--kma-bg-lnb-item);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-side-list.png') 16px center / 20px auto no-repeat var(--kma-bg-lnb-item);
   border-radius: 8px;
   transition: background-color 0.2s;
   overflow: hidden;
@@ -541,7 +541,7 @@ section.bg-kma-deco {
   display: none;
   width: 22px;
   height: 100%;
-  background: url('../images/icon-tag-close.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-tag-close.svg') center / 100% auto no-repeat;
   flex-shrink: 0;
   margin-left: 8px;
 }
@@ -576,7 +576,7 @@ section.bg-kma-deco {
 
 /* === 입력 프롬프트 === */
 .btn-chat-attach {
-  background-image: url('../images/icon-plus.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/icon-plus.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px 20px;
@@ -600,17 +600,17 @@ section.bg-kma-deco {
 
 /* 입력값 없음 */
 .btn-chat-send-disabled {
-  background-image: url('../images/icon-send-disabled.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/icon-send-disabled.svg');
 }
 
 /* 입력값 있음 */
 .btn-chat-send-active {
-  background-image: url('../images/icon-send-active.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/icon-send-active.svg');
 }
 
 /* 프롬프트 실행 중 */
 .btn-chat-send-stop {
-  background-image: url('../images/icon-send-stop.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/icon-send-stop.svg');
   background-size: 20px auto;
   background-color: #eaf3ff;
 }
@@ -658,7 +658,7 @@ section.bg-kma-deco {
   width: 40px;
   height: 38px;
   border-radius: 50%;
-  background: url('../images/icon-input-del.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-del.svg') center / 20px auto no-repeat;
   margin-right: 4px;
 }
 
@@ -697,7 +697,7 @@ section.bg-kma-deco {
   border: 1px solid var(--kma-input-border);
   border-radius: 8px;
   padding: 0 36px 0 12px;
-  background: url('../images/icon-input-arrow-down.svg') right 12px center / 20px auto no-repeat var(--kma-white-02);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-arrow-down.svg') right 12px center / 20px auto no-repeat var(--kma-white-02);
 }
 
 .ipt-select > .common-select-trigger:hover{
@@ -708,7 +708,7 @@ section.bg-kma-deco {
 }
 
 .ipt-select > .common-select-trigger.open{
-  background: url('../images/icon-input-arrow-down.svg') right 12px center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-arrow-down.svg') right 12px center / 20px auto no-repeat;
 }
 
 .ipt-select > .common-select-menu{
@@ -734,7 +734,7 @@ section.bg-kma-deco {
   font-size: 14px;
   transition: background-color 0.2s;
   border-radius: 300px;
-  background: url('../images/icon-list-arrow-down.svg') right 16px center / 16px auto no-repeat var(--kma-white-01);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-list-arrow-down.svg') right 16px center / 16px auto no-repeat var(--kma-white-01);
 }
 
 .common-select-trigger:disabled{
@@ -756,7 +756,7 @@ section.bg-kma-deco {
 }
 
 .common-select-trigger.open {
-  background: url('../images/icon-list-arrow-up.svg') right 16px center / 16px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-list-arrow-up.svg') right 16px center / 16px auto no-repeat;
 }
 
 .common-select-menu {
@@ -792,21 +792,21 @@ section.bg-kma-deco {
 
 .common-select-option-active {
   color: var(--kma-primary);
-  background: url('../images/icon-list-check-on.svg') right 16px top 4px/ 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-list-check-on.svg') right 16px top 4px/ 20px auto no-repeat;
 }
 
 /* Mobile 공통 셀렉트 - 팝업으로 옵션값 노출 */
 .common-select-popopen {
   padding: 4px 26px 4px 4px;
   font-size: 14px;
-  background: url('../images/icon-input-arrow-down.svg') right 4px center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-arrow-down.svg') right 4px center / 20px auto no-repeat;
 }
 
 .icon-select-check {
   display: block;
   width: 20px;
   height: 20px;
-  background: url('../images/icon-list-check-on.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-list-check-on.svg') center / 100% auto no-repeat;
 }
 
 /* === 공통 테이블 === */
@@ -931,7 +931,7 @@ section.bg-kma-deco {
   display: block;
   width: 28px;
   height: 28px;
-  background: url('../images/icon-edit.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-edit.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
@@ -994,41 +994,41 @@ section.bg-kma-deco {
 .ai-answer-wrap .btn-favorite {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-favorites.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-favorites.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
 .ai-answer-wrap .btn-copy {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-copy.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-copy.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
 .ai-answer-wrap .btn-good {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-great.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-great.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
 .ai-answer-wrap .btn-bad {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-not-really.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-not-really.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 .ai-answer-wrap .btn-retry {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-again.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-again.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
 .ai-answer-wrap .btn-more {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-more.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-more.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
@@ -1211,7 +1211,7 @@ section.bg-kma-deco {
 .btn-panel-close {
   width: 30px;
   height: 30px;
-  background: url('../images/icon-popup-close.svg') center / 24px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-popup-close.svg') center / 24px auto no-repeat;
 }
 
 .material-panel-footer {
@@ -1227,12 +1227,12 @@ section.bg-kma-deco {
 .btn-download {
   width: 36px;
   height: 36px;
-  background: url('../images/icon-download.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-download.svg') center / 20px auto no-repeat;
   border-radius: 50%;
 }
 
 .btn-download.completed {
-  background-image: url('../images/icon-download-complete.svg');
+  background-image: url('../../../../apps/kma-athena/src/shared/assets/images/icon-download-complete.svg');
 }
 
 .btn-download:hover {
@@ -1246,7 +1246,7 @@ section.bg-kma-deco {
   bottom: 196px;
   width: 36px;
   height: 36px;
-  background: url('../images/btn-floating-down.svg') center / 100% auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/btn-floating-down.svg') center / 100% auto no-repeat;
   transition: opacity 0.2s;
   border-radius: 50%;
   z-index: 20;
@@ -1275,19 +1275,19 @@ section.bg-kma-deco {
 /* === KMA 내부지식 챗봇 === */
 .category-card-wrap button.ic-association,
 .category-card-wrap div.ic-association{
-  background: url('../images/icon-menu-search.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-menu-search.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
 }
 .category-card-wrap button.ic-board,
 .category-card-wrap div.ic-board{
-  background: url('../images/icon-menu-guide.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-menu-guide.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
 }
 .category-card-wrap button.ic-license,
 .category-card-wrap div.ic-license{
-  background: url('../images/icon-menu-license.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-menu-license.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
 }
 .category-card-wrap button.ic-credit,
 .category-card-wrap div.ic-credit{
-  background: url('../images/icon-menu-complaints.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-menu-complaints.png') top 30px center / 84px auto no-repeat var(--kma-white-01);
 }
 
 /* === 나만의 비서 === */
@@ -1298,7 +1298,7 @@ section.bg-kma-deco {
   justify-content: center;
   margin-top: 87px;
   padding-top: 120px;
-  background: url('../images/icon-secretary.svg') top center / 100px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-secretary.svg') top center / 100px auto no-repeat;
 }
 
 .my-assistant-swiper-wrapper--pc .swiper-slide{
@@ -1341,19 +1341,19 @@ section.bg-kma-deco {
 .btn-assistant-create > strong{
   display: block;
   padding-top: 58px;
-  background: url('../images/icon-add-ms.svg') top center / 46px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-add-ms.svg') top center / 46px auto no-repeat;
 }
 
 .btn-assistant{
-  background: url('../images/icon-secretary.svg') top 30px center / 84px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-secretary.svg') top 30px center / 84px auto no-repeat;
 }
 
 .btn-assistant-prev{
-  background: url('../images/icon-arrow-left.svg') center center / 20px 20px no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-arrow-left.svg') center center / 20px 20px no-repeat;
 }
 
 .btn-assistant-next{
-  background: url('../images/icon-arrow-right.svg') center center / 20px 20px no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-arrow-right.svg') center center / 20px 20px no-repeat;
 }
 
 .swiper-pagination-bullet{
@@ -1412,7 +1412,7 @@ section.bg-kma-deco {
   height: 36px;
   border: 1px solid var(--kma-gray-button-border);
   border-radius: 6px;
-  background: url('../images/icon-plus.svg') center / 20px auto no-repeat var(--kma-white-02);
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-plus.svg') center / 20px auto no-repeat var(--kma-white-02);
 }
 
 .form-box .form-info{
@@ -1506,7 +1506,7 @@ section.bg-kma-deco {
 .file-add-list .btn-file-del{
   width: 24px;
   height: 24px;
-  background: url('../images/icon-input-del.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-del.svg') center / 20px auto no-repeat;
 }
 
 /* === 보관함 === */
@@ -1558,65 +1558,65 @@ section.bg-kma-deco {
 }
 
 .nodata-box > p{
-  background: url('../images/icon-list-nodata.svg') center top / 100px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-list-nodata.svg') center top / 100px auto no-repeat;
 }
 
 .nodata-list-box > p{
-  background: url('../images/icon-internal-nodata.svg') center top / 60px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-internal-nodata.svg') center top / 60px auto no-repeat;
 }
 
 
 /* === Dark Mode === */
 [data-theme='dark'] {
   .common-checkbox-icon {
-    background-image: url('../images/dark-mode/checkbox-off.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/checkbox-off.svg');
   }
 
   .common-checkbox-input:checked + .common-checkbox-trigger .common-checkbox-icon {
-    background-image: url('../images/dark-mode/checkbox-p-on.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/checkbox-p-on.svg');
   }
 
   .common-checkbox-input:disabled + .common-checkbox-trigger .common-checkbox-icon {
-    background-image: url('../images/dark-mode/checkbox-dimmed.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/checkbox-dimmed.svg');
   }
 
   .common-checkbox-input:checked:disabled + .common-checkbox-trigger .common-checkbox-icon {
-    background-image: url('../images/dark-mode/checkbox-checked-dimmed.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/checkbox-checked-dimmed.svg');
   }
 
   .logo-kma {
-    background-image: url('../images/dark-mode/logo-kma-01.png');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/logo-kma-01.png');
   }
 
   .file-add-list .btn-file-del,
   .btn-ipt-clear{
-    background-image: url('../images/dark-mode/icon-input-del.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-input-del.svg');
   }
 
   .btn-lnb-toggle { 
-    background-image: url('../images/dark-mode/icon-side-sidebar-area-default.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-side-sidebar-area-default.svg');
   }
 
   .btn-toggle-text::after{
-    background-image: url('../images/dark-mode/icon-list-arrow-up.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-list-arrow-up.svg');
   }
 
   .btn-lnb-history .delete-btn{
-    background-image: url('../images/dark-mode/icon-tag-close.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-tag-close.svg');
   }
 
   .btn-list-del{
-    background-image: url('../images/dark-mode/icon-trash.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-trash.svg');
   }
 
   .popup-wrap .btn-popup-close, 
   .btn-archive-del, 
   .btn-panel-close {
-    background-image: url('../images/dark-mode/icon-popup-close.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-popup-close.svg');
   }
 
   .btn-search{
-    background-image: url('../images/dark-mode/icon-input-search.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-input-search.svg');
   }
 
   .custom-scrollbar {
@@ -1633,42 +1633,42 @@ section.bg-kma-deco {
 
   section.bg-kma-deco {
     background-image:
-      url('../images/dark-mode/bg-deco-t-left.png'), url('../images/dark-mode/bg-deco-t-right.png'),
-      url('../images/dark-mode/bg-deco-b-left.png'), url('../images/dark-mode/bg-deco-b-right.png');
+      url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/bg-deco-t-left.png'), url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/bg-deco-t-right.png'),
+      url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/bg-deco-b-left.png'), url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/bg-deco-b-right.png');
   }
 
   .btn-info-help {
-    background-image: url('../images/dark-mode/icon-info-help.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-info-help.svg');
   }
 
   .common-select-trigger{
-    background-image: url('../images/dark-mode/icon-list-arrow-down.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-list-arrow-down.svg');
   }
 
   .common-select-trigger.open {
-    background-image: url('../images/dark-mode/icon-list-arrow-up.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-list-arrow-up.svg');
   }
 
   .ipt-select > .common-select-trigger,
   .common-select-popopen{
-    background-image: url('../images/dark-mode/icon-input-arrow-down.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-input-arrow-down.svg');
   }
 
   .form-box .btn-file-add,
   .btn-chat-attach {
-    background-image: url('../images/dark-mode/icon-plus.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-plus.svg');
   }
 
   .btn-chat-send-disabled {
-    background-image: url('../images/dark-mode/icon-send-disabled.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-send-disabled.svg');
   }
   
   .btn-chat-send-active {
-    background-image: url('../images/dark-mode/icon-send-active.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-send-active.svg');
   }
   
   .btn-chat-send-stop {
-    background-image: url('../images/dark-mode/icon-send-stop.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-send-stop.svg');
     background-color: #566a88;
   }
   
@@ -1678,53 +1678,53 @@ section.bg-kma-deco {
 
   .common-select-option-active,
   .icon-select-check{
-    background-image: url('../images/dark-mode/icon-list-check-on.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-list-check-on.svg');
   }
 
   .btn-title-edit{
-    background-image: url('../images/dark-mode/icon-edit.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-edit.svg');
   }
 
   .btn-scroll-bottom{
-    background-image: url('../images/dark-mode/floating-downu.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/floating-downu.svg');
   }
 
   .btn-download{
-    background-image: url('../images/dark-mode/icon-download.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-download.svg');
   }
 
   .btn-assistant-create > strong{
-    background-image: url('../images/dark-mode/icon-add-ms.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-add-ms.svg');
   }
 
   .btn-assistant-prev{
-    background-image: url('../images/dark-mode/icon-arrow-left.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-arrow-left.svg');
   }
   
   .btn-assistant-next{
-    background-image: url('../images/dark-mode/icon-arrow-right.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-arrow-right.svg');
   }
 
   .ai-answer-wrap .btn-favorite {
-    background-image: url('../images/dark-mode/icon-favorites.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-favorites.svg');
   }
   
   .ai-answer-wrap .btn-copy {
-    background-image: url('../images/dark-mode/icon-copy.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-copy.svg');
   }
   .ai-answer-wrap .btn-good {
-    background-image: url('../images/dark-mode/icon-great.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-great.svg');
   }
   
   .ai-answer-wrap .btn-bad {
-    background-image: url('../images/dark-mode/icon-not-really.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-not-really.svg');
   }
   .ai-answer-wrap .btn-retry {
-    background-image: url('../images/dark-mode/icon-again.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-again.svg');
   }
   
   .ai-answer-wrap .btn-more {
-    background-image: url('../images/dark-mode/icon-more.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-more.svg');
   }
 
   .filter-scroll-wrap::before{
@@ -1738,10 +1738,10 @@ section.bg-kma-deco {
   }
 
   .nodata-box > p{
-    background-image: url('../images/dark-mode/icon-list-nodata.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-list-nodata.svg');
   }
   
   .nodata-list-box > p{
-    background-image: url('../images/dark-mode/icon-internal-nodata.svg');
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-internal-nodata.svg');
   }
 }

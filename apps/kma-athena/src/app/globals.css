@@ -2,8 +2,8 @@
 @config "../../tailwind.config.js";
 
 @import '../shared/assets/font/font.css';
-@import '../shared/assets/styles/kma-ai-common.css';
-@import '../shared/assets/styles/kma-ai-mobile.css';
+@import '@kma/ui-components/styles/kma-ai-common.css';
+@import '@kma/ui-components/styles/kma-ai-mobile.css';
 
 @layer base {
   input::placeholder,
