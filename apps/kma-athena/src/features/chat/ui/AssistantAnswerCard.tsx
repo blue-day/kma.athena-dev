@@ -88,13 +88,13 @@ export function AssistantAnswerCard({ onOpenMaterialPanel }: AssistantAnswerCard
       <div className="flex items-center justify-end gap-1">
         <button
           type="button"
-          className="btn-favorite transition-colors hover:bg-[var(--kma-bg-hover)]"
+          className="btn-favorite transition-colors"
         >
           <span className="sr-only">보관함 저장</span>
         </button>
         <button
           type="button"
-          className="btn-copy transition-colors hover:bg-[var(--kma-bg-hover)]"
+          className="btn-copy transition-colors"
         >
           <span className="sr-only">복사</span>
         </button>
@@ -122,37 +122,37 @@ export function AssistantAnswerCard({ onOpenMaterialPanel }: AssistantAnswerCard
       {/* 버튼 아이콘 필요시 사용 */}
       <button
         type="button"
-        className="btn-favorite transition-colors hover:bg-[var(--kma-bg-hover)]"
+        className="btn-favorite transition-colors"
       >
         <span className="sr-only">보관함 저장</span>
       </button>
       <button
         type="button"
-        className="btn-copy transition-colors hover:bg-[var(--kma-bg-hover)]"
+        className="btn-copy transition-colors"
       >
         <span className="sr-only">복사</span>
       </button>
       <button
           type="button"
-          className="btn-good transition-colors hover:bg-[var(--kma-bg-hover)]"
+          className="btn-good transition-colors"
         >
           <span className="sr-only">좋아요</span>
         </button>
         <button
           type="button"
-          className="btn-bad transition-colors hover:bg-[var(--kma-bg-hover)]"
+          className="btn-bad transition-colors"
         >
           <span className="sr-only">별로임</span>
         </button>
         <button
           type="button"
-          className="btn-retry transition-colors hover:bg-[var(--kma-bg-hover)]"
+          className="btn-retry transition-colors"
         >
           <span className="sr-only">다시시도</span>
         </button>
         <button
           type="button"
-          className="btn-more transition-colors hover:bg-[var(--kma-bg-hover)]"
+          className="btn-more transition-colors"
         >
           <span className="sr-only">더보기</span>
         </button>

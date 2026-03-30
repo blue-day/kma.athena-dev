@@ -25,7 +25,7 @@ export function ConversationSummaryHeader() {
             </p>
             <button
               type="button"
-              className="btn-title-edit shrink-0 transition-colors hover:bg-[var(--kma-bg-hover)]"
+              className="btn-title-edit shrink-0 transition-colors"
               onClick={() => setIsEditPopupOpen(true)}
             >
               <span className="sr-only">수정</span>

@@ -95,6 +95,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* === 공통 스타일 === */
 em{
   font-style: normal;
@@ -931,6 +935,10 @@ section.bg-kma-deco {
   border-radius: 50%;
 }
 
+.btn-title-edit:hover {
+  background-color: var(--kma-bg-hover);
+}
+
 /* 답변 태그 스타일 정의 */
 .ai-answer-wrap {
   width: 100%;
@@ -1022,6 +1030,15 @@ section.bg-kma-deco {
   height: 36px;
   background: url('../images/icon-more.svg') center / 20px auto no-repeat;
   border-radius: 50%;
+}
+
+.ai-answer-wrap .btn-favorite:hover,
+.ai-answer-wrap .btn-copy:hover,
+.ai-answer-wrap .btn-good:hover,
+.ai-answer-wrap .btn-bad:hover,
+.ai-answer-wrap .btn-retry:hover,
+.ai-answer-wrap .btn-more:hover {
+  background-color: var(--kma-bg-hover);
 }
 
 .ai-answer-wrap .recommend-box {
@@ -1215,7 +1232,11 @@ section.bg-kma-deco {
 }
 
 .btn-download.completed {
-  background: url('../images/icon-download-complete.svg') center / 20px auto no-repeat !important;
+  background-image: url('../images/icon-download-complete.svg');
+}
+
+.btn-download:hover {
+  background-color: var(--kma-bg-hover);
 }
 
 .btn-scroll-bottom {

@@ -13,8 +13,6 @@
     "graphql": "^16.8.0",
     "@internationalized/date": "^3.10.1",
     "@kma/api-interface": "workspace:*",
-    "@kma/auth": "workspace:*",
-    "@kma/comn": "workspace:*",
     "@kma/ui-components": "workspace:*",
     "@kma/utils": "workspace:*",
     "@reduxjs/toolkit": "^2.2.7",

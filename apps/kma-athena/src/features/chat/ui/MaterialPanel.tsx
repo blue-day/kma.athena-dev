@@ -151,7 +151,7 @@ export const MaterialPanelContent = ({
                     </div>
                     <button
                       type="button"
-                      className={`btn-download transition-colors hover:bg-[var(--kma-bg-hover)] ${
+                      className={`btn-download transition-colors ${
                         document.status === 'completed' ? 'completed' : ''
                       }`}
                     >

@@ -105,7 +105,7 @@ export const AttachmentPanelContent = ({ isSelectMode }: AttachmentPanelContentP
               </div>
               <button
                 type="button"
-                className={`btn-download transition-colors hover:bg-[var(--kma-bg-hover)] ${
+                className={`btn-download transition-colors ${
                   file.status === 'completed' ? 'completed' : ''
                 }`}
               >
