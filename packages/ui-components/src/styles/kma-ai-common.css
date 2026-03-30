@@ -286,7 +286,7 @@ section.bg-kma-deco {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5) !important;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -333,10 +333,19 @@ section.bg-kma-deco {
 .popup-wrap.type-alert .popup-content,
 .popup-wrap.type-confirm .popup-content {
   padding: 26px 20px 30px;
+  color: var(--kma-text);
+  text-align: left;
 }
 
 .popup-wrap .popup-footer .btn-wrap .btn-txt{
   height: 40px;
+}
+
+.popup-wrap .swal2-actions.popup-footer{
+  width: 100%;
+  margin: 0;
+  gap: 6px;
+  justify-content: flex-end;
 }
 
 .popup-bottom-wrap {
@@ -1255,21 +1264,43 @@ section.bg-kma-deco {
 /* === 공통 토스트 팝업 === */
 .kma-toast-container {
   top: 80px !important;
+  height: auto;
+  width: auto !important;
 }
 
 .kma-toast {
   min-width: unset;
   max-width: 520px;
-  border-radius: 16px !important;
+  border-radius: 10px !important;
   background-color: var(--kma-white-01) !important;
   color: var(--kma-text) !important;
-  box-shadow: var(--kma-shadow-elevated);
+  /* box-shadow: var(--kma-shadow-elevated) !important; */
+  box-shadow: 0 0 1px hsl(0deg 0% 0% / 0.045), 0 1px 4px hsl(0deg 0% 0% / 0.045), 1px 2px 4px hsl(0deg 0% 0% / 0.045), 2px 2px 6px hsl(0deg 0% 0% / 0.045), 2px 4px 16px hsl(0deg 0% 0% / 0.045) !important;
   line-height: 1;
-  padding: 16px 20px !important;
+  padding: 12px 20px !important;
 }
 
 .kma-toast > div {
   margin: 0 !important;
+}
+
+/* SweetAlert2 toast 내부 요소 오버라이드 */
+.kma-toast.swal2-popup.swal2-toast {
+  gap: 0 !important;
+}
+
+.kma-toast .swal2-title {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: var(--kma-text) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.43 !important;
+}
+
+.kma-toast .swal2-html-container {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* === KMA 내부지식 챗봇 === */

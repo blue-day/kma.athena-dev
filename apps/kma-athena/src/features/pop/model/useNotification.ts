@@ -2,8 +2,7 @@
 
 import { ReactNode } from 'react';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
-
-type ToastType = 'success' | 'error' | 'info';
+import { showToast, dismissToast } from '@/shared/ui/toast';
 
 type PopupCallbacks = {
   onConfirm?: () => void | Promise<void>;
@@ -54,12 +53,25 @@ function createBaseOptions({
   confirmText,
   popupWidth,
   confirmDisabled,
-}: PopupParams): SweetAlertOptions {
+}: PopupParams, variant: 'alert' | 'confirm'): SweetAlertOptions {
   return {
     title,
     confirmButtonText: confirmText ?? '확인',
-    width: popupWidth,
-    showCloseButton: true,
+    width: popupWidth ?? 320,
+    padding: 0,
+    showCloseButton: false,
+    buttonsStyling: false,
+    reverseButtons: true,
+    customClass: {
+      container: `popup-wrap type-${variant}`,
+      popup: 'popup-box',
+      title: 'popup-title font-medium leading-5',
+      htmlContainer: 'popup-content',
+      actions: 'popup-footer',
+      confirmButton: 'btn-txt primary h-9',
+      cancelButton: 'btn-txt secondary h-9',
+      closeButton: 'btn-popup-close',
+    },
     ...buildBodyOptions(message, content),
     didOpen: () => {
       if (confirmDisabled) {
@@ -76,7 +88,7 @@ export function useNotification() {
   return {
     alert: async ({ onConfirm, onClose, ...params }: AlertParams) => {
       const result = await Swal.fire({
-        ...createBaseOptions(params),
+        ...createBaseOptions(params, 'alert'),
       });
 
       if (result.isConfirmed) {
@@ -89,7 +101,7 @@ export function useNotification() {
 
     confirm: async ({ onConfirm, onCancel, onClose, cancelText, ...params }: ConfirmParams) => {
       const result = await Swal.fire({
-        ...createBaseOptions({ ...params, cancelText }),
+        ...createBaseOptions({ ...params, cancelText }, 'confirm'),
         showCancelButton: true,
         cancelButtonText: cancelText ?? '취소',
       });
@@ -107,16 +119,8 @@ export function useNotification() {
       await onClose?.();
     },
 
-    toast: async (message: string, type: ToastType = 'info', duration = 2000) => {
-      await Swal.fire({
-        toast: true,
-        position: 'top',
-        icon: type,
-        title: message,
-        showConfirmButton: false,
-        timer: duration,
-        timerProgressBar: true,
-      });
+    toast: (message: string, type: 'success' | 'error' | 'info' = 'info', duration = 2000) => {
+      showToast(message, { type, duration });
     },
 
     closeAlert: () => {

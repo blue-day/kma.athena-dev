@@ -34,6 +34,11 @@
     padding: 26px 20px 16px;
   }
 
+  /* === 공통 토스트 팝업 === */
+  .kma-toast-container {
+    top: 66px !important;
+  }
+
   /* === 공통 인풋 === */
   .textarea-box textarea{
     height: 160px;
