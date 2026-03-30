@@ -122,7 +122,7 @@ export function ChatConversationView() {
         </section>
 
         <aside
-          className={`side-panel-wrap hidden flex-shrink-0 overflow-y-auto border-l border-gray-border bg-[var( --kma-white-content)] transition-all duration-300 md:block ${
+          className={`side-panel-wrap hidden flex-shrink-0 overflow-y-auto border-l border-gray-border bg-[var(--kma-white-content)] transition-all duration-300 md:block ${
             isSidePanelOpen ? 'w-[400px] opacity-100' : 'w-0 opacity-0 pointer-events-none'
           }`}
           aria-hidden={!isSidePanelOpen}
