@@ -162,7 +162,7 @@ export const Lnb = ({
   };
 
   const renderProfile = (expanded: boolean) => (
-    <div className="h-[110px] md:h-[142px] self-stretch flex flex-col justify-center items-stretch bg-primary dark:bg-[#1e2a3b]">
+    <div className="h-[110px] md:h-[120px] self-stretch flex flex-col justify-center items-stretch bg-primary dark:bg-[#1e2a3b]">
       <div className={`flex items-center gap-3 transition-padding duration-300 ${expanded ? 'px-[36px]' : 'p-4'}`}>
         <div className="w-[50px] h-[50px] min-w-[50px] min-h-[50px] shrink-0 rounded-full overflow-hidden">
           {/* 외부 URL 포함 동적 이미지 소스를 허용하기 위해 img 태그를 사용 */}
