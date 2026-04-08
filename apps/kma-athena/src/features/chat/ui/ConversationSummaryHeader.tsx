@@ -1,11 +1,31 @@
 'use client';
 
 import { useState } from 'react';
-import editIcon from '@/shared/assets/images/icon-side-list.png';
+import tabIconGeneral from '@/shared/assets/images/icon-side-tab-01.png';
+import tabIconKnowledge from '@/shared/assets/images/icon-side-tab-02.png';
+import tabIconMyAssistant from '@/shared/assets/images/icon-side-tab-03.png';
 import { CommonInput } from '@/shared/ui/CommonInput';
 import { CommonPopup } from '@/shared/ui/CommonPopup';
 
-export function ConversationSummaryHeader() {
+export type ConversationChatSource = 'general' | 'knowledge-chat' | 'my-assistant' | null;
+
+function tabIconSrc(source: ConversationChatSource) {
+  switch (source) {
+    case 'knowledge-chat':
+      return tabIconKnowledge.src;
+    case 'my-assistant':
+      return tabIconMyAssistant.src;
+    default:
+      return tabIconGeneral.src;
+  }
+}
+
+type ConversationSummaryHeaderProps = {
+  /** `/chat/conversation` 진입 시 `source` 쿼리 (GeneralChatPage / KnowledgeChatPage / MyAssistantPage) */
+  chatSource?: ConversationChatSource;
+};
+
+export function ConversationSummaryHeader({ chatSource = null }: ConversationSummaryHeaderProps) {
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
   const [editTitleText, setEditTitleText] = useState('');
 
@@ -19,7 +39,7 @@ export function ConversationSummaryHeader() {
           <div className="flex min-w-0 flex-1 items-center">
             <p
               className="mr-1 truncate bg-left0 bg-no-repeat pl-[26px] text-[13px] md:text-sm leading-5 bg-[length:20px_20px]"
-              style={{ backgroundImage: `url(${editIcon.src})` }}
+              style={{ backgroundImage: `url(${tabIconSrc(chatSource)})` }}
             >
               성분명 처방에 대한 의협의 공식 입장은 어때?
             </p>

@@ -21,6 +21,7 @@ const HISTORY_SECTIONS = [
     key: 'today',
     title: '오늘',
     transitionDelay: '60ms',
+    category: 'general',
     items: [1, 2].map(
       (index) => `오늘의 대화 제목 샘플 오늘의 대화 제목 샘플 오늘의 대화 제목 샘플${index}`,
     ),
@@ -29,12 +30,14 @@ const HISTORY_SECTIONS = [
     key: 'yesterday',
     title: '어제',
     transitionDelay: '130ms',
+    category: 'knowledge',
     items: [1, 2].map((index) => `어제의 대화 제목 샘플 ${index}`),
   },
   {
     key: 'past',
     title: '4일 전',
     transitionDelay: '200ms',
+    category: 'assistant',
     items: [1, 2, 3, 4].map((index) => `오래된 대화 제목 샘플 ${index}`),
   },
 ] as const;
@@ -67,8 +70,8 @@ export const Lnb = ({
     setProfileSrc(profileImageUrl?.trim() || defaultProfileIconMale.src);
   }, [profileImageUrl]);
 
-  const renderHistoryItem = (title: string, key: string) => (
-    <div key={key} className="btn-lnb-history">
+  const renderHistoryItem = (title: string, key: string, category: string) => (
+    <div key={key} className={`btn-lnb-history ${category === 'general' ? 'general' : category === 'knowledge' ? 'knowledge' : 'assistant'}`}>
       <button className="title">
         <span className="truncate text-sm font-medium">{title}</span>
       </button>
@@ -145,7 +148,7 @@ export const Lnb = ({
               ) : null}
               <div className="space-y-1.5">
                 {section.items.map((title, index) =>
-                  renderHistoryItem(title, `${section.key}-${index}`),
+                  renderHistoryItem(title, `${section.key}-${index}`, `${section.category}`),
                 )}
               </div>
             </div>

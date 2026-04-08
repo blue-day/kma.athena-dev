@@ -12,14 +12,25 @@ interface ChatHeaderProps {
   header?: React.ReactNode;
 }
 
+function mobileSelectPopopenClass(activeTabKey: string) {
+  switch (activeTabKey) {
+    case '/knowledge-chat':
+      return 'knowledge';
+    case '/my-assistant':
+      return 'assistant';
+    default:
+      return 'general';
+  }
+}
+
 export const ChatHeader = ({ header }: ChatHeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const { openMobileMenu, themeMode, setThemeMode } = useMainLayout();
   const tabs = [
-    { key: '/', label: '일반 챗봇' },
-    { key: '/knowledge-chat', label: 'KMA 내부 지식 챗봇 ' },
-    { key: '/my-assistant', label: '나만의 비서' },
+    { key: '/', label: '일반 챗봇', category: 'general' },
+    { key: '/knowledge-chat', label: 'KMA 내부 지식 챗봇 ', category: 'knowledge' },
+    { key: '/my-assistant', label: '나만의 비서', category: 'assistant' },
   ];
   const activeTabFromPath = tabs.find((tab) => tab.key === pathname)?.key ?? '/';
   const [activeTab, setActiveTab] = useState(activeTabFromPath);
@@ -87,7 +98,7 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
             <button
               type="button"
               onClick={() => setMobileSelectOpen(true)}
-              className="common-select-popopen"
+              className={`common-select-popopen ${mobileSelectPopopenClass(activeTab)}`}
               aria-haspopup="dialog"
               aria-expanded={mobileSelectOpen}
             >

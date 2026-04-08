@@ -34,7 +34,12 @@ export function ChatConversationView() {
   const [showScrollToBottomButton, setShowScrollToBottomButton] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const isSidePanelOpen = activeSidePanel !== null;
-  const isFromMyAssistant = searchParams.get('source') === 'my-assistant';
+  const sourceParam = searchParams.get('source');
+  const isFromMyAssistant = sourceParam === 'my-assistant';
+  const conversationChatSource =
+    sourceParam === 'general' || sourceParam === 'knowledge-chat' || sourceParam === 'my-assistant'
+      ? sourceParam
+      : null;
 
   const updateScrollButtonVisibility = () => {
     const container = scrollContainerRef.current;
@@ -88,7 +93,7 @@ export function ChatConversationView() {
     <ChatLayout>
       <div className="relative flex h-full">
         <section className="relative z-10 mx-auto flex h-full w-full flex-col">
-          <ConversationSummaryHeader />
+          <ConversationSummaryHeader chatSource={conversationChatSource} />
 
           <div
             ref={scrollContainerRef}
