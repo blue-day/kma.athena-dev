@@ -14,8 +14,10 @@ interface ChatTypeTabsProps {
 
 export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) => {
   const navRef = useRef<HTMLElement | null>(null);
+  // 각 탭 버튼의 실측 위치/너비를 읽기 위해 ref를 배열로 관리
   const tabButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [indicatorStyle, setIndicatorStyle] = useState({ x: 0, width: 0 });
+  // 최초 위치 계산 전에는 transition을 끄고, 계산 후에만 애니메이션 활성화
   const [isIndicatorReady, setIsIndicatorReady] = useState(false);
 
   useLayoutEffect(() => {
@@ -36,6 +38,7 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
 
       const { left: navLeft } = navElement.getBoundingClientRect();
       const { left: buttonLeft, width } = activeButton.getBoundingClientRect();
+      // nav 기준 상대 좌표로 변환해 인디케이터 시작점을 맞춘다
       const x = buttonLeft - navLeft;
 
       setIndicatorStyle({ x, width });
@@ -49,6 +52,7 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
 
     updateIndicator();
 
+    // 탭 텍스트 길이/레이아웃 변경에도 인디케이터를 즉시 재계산
     const resizeObserver = new ResizeObserver(updateIndicator);
     if (navRef.current) {
       resizeObserver.observe(navRef.current);
