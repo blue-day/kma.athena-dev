@@ -256,7 +256,7 @@ section.bg-kma-deco {
 }
 
 .btn-archive-del {
-  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-popup-close.svg') center / 24px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-trash.svg') center / 20px auto no-repeat;
 }
 
 .btn-txt.ic-download > span{
@@ -276,7 +276,7 @@ section.bg-kma-deco {
 }
 
 .btn-search{
-  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-search.svg') center / 20px auto no-repeat;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-input-search.svg') center / 20px auto no-repeat var(--kma-white-02);
 }
 
 /* === 공통 팝업 === */
@@ -1650,6 +1650,25 @@ section.bg-kma-deco {
   background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-internal-nodata.svg') center top / 60px auto no-repeat;
 }
 
+.archive-list > li > div button{
+  position: relative;
+  padding-right: 24px;
+  
+}
+.archive-list > li > div button::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: url('../../../../apps/kma-athena/src/shared/assets/images/icon-accordion-arrow-down.svg') right top / 20px auto no-repeat;
+  transition: transform 0.3s ease;
+}
+
+.archive-list > li > div button.open::after{
+  transform: rotate(-180deg);
+}
 
 /* === Dark Mode === */
 [data-theme='dark'] {
@@ -1690,12 +1709,12 @@ section.bg-kma-deco {
     background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-tag-close.svg');
   }
 
-  .btn-list-del{
+  .btn-list-del,
+  .btn-archive-del{
     background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-trash.svg');
   }
 
   .popup-wrap .btn-popup-close, 
-  .btn-archive-del, 
   .btn-panel-close {
     background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-popup-close.svg');
   }
@@ -1828,5 +1847,9 @@ section.bg-kma-deco {
   
   .nodata-list-box > p{
     background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-internal-nodata.svg');
+  }
+
+  .archive-list > li > div button::after{
+    background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-accordion-arrow-down.svg');
   }
 }

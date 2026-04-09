@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { ChatLayout } from '@/widgets/layout/ChatLayout';
 import { ExpandableSearchArea } from '@/shared/ui/ExpandableSearchArea';
 import { ScrollableFilterTabs } from '@/shared/ui/ScrollableFilterTabs';
@@ -62,16 +61,18 @@ const ARCHIVE_ITEMS: ArchiveItem[] = [
 ];
 
 export function ChatArchivePage() {
-  const router = useRouter();
   const [selectedFilter, setSelectedFilter] = useState<(typeof ARCHIVE_FILTER_OPTIONS)[number]>(
     ARCHIVE_FILTER_OPTIONS[0],
   );
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
   const filteredArchiveItems =
     selectedFilter === '전체'
       ? ARCHIVE_ITEMS
       : ARCHIVE_ITEMS.filter((item) => item.botType === selectedFilter);
-  const handleArchiveItemClick = (id: number) => {
-    router.push(`/chat/conversation?archiveId=${id}`);
+
+  const handleToggleArchiveItem = (id: number) => {
+    setExpandedId((prevId) => (prevId === id ? null : id));
   };
 
   return (
@@ -89,7 +90,7 @@ export function ChatArchivePage() {
 
               <ExpandableSearchArea />
             </div>
-            
+
             <div className="flex items-center pt-4 pb-2 md:pt-4">
               <strong className="inline-block mr-2.5 text-2xl font-bold">보관함</strong>
               <span className="inline-block text-sm font-medium">
@@ -98,23 +99,45 @@ export function ChatArchivePage() {
             </div>
 
             {filteredArchiveItems.length > 0 ? (
-              <ul className="divide-y divide-gray-border border-t border-gray-border">
+              <ul className="archive-list divide-y divide-gray-border border-t border-gray-border">
                 {filteredArchiveItems.map((item) => (
                   <li key={item.id} className="relative py-5 md:py-4">
-                    <button
-                      type="button"
-                      className="flex flex-col items-start w-full text-left gap-2.5"
-                      onClick={() => handleArchiveItemClick(item.id)}
-                      aria-label={`보관 대화 상세 이동: ${item.title}`}
-                    >
-                      <span className="inline-block rounded-md bg-[var(--kma-badge-03)] px-2.5 text-sm leading-7">
+                    <div className="flex flex-col items-start w-full">
+                      <span className="inline-block mb-2.5 rounded-md bg-[var(--kma-badge-03)] px-2.5 text-sm leading-7">
                         {item.botType}
                       </span>
 
-                      <span className="w-full font-bold leading-[1.38] line-clamp-2 md:truncate">
-                        {item.prefix ? <em className="inline-block text-primary mr-2.5 leading-[1.38]">{item.prefix}</em> : null}
+                      <button
+                        type="button"
+                        className={`${expandedId === item.id ? 'open' : ''} w-full text-left font-bold leading-[1.38] line-clamp-2 md:truncate mb-2.5`}
+                        onClick={() => handleToggleArchiveItem(item.id)}
+                        aria-expanded={expandedId === item.id}
+                        aria-label={`보관 대화 내용 ${expandedId === item.id ? '닫기' : '펼치기'}: ${item.title}`}
+                      >
+                        {item.prefix ? (
+                          <em className="inline-block text-primary mr-2.5 leading-[1.38]">{item.prefix}</em>
+                        ) : null}
                         {item.title}
-                      </span>
+                      </button>
+
+                      <div
+                        className={`grid w-full transition-all duration-300 ease-in-out ${
+                          expandedId === item.id ? 'grid-rows-[1fr] opacity-100 mb-2.5' : 'grid-rows-[0fr] opacity-0 mt-0'
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <div className="py-1">
+                            <div className="ai-answer-wrap !p-0">
+                              <p>답변내용이 들어갑니다.</p>
+
+                              <ul>
+                                <li>리스트1</li>
+                                <li>리스트2</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                       <span className="flex flex-col gap-0.5 text-sm leading-[1.29]">
                         <span className="block">
@@ -127,11 +150,11 @@ export function ChatArchivePage() {
                           {item.isExpired ? <em className="ml-2.5 text-[#f35167]">(보관일 만료)</em> : null}
                         </span>
                       </span>
-                    </button>
+                    </div>
 
                     <button
                       type="button"
-                      className="btn-archive-del absolute right-0 top-0 w-6 h-14"
+                      className="btn-archive-del absolute right-0 top-2 w-6 h-9"
                       aria-label="보관 항목 삭제"
                       onClick={(event) => {
                         event.stopPropagation();
@@ -144,8 +167,7 @@ export function ChatArchivePage() {
               </ul>
             ) : (
               <div className="nodata-box flex flex-col md:min-h-[470px] pt-[120px] md:pt-[200px] items-center gap-1 md:gap-2.5">
-                <p className="pt-[96px] md:pt-[120px] md:text-xl font-medium"
-                  >검색 결과가 없습니다.</p>
+                <p className="pt-[96px] md:pt-[120px] md:text-xl font-medium">검색 결과가 없습니다.</p>
                 <span className="text-sm text-gray-300">새로운 항목을 추가해 보세요.</span>
               </div>
             )}
