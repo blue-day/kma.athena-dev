@@ -20,6 +20,8 @@ interface ChatPromptInputProps {
   onOpenAttachmentPanel?: () => void;
   // 나만의 비서 진입 여부에 따라 첨부파일 버튼 표시를 전환합니다.
   isFromMyAssistant?: boolean;
+  // 부모에서 주입할 텍스트 값 (예시 문구 클릭 시 입력창을 채웁니다).
+  injectedValue?: string;
 }
 
 export const ChatPromptInput = ({
@@ -30,6 +32,7 @@ export const ChatPromptInput = ({
   modelSelectorVariant = 'select',
   onOpenAttachmentPanel,
   isFromMyAssistant = false,
+  injectedValue,
 }: ChatPromptInputProps) => {
   const [message, setMessage] = useState('');
   const [selectedModel, setSelectedModel] = useState(MODEL_OPTIONS[0]);
@@ -97,6 +100,15 @@ export const ChatPromptInput = ({
       window.cancelAnimationFrame(frameId);
     };
   }, [animateOnMount]);
+
+  useEffect(() => {
+    if (!injectedValue) {
+      return;
+    }
+
+    setMessage(injectedValue);
+    textareaRef.current?.focus();
+  }, [injectedValue]);
 
   return (
     <div

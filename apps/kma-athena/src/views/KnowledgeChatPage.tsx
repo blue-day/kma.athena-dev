@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChatPromptInput } from '@/features/chat/ui/ChatPromptInput';
 import { ChatLayout } from '@/widgets/layout/ChatLayout';
@@ -23,6 +23,7 @@ interface KnowledgeActionCard {
   description: string;
   isEnabled: boolean;
   className: string;
+  examplePrompts?: string[];
 }
 
 const KNOWLEDGE_ACTION_CARDS: KnowledgeActionCard[] = [
@@ -32,13 +33,23 @@ const KNOWLEDGE_ACTION_CARDS: KnowledgeActionCard[] = [
     description: '지식 저장소 자료를 기반으로\n검색할 수 있습니다.',
     isEnabled: true,
     className: 'ic-association',
+    examplePrompts: [
+      '의대증원 수급추계위에서 제시하고 있는 방법론을 요약해줘',
+      '최근 협회의 주요 공지사항을 알려줘',
+      '협회 자료에서 의사 면허 관련 내용을 찾아줘',
+    ],
   },
   {
     key: 'board-material',
     title: '상임 이사회 자료 검색',
-    description: '명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
+    description: '설명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
     isEnabled: true,
     className: 'ic-board',
+    examplePrompts: [
+      // '2024년 상임 이사회 주요 결정 사항을 정리해줘',
+      // '최근 이사회에서 논의된 안건 목록을 알려줘',
+      // '이사회 회의록에서 예산 관련 내용을 찾아줘',
+    ],
   },
   {
     key: 'license-report',
@@ -50,7 +61,7 @@ const KNOWLEDGE_ACTION_CARDS: KnowledgeActionCard[] = [
   {
     key: 'credit-point',
     title: '연수 평점',
-    description: '명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
+    description: '설명입력란에 입력된 내용이 보여집니다.\n30자 제한 두세요.',
     isEnabled: false,
     className: 'ic-credit',
   },
@@ -95,6 +106,7 @@ interface ExpandedActionPanelProps {
   className?: string;
   isExpandedStage: boolean;
   showPrompt: boolean;
+  examplePrompts?: string[];
   onSubmit: (message: string) => void;
 }
 
@@ -104,8 +116,17 @@ const ExpandedActionPanel = ({
   className = '',
   isExpandedStage,
   showPrompt,
+  examplePrompts,
   onSubmit,
 }: ExpandedActionPanelProps) => {
+  const [injectedValue, setInjectedValue] = useState('');
+
+  const handleExampleClick = useCallback((prompt: string) => {
+    // 같은 예시를 연속으로 클릭해도 useEffect가 재실행되도록 빈 값을 거쳤다가 설정합니다.
+    setInjectedValue('');
+    requestAnimationFrame(() => setInjectedValue(prompt));
+  }, []);
+
   return (
     //확장된 카드 영역
     <div
@@ -117,14 +138,32 @@ const ExpandedActionPanel = ({
       <p className="mt-1.5 md:mt-4 text-xs md:text-[13px] leading-[1.25] md:text-sm text-gray-300">{description}</p>
 
       {showPrompt && (
-        <div className="mt-10 md:mt-9">
-          <ChatPromptInput
-            onSubmit={onSubmit}
-            docked
-            animateOnMount
-            placeholder="질문 예시: 의대증원 수급추계위에서 제시하고 있는 방법론을 요약줘"
-          />
-        </div>
+        <>
+          {examplePrompts && examplePrompts.length > 0 && (
+            <div className="mt-8 md:mt-9 flex flex-wrap gap-2 max-w-[860px] mx-auto justify-center animate-fade-in-up">
+              {examplePrompts.map((prompt, index) => (
+                <button
+                  key={prompt}
+                  type="button"
+                  onClick={() => handleExampleClick(prompt)}
+                  className={`${index === 0 ? 'block' : 'hidden md:inline-block'} md:flex-1 w-full px-4 py-2.5 text-sm leading-[1.43] font-medium rounded-lg border border-gray-border bg-(--kma-card-border) text-left transition-all duration-200 hover:translate-y-[-4px]`}
+                >
+                    <span className="text-primary">[예시] </span> 
+                    <span className="">{prompt}</span>
+                </button>
+              ))}
+            </div>
+          )}
+          <div className={`${examplePrompts && examplePrompts.length > 0 ? 'mt-2.5 ' : 'mt-10 md:mt-9'}`}>
+            <ChatPromptInput
+              onSubmit={onSubmit}
+              docked
+              animateOnMount
+              injectedValue={injectedValue}
+              placeholder="질문 예시: 의대증원 수급추계위에서 제시하고 있는 방법론을 요약줘"
+            />
+          </div>
+        </>
       )}
     </div>
   );
@@ -247,6 +286,7 @@ export function KnowledgeChatPage() {
             className={card.className}
             isExpandedStage={isExpanding || isExpanded}
             showPrompt={isExpanded}
+            examplePrompts={card.examplePrompts}
             onSubmit={handleSubmit}
           />
         ) : (

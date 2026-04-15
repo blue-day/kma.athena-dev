@@ -40,7 +40,7 @@
 
 [data-theme='dark'] {
   --kma-text: #fff;
-  --kma-primary: #4180ff;
+  --kma-primary: #5179c9;
   --kma-gray-300: #9498ac;
   --kma-gray-400: #99a1af;
   --kma-text-cancel: #7982a0;
@@ -1199,7 +1199,7 @@ section.bg-kma-deco {
 }
 
 .ai-answer-wrap a:hover {
-  color: #357fff;
+  color: #5179C9;
 }
 
 .ai-answer-wrap img {
@@ -1852,4 +1852,19 @@ section.bg-kma-deco {
   .archive-list > li > div button::after{
     background-image: url('../../../../apps/kma-athena/src/shared/assets/images/dark-mode/icon-accordion-arrow-down.svg');
   }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
 }
