@@ -6,40 +6,30 @@ import { ChatTypeTabs } from './ChatTypeTabs';
 import { ThemeModeSwitch } from './ThemeModeSwitch';
 import { useMainLayout } from './MainLayoutContext';
 import Link from 'next/link';
-import { SelectBottomSheet } from '@/shared/ui/SelectBottomSheet';
+import { SelectBottomSheet } from '@/shared/common/ui/SelectBottomSheet';
+import { getInfoByRoute, isSameTabNavigation, resolveChatRoute } from '@/entities/chat/lib/chatNavigation';
+import { CHAT_TAB_ITEMS } from '@/entities/chat/config/chatTabConfig';
 
 interface ChatHeaderProps {
   header?: React.ReactNode;
-}
-
-function mobileSelectPopopenClass(activeTabKey: string) {
-  switch (activeTabKey) {
-    case '/knowledge-chat':
-      return 'knowledge';
-    case '/my-assistant':
-      return 'assistant';
-    default:
-      return 'general';
-  }
 }
 
 export const ChatHeader = ({ header }: ChatHeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const { openMobileMenu, themeMode, setThemeMode } = useMainLayout();
-  const tabs = [
-    { key: '/', label: '일반 챗봇', category: 'general' },
-    { key: '/knowledge-chat', label: 'KMA 내부 지식 챗봇 ', category: 'knowledge' },
-    { key: '/my-assistant', label: '나만의 비서', category: 'assistant' },
-  ];
-  const activeTabFromPath = tabs.find((tab) => tab.key === pathname)?.key ?? '/';
-  const [activeTab, setActiveTab] = useState(activeTabFromPath);
-  const routeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [mobileSelectOpen, setMobileSelectOpen] = useState(false);
+  const [pendingTab, setPendingTab] = useState<string | null>(null);
+  const routeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const routeActiveTab = resolveChatRoute(pathname).chatTabRoute;
+  const visibleActiveTab = pendingTab ?? routeActiveTab;
+  const activeChatInfo = getInfoByRoute(visibleActiveTab)
 
   useEffect(() => {
-    setActiveTab(activeTabFromPath);
-  }, [activeTabFromPath]);
+    setPendingTab(null);
+  }, [routeActiveTab]);
 
   useEffect(() => {
     return () => {
@@ -49,20 +39,31 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
     };
   }, []);
 
-  const handleTabChange = (nextPath: string) => {
-    setActiveTab(nextPath);
-
-    if (nextPath === pathname) {
+  const clearRouteTimer = () => {
+    if (!routeTimerRef.current) {
       return;
     }
 
-    if (routeTimerRef.current) {
-      clearTimeout(routeTimerRef.current);
+    clearTimeout(routeTimerRef.current);
+    routeTimerRef.current = null;
+  };
+
+  const handleTabChange = (nextPath: string) => {
+    clearRouteTimer();
+
+    if (isSameTabNavigation(pathname, nextPath)) {
+      setPendingTab(null);
+      setMobileSelectOpen(false);
+      router.replace(getInfoByRoute(nextPath).key, { scroll: false });
+      return;
     }
 
-    // 탭 인디케이터 애니메이션이 보이도록 짧게 지연 후 이동
+    setPendingTab(nextPath);
+    setMobileSelectOpen(false);
+
     routeTimerRef.current = setTimeout(() => {
       router.push(nextPath);
+      routeTimerRef.current = null;
     }, 180);
   };
 
@@ -71,7 +72,7 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
       {header || (
         <>
           <div className="hidden md:flex items-center h-full w-full px-[30px]">
-            <ChatTypeTabs tabs={tabs} activeTab={activeTab} onChange={handleTabChange} />
+            <ChatTypeTabs tabs={CHAT_TAB_ITEMS} activeTab={visibleActiveTab} onChange={handleTabChange} />
             <ThemeModeSwitch value={themeMode} onChange={setThemeMode} />
           </div>
 
@@ -84,7 +85,7 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
                 className="btn-mobile-menu"
               >
               </button>
-              
+
               <Link
                 href="/"
                 className="flex items-center "
@@ -98,11 +99,11 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
             <button
               type="button"
               onClick={() => setMobileSelectOpen(true)}
-              className={`common-select-popopen ${mobileSelectPopopenClass(activeTab)}`}
+              className={`common-select-popopen ${activeChatInfo.chatType}`}
               aria-haspopup="dialog"
               aria-expanded={mobileSelectOpen}
             >
-              <span className="truncate">{tabs.find((tab) => tab.key === activeTab)?.label}</span>
+              <span className="truncate">{activeChatInfo.label}</span>
             </button>
           </div>
 
@@ -110,8 +111,8 @@ export const ChatHeader = ({ header }: ChatHeaderProps) => {
             open={mobileSelectOpen}
             onClose={() => setMobileSelectOpen(false)}
             title="챗봇 타입 선택"
-            options={tabs}
-            value={activeTab}
+            options={CHAT_TAB_ITEMS}
+            value={visibleActiveTab}
             onSelect={handleTabChange}
           />
         </>

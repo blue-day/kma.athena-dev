@@ -1,12 +1,12 @@
 'use client';
 
+import { getInfoByRoute } from '@/entities/chat/lib/chatNavigation';
 import { useLayoutEffect, useRef, useState } from 'react';
 
 interface ChatTypeTabsProps {
-  tabs: Array<{
+  tabs: ReadonlyArray<{
     key: string;
     label: string;
-    category: string;
   }>;
   activeTab: string;
   onChange: (tabKey: string) => void;
@@ -77,7 +77,7 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
     <nav ref={navRef} className="chat-type-tabs relative flex h-full items-end" aria-label="챗봇 타입 탭">
       {tabs.map((tab, index) => {
         const isActive = activeTab === tab.key;
-        const categoryClass = tab.category === 'general' ? 'general' : tab.category === 'knowledge' ? 'knowledge' : 'assistant';
+
         return (
           <button
             key={tab.key}
@@ -86,7 +86,7 @@ export const ChatTypeTabs = ({ tabs, activeTab, onChange }: ChatTypeTabsProps) =
             }}
             type="button"
             onClick={() => onChange(tab.key)}
-            className={`${categoryClass} relative min-h-12 min-w-[140px] pb-[11px] px-2`}
+            className={`${getInfoByRoute(tab.key).chatType} relative min-h-12 min-w-[140px] pb-[11px] px-2`}
           >
             <span className={`inline-block pl-[26px] transition-font leading-[24px] ${isActive ? 'font-semibold' : 'hover:font-semibold'}`}>{tab.label}</span>
           </button>

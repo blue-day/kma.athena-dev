@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ChatHeader } from './Header';
-import { HelpGuide } from '../../shared/ui/HelpGuide';
+import { HelpGuide } from '../../shared/common/ui/HelpGuide';
 
 interface ChatLayoutProps {
   children: React.ReactNode;

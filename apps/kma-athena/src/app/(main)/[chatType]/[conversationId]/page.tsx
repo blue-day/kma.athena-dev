@@ -4,15 +4,16 @@ import { ChatLayout } from '@/widgets/layout/ChatLayout';
 
 export const dynamic = 'force-dynamic';
 
-const ChatArchivePage = nextDynamic(() =>
-  import('@/views/archive/ChatArchivePage').then((mod) => mod.ChatArchivePage),
+const ChatConversationView = nextDynamic(() =>
+  import('@/views/chat/ChatConversationView').then((mod) => mod.ChatConversationView),
 );
+
 
 export default function Page() {
   return (
-    <ChatLayout contentBgClassName="">
+    <ChatLayout>
       <Suspense fallback={null}>
-        <ChatArchivePage />
+        <ChatConversationView />
       </Suspense>
     </ChatLayout>
   );

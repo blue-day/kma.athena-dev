@@ -1,9 +1,13 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../../tailwind.config.js";
+@source not "../../.next/**";
+@source not "../../node_modules/**";
 
 @import '../shared/assets/font/font.css';
 @import '@kma/ui-components/styles/kma-ai-common.css';
 @import '@kma/ui-components/styles/kma-ai-mobile.css';
+@import 'swiper/css';
+@import 'swiper/css/pagination';
 
 @layer base {
   input::placeholder,

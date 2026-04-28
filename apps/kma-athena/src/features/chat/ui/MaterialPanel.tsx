@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { CommonSubTabs } from '@/shared/ui/CommonSubTabs';
-import { CommonCheckbox } from '@/shared/ui/CommonCheckbox';
+import { CommonSubTabs } from '@/shared/common/ui/CommonSubTabs';
+import { CommonCheckbox } from '@/shared/common/ui/CommonCheckbox';
 
 interface MaterialPanelProps {
   onClose: () => void;
@@ -130,7 +130,7 @@ export const MaterialPanelContent = ({
             {internalCount === 0 ? (
               <div className="nodata-list-box flex flex-col pt-[120px] md:pt-[200px] items-center gap-1 md:gap-2.5">
                 <p className="pt-[80px] text-sm text-gray-300">
-                 내부 자료가 확인되지 않습니다.
+                  내부 자료가 확인되지 않습니다.
                 </p>
               </div>
             ) : (
@@ -151,9 +151,8 @@ export const MaterialPanelContent = ({
                     </div>
                     <button
                       type="button"
-                      className={`btn-download transition-colors ${
-                        document.status === 'completed' ? 'completed' : ''
-                      }`}
+                      className={`btn-download transition-colors ${document.status === 'completed' ? 'completed' : ''
+                        }`}
                     >
                       <span className="sr-only">다운로드</span>
                     </button>
@@ -169,10 +168,10 @@ export const MaterialPanelContent = ({
             </p>
             {externalCount === 0 ? (
               <div className="nodata-list-box flex flex-col pt-[120px] md:pt-[200px] items-center gap-1 md:gap-2.5">
-              <p className="pt-[80px] text-sm text-gray-300">
-               외부 자료가 확인되지 않습니다.
-              </p>
-            </div>
+                <p className="pt-[80px] text-sm text-gray-300">
+                  외부 자료가 확인되지 않습니다.
+                </p>
+              </div>
             ) : (
               <ol>
                 {EXTERNAL_DOCUMENTS.map((document, index) => (

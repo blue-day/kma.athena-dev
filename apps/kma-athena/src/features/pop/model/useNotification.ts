@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
-import { showToast, dismissToast } from '@/shared/ui/toast';
+import { showToast, dismissToast } from '@/shared/common/ui/toast';
 
 type PopupCallbacks = {
   onConfirm?: () => void | Promise<void>;
@@ -46,14 +46,10 @@ function buildBodyOptions(message?: string, content?: ReactNode) {
   } satisfies Pick<SweetAlertOptions, 'text'>;
 }
 
-function createBaseOptions({
-  title,
-  message,
-  content,
-  confirmText,
-  popupWidth,
-  confirmDisabled,
-}: PopupParams, variant: 'alert' | 'confirm'): SweetAlertOptions {
+function createBaseOptions(
+  { title, message, content, confirmText, popupWidth, confirmDisabled }: PopupParams,
+  variant: 'alert' | 'confirm',
+): SweetAlertOptions {
   return {
     title,
     confirmButtonText: confirmText ?? '확인',

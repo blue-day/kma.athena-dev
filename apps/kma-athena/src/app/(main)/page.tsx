@@ -1,5 +1,5 @@
-import { GeneralChatPage } from '@/views/GeneralChatPage';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-  return <GeneralChatPage />;
+  redirect('/general');
 }

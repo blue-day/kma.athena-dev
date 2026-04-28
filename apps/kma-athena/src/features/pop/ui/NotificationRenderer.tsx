@@ -4,9 +4,9 @@
  * 팝업 모음
  */
 import { useEffect, useRef, useState } from 'react';
-import { CommonPopup } from '@/shared/ui/CommonPopup';
-import { CommonToast } from '@/shared/ui/CommonToast';
-import { showToast } from '@/shared/ui/toast';
+import { CommonPopup } from '@/shared/common/ui/CommonPopup';
+import { CommonToast } from '@/shared/common/ui/CommonToast';
+import { showToast } from '@/shared/common/ui/toast';
 import { useNotificationStore } from '../model/notificationStore';
 import { clearPopupCallbacks, getPopupCallbacks } from '../lib/popCallbackRegistry';
 

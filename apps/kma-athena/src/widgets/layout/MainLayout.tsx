@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Lnb } from './Lnb';
 import { MainLayoutProvider } from './MainLayoutContext';
-import { CommonLoading } from '@/shared/ui/CommonLoading';
+import { CommonLoading } from '@/shared/common/ui/CommonLoading';
 import { NotificationRenderer } from '@/features/pop/ui/NotificationRenderer';
 
 interface MainLayoutProps {

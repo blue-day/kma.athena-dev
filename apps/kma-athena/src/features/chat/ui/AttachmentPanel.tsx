@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CommonCheckbox } from '@/shared/ui/CommonCheckbox';
+import { CommonCheckbox } from '@/shared/common/ui/CommonCheckbox';
 
 interface AttachmentPanelProps {
   onClose: () => void;
@@ -105,9 +105,8 @@ export const AttachmentPanelContent = ({ isSelectMode }: AttachmentPanelContentP
               </div>
               <button
                 type="button"
-                className={`btn-download transition-colors ${
-                  file.status === 'completed' ? 'completed' : ''
-                }`}
+                className={`btn-download transition-colors ${file.status === 'completed' ? 'completed' : ''
+                  }`}
               >
                 <span className="sr-only">다운로드</span>
               </button>
