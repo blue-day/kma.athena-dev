@@ -3,18 +3,12 @@
 import { useId, useRef, useState } from 'react';
 import { CommonSelect } from '@/shared/common/ui/CommonSelect';
 import { CommonInput } from '@/shared/common/ui/CommonInput';
-import { ChatAssistantRequest, LlmType, MODEL_OPTIONS } from '@/entities/chat/model/chatTypes';
+import { LlmType, MODEL_OPTIONS } from '@/entities/chat/model/chatTypes';
 import { recommendationAssistant } from '@/entities/chat/config/assistantConfig';
-
-type CreateAssistantContentProps = {
-  onChange?: (value: ChatAssistantRequest | null) => void;
-};
-
-const MAX_PERSONA_LENGTH = 200;
+import { LIMIT_FILE_TYPE, MAX_FILE_SIZE_MB, MAX_FILES, MAX_NAME_LENGTH, MAX_PERSONA_LENGTH } from '../lib/validateAssistant';
 
 export function CreateAssistantContent() {
   const radioGroupName = useId();
-  const fileInputId = useId();
   const assistantNameRef = useRef<HTMLInputElement>(null);
   const [selectedModel, setSelectedModel] = useState<LlmType>(MODEL_OPTIONS[0]);
   const [selectedAssistantType, setSelectedAssistantType] = useState('');
@@ -76,7 +70,7 @@ export function CreateAssistantContent() {
             value={assistantName}
             onChange={setAssistantName}
             onClear={() => setAssistantName('')}
-            placeholder="비서의 이름을 입력하세요 (최대 12자)"
+            placeholder={`비서의 이름을 입력하세요 (최대 ${MAX_NAME_LENGTH}자)`}
             className="disabled" //비활성화 스타일
             disabled //비활성화 속성
           />
@@ -90,7 +84,7 @@ export function CreateAssistantContent() {
             <textarea
               placeholder={`비서의 역할, 성격, 임무, 말투 등 나만의 비서에게 페르소나를 지정하세요. \n구체적으로 정의할수록 원하는 답변을 얻을 확률이 높아집니다.`}
             />
-            <p className="txt-count">0/200</p>
+            <p className="txt-count">0/{MAX_PERSONA_LENGTH}</p>
           </div>
         </div>
       </div>
@@ -143,7 +137,9 @@ export function CreateAssistantContent() {
         <p className="form-info">
           첨부된 파일을 참고로 답을 해줍니다.
           <br />
-          (파일 형식은 PDF만 가능하며, 최대 10개, 10MB 이하로 제한됩니다.)
+          ※ 파일 형식은 {LIMIT_FILE_TYPE.join(', ')} 만 가능하며, 최대 {MAX_FILES}개, {MAX_FILE_SIZE_MB}MB 이하로 제한됩니다.
+          <br />
+          ※ 동일한 이름의 파일은 업로드가 불가능합니다.
         </p>
       </div>
     </div>

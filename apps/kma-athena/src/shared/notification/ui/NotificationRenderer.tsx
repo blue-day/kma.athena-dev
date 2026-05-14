@@ -5,7 +5,7 @@
  * - 실제로 showAlert, showConfirm, showToast를 실행
  */
 import { useEffect } from 'react';
-import { showToast } from '@/shared/common/ui/toast';
+import { showToast } from '@/shared/notification/lib/toast';
 import { showAlert, showConfirm } from '../lib/notification';
 import { useNotificationStore } from '../model/notificationStore';
 

@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { ChatType } from '@/entities/chat/config/chatTabConfig';
 import { CommonInput } from '@/shared/common/ui/CommonInput';
 import { CommonPopup } from '@/shared/common/ui/CommonPopup';
-import { useNotification } from '@/shared/pop/lib/useNotification';
 import tabIconGeneral from '@/shared/assets/images/icon-side-tab-01.png';
 import tabIconKnowledge from '@/shared/assets/images/icon-side-tab-02.png';
 import tabIconMyAssistant from '@/shared/assets/images/icon-side-tab-03.png';
+import { useNotification } from '@/shared/notification/hooks/useNotification';
 
 type Props = {
   conversationTitle: string;

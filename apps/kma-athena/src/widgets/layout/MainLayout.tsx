@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { Lnb } from './Lnb';
+import { Lnb } from './lnb/Lnb';
 import { MainLayoutProvider } from './MainLayoutContext';
 import { CommonLoading } from '@/shared/common/ui/CommonLoading';
-import { NotificationRenderer } from '@/features/pop/ui/NotificationRenderer';
+import { NotificationRenderer } from '@/shared/notification/ui/NotificationRenderer';
 
 interface MainLayoutProps {
   children: React.ReactNode;

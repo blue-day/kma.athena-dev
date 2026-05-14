@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ChatPromptInput } from '@/features/chat/ui/ChatPromptInput';
-import { ChatWelcomeHero } from '@/features/chat/ui/ChatWelcomeHero';
+import { ChatWelcomeHero } from '@/widgets/chat/ChatWelcomeHero';
 import { buildConversationRoute } from '@/entities/chat/lib/chatNavigation';
 import { generateSessionId } from '@/entities/chat/lib/chatUtil';
 

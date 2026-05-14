@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { ChatTypeTabs } from './ChatTypeTabs';
-import { ThemeModeSwitch } from './ThemeModeSwitch';
-import { useMainLayout } from './MainLayoutContext';
+import { useMainLayout } from '../MainLayoutContext';
 import Link from 'next/link';
 import { SelectBottomSheet } from '@/shared/common/ui/SelectBottomSheet';
 import { getInfoByRoute, isSameTabNavigation, resolveChatRoute } from '@/entities/chat/lib/chatNavigation';
 import { CHAT_TAB_ITEMS } from '@/entities/chat/config/chatTabConfig';
+import { ChatTypeTabs } from './ChatTypeTabs';
+import { ThemeModeSwitch } from './ThemeModeSwitch';
 
 interface ChatHeaderProps {
   header?: React.ReactNode;

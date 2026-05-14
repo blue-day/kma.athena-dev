@@ -3,7 +3,7 @@
  * React 내부 전용 팝업 사용 훅
  * - 팝업 정책 통일 : toast, alert, confirm enqueue
  */
-import { closeNotification } from './notification';
+import { closeNotification } from '../lib/notification';
 import { useNotificationStore } from '../model/notificationStore';
 import type { PopupPayload, ToastType } from '../model/notificationTypes';
 

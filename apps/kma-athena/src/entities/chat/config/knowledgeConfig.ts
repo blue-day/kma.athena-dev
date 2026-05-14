@@ -90,7 +90,7 @@ export interface KnowledgeActionCard {
   examplePrompts?: readonly string[];
 }
 
-export const knowledgeActionsCardList: KnowledgeActionCard[] = (
+export const KNOWLEDGE_ACTION_CARDS_LIST: KnowledgeActionCard[] = (
   Object.entries(KNOWLEDGE_ITEM) as [KnowledgeActionKey, (typeof KNOWLEDGE_ITEM)[KnowledgeActionKey]][]
 ).map(([key, value]) => ({
   key,
@@ -101,5 +101,7 @@ export const knowledgeActionsCardList: KnowledgeActionCard[] = (
   examplePrompts: value.examplePrompts,
 }));
 
-export const ENABLED_KNOWLEDGE_ACTION_CARDS = knowledgeActionsCardList.filter((card) => card.isEnabled);
-export const DISABLED_KNOWLEDGE_ACTION_CARDS = knowledgeActionsCardList.filter((card) => !card.isEnabled);
+export const ENABLED_KNOWLEDGE_ACTION_CARDS = KNOWLEDGE_ACTION_CARDS_LIST.filter((card) => card.isEnabled);
+export const DISABLED_KNOWLEDGE_ACTION_CARDS = KNOWLEDGE_ACTION_CARDS_LIST.filter((card) => !card.isEnabled);
+
+export const KNOWLEDGE_APP_CODES = Object.values(KNOWLEDGE_ITEM).map((item) => item.appCode);

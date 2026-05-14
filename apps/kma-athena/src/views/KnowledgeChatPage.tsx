@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ChatWelcomeHero } from '@/features/chat/ui/ChatWelcomeHero';
-import { DISABLED_KNOWLEDGE_ACTION_CARDS, ENABLED_KNOWLEDGE_ACTION_CARDS, KnowledgeActionCard, KnowledgeActionKey, knowledgeActionsCardList } from '@/entities/chat/config/knowledgeConfig';
+import { ChatWelcomeHero } from '@/widgets/chat/ChatWelcomeHero';
+import { DISABLED_KNOWLEDGE_ACTION_CARDS, ENABLED_KNOWLEDGE_ACTION_CARDS, KnowledgeActionCard, KnowledgeActionKey, KNOWLEDGE_ACTION_CARDS_LIST } from '@/entities/chat/config/knowledgeConfig';
 import { ExpandedActionPanel } from '@/features/knowledge/ui/ExpandedActionPanel';
 import { useKnowledgeTransition } from '@/features/knowledge/hooks/useKnowledgeTransition';
 import { buildConversationRoute } from '@/entities/chat/lib/chatNavigation';

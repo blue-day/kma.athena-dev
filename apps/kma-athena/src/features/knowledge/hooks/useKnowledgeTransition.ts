@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { isKnowledgeActionKey } from '@/entities/chat/lib/knowledgeAction';
 import {
-  knowledgeActionsCardList,
+  KNOWLEDGE_ACTION_CARDS_LIST,
   type KnowledgeActionKey,
   FADE_DURATION_MS,
   EXPAND_DURATION_MS,
@@ -25,7 +25,7 @@ export function useKnowledgeTransition() {
   const selectedActionKey: KnowledgeActionKey | null = clickedKey ?? urlActionKey;
 
   const selectedCard = useMemo(
-    () => knowledgeActionsCardList.find((card) => card.key === selectedActionKey) ?? null,
+    () => KNOWLEDGE_ACTION_CARDS_LIST.find((card) => card.key === selectedActionKey) ?? null,
     [selectedActionKey],
   );
 

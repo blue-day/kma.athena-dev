@@ -5,25 +5,17 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperInstance } from 'swiper';
 import { AssistantCard } from '@/features/assistant/ui/AssistantCard';
+import { AssistantListItem } from '@/entities/chat/model/assistantTypes';
 
-export interface AssistantCardItem {
-  id: string;
-  title: string;
-}
-
-interface SlideCardCreate {
-  kind: 'create';
-}
-
-interface SlideCardAssistant {
-  kind: 'assistant';
-  assistant: AssistantCardItem;
-}
-
-type SlideCard = SlideCardCreate | SlideCardAssistant;
+type SlideCard = { kind: 'create' } | { kind: 'assistant'; item: AssistantListItem };
 
 const MOBILE_CARDS_PER_SLIDE = 4;
 
+interface AssistantCardCarouselProps {
+  assistants: AssistantListItem[];
+  onCreateClick: () => void;
+  onAssistantClick: (id: string, title: string) => void;
+}
 const chunkCards = (cards: SlideCard[], size: number): SlideCard[][] => {
   const pages: SlideCard[][] = [];
   for (let index = 0; index < cards.length; index += size) {
@@ -33,7 +25,7 @@ const chunkCards = (cards: SlideCard[], size: number): SlideCard[][] => {
 };
 
 interface AssistantCardCarouselProps {
-  assistants: AssistantCardItem[];
+  assistants: AssistantListItem[];
   onCreateClick: () => void;
   onAssistantClick: (id: string, title: string) => void;
 }
@@ -41,24 +33,18 @@ interface AssistantCardCarouselProps {
 export function AssistantCardCarousel({ assistants, onCreateClick, onAssistantClick }: AssistantCardCarouselProps) {
   const desktopSwiperRef = useRef<SwiperInstance | null>(null);
 
-  const slideCards = useMemo<SlideCard[]>(() => {
-    const assistantCards: SlideCard[] = assistants.map((assistant) => ({
-      kind: 'assistant',
-      assistant,
-    }));
-    return [{ kind: 'create' }, ...assistantCards];
-  }, [assistants]);
+  const slideCards = useMemo<SlideCard[]>(() => [
+    { kind: 'create' },
+    ...assistants.map((item) => ({ kind: 'assistant' as const, item })),
+  ], [assistants]);
 
   const mobileSlidePages = useMemo(
     () => chunkCards(slideCards, MOBILE_CARDS_PER_SLIDE),
     [slideCards],
   );
 
-  const shouldLoopDesktop = slideCards.length > 4;
+  const hasOverFourSlides = slideCards.length > 4;
   const shouldLoopMobile = mobileSlidePages.length > 1;
-  const shouldShowDesktopNavigation = slideCards.length > 4;
-  const shouldCenterDesktopCards = assistants.length + 1 <= 4;
-  const hasFiveOrMoreSlides = slideCards.length >= 5;
 
   const renderCard = (card: SlideCard) => {
     if (card.kind === 'create') {
@@ -66,9 +52,8 @@ export function AssistantCardCarousel({ assistants, onCreateClick, onAssistantCl
     }
     return (
       <AssistantCard
-        kind="assistant"
-        id={card.assistant.id}
-        title={card.assistant.title}
+        kind={card.kind}
+        item={card.item}
         onAssistantClick={onAssistantClick}
       />
     );
@@ -77,7 +62,7 @@ export function AssistantCardCarousel({ assistants, onCreateClick, onAssistantCl
   return (
     <section className="mt-5 md:mt-[34px] w-full max-w-[1224px]">
       <div className="relative [&:has(.swiper-initialized)_.btn-assistant-prev]:pointer-events-auto [&:has(.swiper-initialized)_.btn-assistant-prev]:opacity-100 [&:has(.swiper-initialized)_.btn-assistant-next]:pointer-events-auto [&:has(.swiper-initialized)_.btn-assistant-next]:opacity-100">
-        {shouldShowDesktopNavigation && (
+        {hasOverFourSlides && (
           <>
             <button
               type="button"
@@ -106,17 +91,17 @@ export function AssistantCardCarousel({ assistants, onCreateClick, onAssistantCl
               onSwiper={(swiper: SwiperInstance) => {
                 desktopSwiperRef.current = swiper;
               }}
-              loop={shouldLoopDesktop}
+              loop={hasOverFourSlides}
               speed={360}
-              spaceBetween={hasFiveOrMoreSlides ? 8 : 0}
+              spaceBetween={hasOverFourSlides ? 8 : 0}
               slidesPerView="auto"
               slidesPerGroup={1}
-              centerInsufficientSlides={shouldCenterDesktopCards}
+              centerInsufficientSlides={!hasOverFourSlides}
               pagination={{
                 el: '.my-assistant-swiper-pagination-desktop',
                 clickable: true,
               }}
-              className={`my-assistant-swiper${hasFiveOrMoreSlides ? ' my-assistant-swiper--five-plus' : ''}`}
+              className={`my-assistant-swiper${hasOverFourSlides ? ' my-assistant-swiper--five-plus' : ''}`}
             >
               {slideCards.map((card, cardIndex) => (
                 <SwiperSlide key={`my-assistant-card-${cardIndex}`} className="h-auto">

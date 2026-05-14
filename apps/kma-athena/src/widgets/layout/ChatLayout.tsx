@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { ChatHeader } from './Header';
-import { HelpGuide } from '../../shared/common/ui/HelpGuide';
+import { HelpGuide } from '@/shared/common/ui/HelpGuide';
+import { ChatHeader } from './header/ChatHeader';
 
 interface ChatLayoutProps {
   children: React.ReactNode;

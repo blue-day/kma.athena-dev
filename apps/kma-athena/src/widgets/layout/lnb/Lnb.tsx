@@ -1,11 +1,12 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import defaultProfileIconMale from '@/shared/assets/images/icon-profile-male.svg';//남성인 경우 
 import defaultProfileIconFemale from '@/shared/assets/images/icon-profile-female.svg';//여성인 경우
-import { ThemeModeSwitch } from '@/widgets/layout/ThemeModeSwitch';
-import { useMainLayout } from './MainLayoutContext';
-import { useNotification } from '@/features/pop/model/useNotification';
+import { ThemeModeSwitch } from '@/widgets/layout/header/ThemeModeSwitch';
+import { useMainLayout } from '../MainLayoutContext';
+import { useNotification } from '@/shared/notification/hooks/useNotification';
+import { ChatHistorySection } from './ChatHistorySection';
 
 const LNB_BACKGROUND_STYLE = {
   backgroundImage:
@@ -59,6 +60,7 @@ export const Lnb = ({
   profileName = '홍길동',
   profileImageUrl,
 }: LnbProps) => {
+  const { alert, confirm, toast } = useNotification();  // 팝업 호출부 가져오기
   const { themeMode, setThemeMode } = useMainLayout();
   const lnbBackgroundStyle = themeMode === 'dark' ? LNB_BACKGROUND_STYLE_DARK : LNB_BACKGROUND_STYLE;
   // 데스크톱 LNB 전용 접기/펼치기 상태
@@ -70,18 +72,9 @@ export const Lnb = ({
     setProfileSrc(profileImageUrl?.trim() || defaultProfileIconMale.src);
   }, [profileImageUrl]);
 
-  const renderHistoryItem = (title: string, key: string, category: string) => (
-    <div key={key} className={`btn-lnb-history ${category === 'general' ? 'general' : category === 'knowledge' ? 'knowledge' : 'assistant'}`}>
-      <button className="title">
-        <span className="truncate text-sm font-medium">{title}</span>
-      </button>
-      <button className="delete-btn">
-        <span className="sr-only">삭제</span>
-      </button>
-    </div>
-  );
+  const handleToggleExpanded = useCallback(() => setIsExpanded((prev) => !prev), []);
+  const handleToggleHistoryVisible = useCallback(() => setIsHistoryVisible((prev) => !prev), []);
 
-  const { alert, confirm, toast } = useNotification();  // 팝업 호출부 가져오기
   const btnNewChat = () => {
     confirm({
       message: '새 채팅으로 이동하시겠습니까?',
@@ -90,6 +83,7 @@ export const Lnb = ({
       },
     });
   }
+
   const btnWait = () => {
     alert({
       // title: '알림',
@@ -101,66 +95,16 @@ export const Lnb = ({
     toast('삭제할 수 없습니다.', 'error')
   }
 
-  const renderHistorySection = (expanded: boolean, forceVisible = false, showThemeSwitch = false) => {
-    const isNavSectionVisible = forceVisible || (expanded && isHistoryVisible);
-
+  const renderMenuActions = (expanded: boolean) => {
     return (
-      <>
-        <div className="space-y-1.5 pb-4 md:pb-5">
-          <button className={`btn-menu-item chat ${expanded ? 'w-full' : 'close'}`} onClick={btnNewChat}>
-            <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>새 채팅</span>
-          </button>
-          <Link href="/archive" className={`btn-menu-item locker ${expanded ? 'w-full' : 'close'}`}>
-            <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>보관함</span>
-          </Link>
-        </div>
-
-        <div className="py-1.5 flex items-center justify-between">
-          <button
-            onClick={() => expanded && setIsHistoryVisible((prev) => !prev)}
-            disabled={!expanded}
-            className="flex items-center transition-all duration-300 text-left"
-          >
-            <span className={`btn-toggle-text truncate transition-opacity duration-300 ${expanded ? 'visible opacity-100' : 'invisible opacity-0'} ${isHistoryVisible ? '' : 'close'}`}>대화기록</span>
-          </button>
-          <button
-            disabled={!expanded}
-            className={`btn-list-del mr-1.5 md:mr-2.5 transition-opacity flex-shrink-0 duration-300 ${expanded ? 'opacity-100' : 'opacity-0'}`}
-            onClick={btnToast}
-          >
-            전체삭제
-          </button>
-        </div>
-
-        <nav
-          className={`wide px-2.5 md:px-4  flex-1 overflow-y-auto space-y-[26px] pb-6 custom-scrollbar transition-opacity duration-300 ${isNavSectionVisible ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-            }`}
-        >
-          {HISTORY_SECTIONS.map((section) => (
-            <div
-              key={section.key}
-              className={`transition-all duration-300 ${isNavSectionVisible ? 'opacity-100' : 'opacity-0'
-                }`}
-              style={{ transitionDelay: isNavSectionVisible ? section.transitionDelay : '0ms' }}
-            >
-              {expanded ? (
-                <h3 className="px-1.5 md:px-[10px] py-[6px] text-[13px] text-gray-300">{section.title}</h3>
-              ) : null}
-              <div className="space-y-1.5">
-                {section.items.map((title, index) =>
-                  renderHistoryItem(title, `${section.key}-${index}`, `${section.category}`),
-                )}
-              </div>
-            </div>
-          ))}
-        </nav>
-
-        {showThemeSwitch ? (
-          <div className="pt-4 px-4 pb-2 bg-white wide text-center">
-            <ThemeModeSwitch value={themeMode} onChange={setThemeMode} />
-          </div>
-        ) : null}
-      </>
+      <div className="space-y-1.5 pb-4 md:pb-5">
+        <button className={`btn-menu-item chat ${expanded ? 'w-full' : 'close'}`} onClick={btnNewChat}>
+          <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>새 채팅</span>
+        </button>
+        <Link href="/archive" className={`btn-menu-item locker ${expanded ? 'w-full' : 'close'}`}>
+          <span className={`text-sm font-medium truncate ${expanded ? 'block opacity-100' : 'w-0 hidden opacity-0'}`}>보관함</span>
+        </Link>
+      </div>
     );
   };
 
@@ -211,7 +155,8 @@ export const Lnb = ({
           </Link>
 
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
+            type="button"
+            onClick={handleToggleExpanded}
             className={`btn-lnb-toggle transition-all duration-300 flex-shrink-0 ${!isExpanded && 'mx-auto'}`}
           >
             <span className="sr-only">{isExpanded ? '사이드바 닫기' : '사이드바 열기'}</span>
@@ -219,7 +164,16 @@ export const Lnb = ({
         </div>
 
         <div className="flex flex-col flex-1 min-h-0 px-4">
-          {renderHistorySection(isExpanded)}
+          {renderMenuActions(isExpanded)}
+
+          <ChatHistorySection
+            expanded={isExpanded}
+            isHistoryVisible={isHistoryVisible}
+            isDeletingAll
+            showThemeSwitch
+            onToggleVisible={handleToggleHistoryVisible}
+            onDeleteAll={btnToast}
+          />
         </div>
 
         {renderProfile(isExpanded)}
@@ -252,7 +206,21 @@ export const Lnb = ({
           </div>
 
           <div className="flex flex-col flex-1 min-h-0 px-2.5">
-            {renderHistorySection(true, false, true)}
+            {renderMenuActions(true)}
+
+            <ChatHistorySection
+              expanded={true}
+              isHistoryVisible={isHistoryVisible}
+              isDeletingAll
+              showThemeSwitch
+              themeSwitchNode={
+                <div className="pt-4 px-4 pb-2 bg-white wide text-center">
+                  <ThemeModeSwitch value={themeMode} onChange={setThemeMode} />
+                </div>
+              }
+              onToggleVisible={handleToggleHistoryVisible}
+              onDeleteAll={btnToast}
+            />
           </div>
 
           {renderProfile(true)}
